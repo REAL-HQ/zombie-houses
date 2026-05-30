@@ -1,83 +1,507 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
-import { ArrowRight, Heart, Home, ShieldCheck } from "lucide-react";
-import { activeRescues } from "@/data/rescues";
+import { SiteLayout } from "@/components/SiteLayout";
+import {
+  ArrowRight,
+  Video,
+  Home as HomeIcon,
+  Heart,
+  Scissors,
+  Droplets,
+  Hammer,
+  Trash2,
+  Truck,
+  Wrench,
+  HardHat,
+  ShieldAlert,
+} from "lucide-react";
+import { activeRescue, currency, daysRemaining, percent } from "@/data/rescues";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Zombie Houses — Saving Homes. Changing Lives." },
-      { name: "description", content: "We rescue distressed homes from auction, neglect, and demolition — and return them to the families who built them." },
+      { title: "ZombieHouses — Saving Homes. Changing Lives." },
+      {
+        name: "description",
+        content:
+          "We renovate neglected houses, rescue families in need, and give communities a second chance — one zombie house at a time.",
+      },
+      { property: "og:title", content: "ZombieHouses — Saving Homes. Changing Lives." },
+      {
+        property: "og:description",
+        content: "Watch the A&E show. Sponsor a rescue. Sell your home fast. All in one place.",
+      },
     ],
   }),
-  component: Index,
+  component: Home,
 });
 
-function Index() {
-  const active = activeRescues()[0];
-
+function Home() {
+  const active = activeRescue();
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <SiteHeader />
-
-      <main className="flex-1">
-        <section className="px-4 md:px-8 pt-16 md:pt-28 pb-20 max-w-6xl mx-auto text-center">
-          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-6">Real Advisors · Zombie House Rescue</p>
-          <h1 className="font-display text-5xl md:text-7xl leading-[1.05] text-foreground">
-            Saving homes.<br />
-            <span className="text-red">Changing lives.</span>
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            We rescue distressed homes from auction, neglect, and demolition — and return them, restored, to the families who built them.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <Link
-              to="/rescue"
-              className="inline-flex items-center gap-2 rounded-full bg-red px-6 py-3 text-white font-semibold hover:opacity-90 transition"
-            >
-              See active rescues <ArrowRight className="w-4 h-4" />
-            </Link>
-            {active && (
-              <Link
-                to="/rescue/$slug"
-                params={{ slug: active.slug }}
-                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-semibold hover:bg-off transition"
-              >
-                Meet {active.title.split("'")[0]}
-              </Link>
-            )}
-          </div>
-        </section>
-
-        <section className="bg-off border-y border-border py-16 px-4 md:px-8">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
-            {[
-              { icon: Home, title: "Find the house", body: "We track tax-deed sales, code-enforcement orders, and quiet neighborhood tips." },
-              { icon: Heart, title: "Fund the rescue", body: "Donors pool small contributions through Slingshot Giving to stop the auction clock." },
-              { icon: ShieldCheck, title: "Return it whole", body: "Title cleared, roof repaired, keys returned — every dollar accounted for, publicly." },
-            ].map((s) => (
-              <div key={s.title} className="bg-background rounded-2xl p-6 border border-border">
-                <s.icon className="w-7 h-7 text-red" />
-                <h3 className="mt-4 font-display text-2xl">{s.title}</h3>
-                <p className="mt-2 text-muted-foreground">{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+    <SiteLayout transparentNavOffset>
+      <Hero />
+      <MissionStrip />
+      <Initiatives />
+      {active && <RescueTeaser />}
+      <SellInline />
+      <DesignPreview />
+      <VendorPreview />
+      <SponsorsPreview />
+      <ClosingStrip />
+    </SiteLayout>
   );
 }
 
-function SiteFooter() {
+function Hero() {
   return (
-    <footer className="bg-[hsl(0_0%_15%)] text-white/80 py-10 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-        <p>© {new Date().getFullYear()} ZombieHouses.com · Real Advisors, Inc.</p>
-        <p className="italic">Saving Homes. Changing Lives.</p>
+    <section className="relative bg-[#0e0e0e] text-white">
+      <div className="max-w-[1160px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]">
+            <span className="h-2 w-2 rounded-full bg-red pulse-dot" />
+            As Seen on A&amp;E
+          </span>
+          <h1 className="mt-6 font-display text-[clamp(2.4rem,6vw,3.4rem)] leading-[1.06] tracking-[-0.03em]">
+            Saving Homes.<br />
+            <em className="not-italic text-red font-display">Changing Lives.</em>
+          </h1>
+          <p className="mt-6 text-[1.05rem] text-white/65 max-w-[440px] leading-relaxed">
+            We renovate neglected houses, rescue families in need, and give communities a second chance — one zombie house at a time.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link
+              to="/rescue"
+              className="inline-flex items-center gap-2 rounded-full bg-white text-[#0e0e0e] px-7 py-3.5 font-bold text-sm hover:bg-white/90 transition"
+            >
+              See Our Work <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/sell"
+              className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+            >
+              Sell Your Home
+            </Link>
+          </div>
+        </div>
+        <div className="hidden md:block">
+          <div className="relative rounded-[22px] border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-8 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(192,57,43,0.25),transparent_60%)]" />
+            <div className="relative">
+              <span className="inline-block rounded-full bg-red px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.15em]">
+                A&amp;E Network
+              </span>
+              <h3 className="mt-5 font-display text-3xl leading-tight">Zombie House Flipping</h3>
+              <p className="mt-2 text-white/55 text-sm">Now streaming · Season 12</p>
+              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/10 pt-6">
+                {[
+                  ["200+", "Homes Saved"],
+                  ["12", "Seasons"],
+                  ["$0", "Rescue Cost"],
+                ].map(([num, label]) => (
+                  <div key={label}>
+                    <p className="font-display text-2xl">{num}</p>
+                    <p className="text-[0.7rem] text-white/50 uppercase tracking-wider mt-1">{label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
+  );
+}
+
+function MissionStrip() {
+  return (
+    <section className="bg-[#0e0e0e] text-white border-t border-white/5">
+      <div className="max-w-[1160px] mx-auto px-6 py-20 md:py-24 text-center">
+        <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.1] tracking-[-0.025em]">
+          We don't just flip houses.{" "}
+          <em className="not-italic font-display text-red">We rescue them.</em>
+        </h2>
+        <p className="mt-5 max-w-[500px] mx-auto text-white/65 leading-relaxed">
+          Zombie House Rescue is a charitable initiative of Real Advisors — pulling homes back from
+          tax sales, code orders, and neglect, then handing the keys back to the families who built them.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Initiatives() {
+  const cards = [
+    {
+      icon: Video,
+      title: "Zombie House Flipping",
+      body: "Twelve seasons on A&E documenting the worst houses on the block — and the crews that bring them back.",
+      tag: "A&E Show",
+      to: "/watch" as const,
+      red: false,
+    },
+    {
+      icon: HomeIcon,
+      title: "Zombie House Buyers",
+      body: "We buy houses in any condition, fast. Fire damage, full gut, hoarder homes — doesn't matter. Cash in 24 hours.",
+      tag: "We Buy Houses",
+      to: "/sell" as const,
+      red: false,
+    },
+    {
+      icon: Heart,
+      title: "Zombie House Rescue",
+      body: "When a family is one missed payment from losing everything — we show up. Free services. Real rescues.",
+      tag: "Free Services",
+      to: "/rescue" as const,
+      red: true,
+    },
+  ];
+  return (
+    <section className="bg-white py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Three Initiatives</p>
+        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
+          One mission. Three ways we show up.
+        </h2>
+        <div className="mt-12 grid md:grid-cols-3 gap-6">
+          {cards.map((c) => (
+            <Link
+              key={c.title}
+              to={c.to}
+              className="group rounded-[22px] border border-mid bg-white p-7 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex flex-col"
+            >
+              <div
+                className={`w-12 h-12 rounded-[14px] flex items-center justify-center ${
+                  c.red ? "bg-red" : "bg-[#0e0e0e]"
+                }`}
+              >
+                <c.icon className="w-5 h-5 text-white" />
+              </div>
+              <h3 className="mt-6 font-display text-2xl leading-tight">{c.title}</h3>
+              <p className="mt-3 text-[0.95rem] text-muted-foreground leading-relaxed flex-1">{c.body}</p>
+              <div className="mt-6 pt-5 border-t border-mid flex items-center justify-between">
+                <span className="text-[0.7rem] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                  {c.tag}
+                </span>
+                <span className="w-9 h-9 rounded-full bg-[#0e0e0e] text-white flex items-center justify-center group-hover:bg-red transition-colors">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RescueTeaser() {
+  const r = activeRescue()!;
+  const pct = percent(r.raised, r.phase1_goal);
+  return (
+    <section className="bg-off py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Zombie House Rescue</p>
+          <h2 className="mt-3 font-display text-[clamp(2rem,4vw,2.8rem)] tracking-[-0.025em]">
+            Right now, we're saving {r.title.split("'")[0]}'s home.
+          </h2>
+          <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
+            {r.location} · {r.urgency_line}. From emergency lawn care to full roof replacements — we mobilize
+            whatever the rescue requires. Every dollar is documented publicly.
+          </p>
+          <Link
+            to="/rescue/$slug"
+            params={{ slug: r.slug }}
+            className="mt-8 inline-flex items-center gap-2 rounded-full border-[1.5px] border-[#0e0e0e] px-6 py-3 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
+          >
+            Read {r.title.split("'")[0]}'s story <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="rounded-[22px] bg-[#0e0e0e] text-white p-8 md:p-10">
+          <h3 className="font-display text-2xl">Help close the gap.</h3>
+          <p className="mt-2 text-white/55 text-sm">{r.urgency_message}</p>
+          <div className="mt-6">
+            <div className="flex items-baseline justify-between mb-2">
+              <span className="font-display text-3xl">{currency(r.raised)}</span>
+              <span className="text-sm text-white/55">of {currency(r.phase1_goal)}</span>
+            </div>
+            <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div className="h-full bg-red rounded-full" style={{ width: `${pct}%` }} />
+            </div>
+            <p className="mt-3 text-xs text-white/55">
+              {r.donor_count} donors · {daysRemaining(r.deadline)} days left
+            </p>
+          </div>
+          <Link
+            to="/rescue/$slug"
+            params={{ slug: r.slug }}
+            className="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-full bg-red px-6 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+          >
+            Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SellInline() {
+  return (
+    <section className="bg-white py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Zombie House Buyers</p>
+          <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
+            Selling a tough house? <em className="not-italic text-red font-display">We'll buy it.</em>
+          </h2>
+          <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
+            No repairs. No commissions. No showings. Just a fair cash offer in 24 hours and a closing date you choose.
+          </p>
+          <ul className="mt-8 space-y-3">
+            {["No Repairs Needed", "Cash Offer in 24 Hours", "Close on Your Timeline", "Zero Fees or Commissions"].map((t) => (
+              <li key={t} className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-red" />
+                <span className="font-semibold">{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <SellFormCard />
+      </div>
+    </section>
+  );
+}
+
+function SellFormCard({ compact = false }: { compact?: boolean }) {
+  return (
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className="rounded-[20px] bg-off border border-mid p-8 md:p-9"
+    >
+      {!compact && (
+        <>
+          <h3 className="font-display text-2xl">Get Your Cash Offer</h3>
+          <p className="mt-1 text-sm text-muted-foreground">Takes 60 seconds. No obligation.</p>
+        </>
+      )}
+      <div className="mt-6 space-y-3">
+        <input
+          required
+          placeholder="Property Address"
+          className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+        />
+        <input
+          required
+          placeholder="Your Name"
+          className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+        />
+        <input
+          required
+          type="tel"
+          placeholder="Phone"
+          className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+        />
+        <select
+          defaultValue=""
+          required
+          className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+        >
+          <option value="" disabled>Condition</option>
+          <option>Move-in Ready</option>
+          <option>Minor Repairs</option>
+          <option>Major Repairs</option>
+          <option>Condemned or Distressed</option>
+        </select>
+        <button
+          type="submit"
+          className="w-full rounded-full bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition"
+        >
+          Get My Cash Offer →
+        </button>
+        <p className="text-[0.7rem] text-muted-foreground text-center">
+          Your info is never sold or shared. We'll call within 24 hours.
+        </p>
+      </div>
+    </form>
+  );
+}
+
+export { SellFormCard };
+
+function DesignPreview() {
+  const cards = [
+    { tag: "BTS Episode", title: "Inside the Lutz teardown", desc: "How a 1968 ranch got a second life." },
+    { tag: "Shop the Look", title: "Sherman's kitchen reno", desc: "Exact paint, fixtures, and finishes." },
+    { tag: "Design Guide", title: "Open concept done right", desc: "What we wish we knew in season 1." },
+  ];
+  return (
+    <section className="bg-off py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6">
+        <div className="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Inspiration</p>
+            <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
+              Before-and-afters worth saving.
+            </h2>
+          </div>
+          <Link
+            to="/design"
+            className="inline-flex items-center gap-2 text-sm font-bold underline-offset-4 hover:underline"
+          >
+            See all inspiration <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="mt-10 grid md:grid-cols-3 gap-6">
+          {cards.map((c) => (
+            <div key={c.title} className="rounded-[18px] bg-white border border-mid overflow-hidden">
+              <div className="aspect-[4/3] bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08]" />
+              <div className="p-5">
+                <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-red">{c.tag}</span>
+                <h3 className="mt-2 font-display text-xl">{c.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VendorPreview() {
+  const cats = [
+    { icon: Scissors, title: "Lawn & Landscaping" },
+    { icon: Droplets, title: "Pressure Washing" },
+    { icon: Hammer, title: "General Contractors" },
+    { icon: Trash2, title: "Junk Removal" },
+    { icon: Truck, title: "Moving" },
+    { icon: Wrench, title: "Plumbing & Electric" },
+    { icon: HardHat, title: "Roofing" },
+    { icon: ShieldAlert, title: "Crime Scene & Biohazard" },
+  ];
+  return (
+    <section className="bg-white py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Vendor Network</p>
+        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
+          The crews behind every rescue.
+        </h2>
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {cats.map((c) => (
+            <div key={c.title} className="rounded-[14px] border border-mid p-5 hover:border-[#0e0e0e] transition-colors">
+              <c.icon className="w-5 h-5 text-red" />
+              <p className="mt-3 font-semibold text-sm leading-snug">{c.title}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[18px] bg-off border border-mid px-6 py-5">
+          <p className="text-sm">
+            <span className="font-bold">Contractor or service provider?</span>{" "}
+            <span className="text-muted-foreground">Join our vendor network.</span>
+          </p>
+          <Link
+            to="/sponsors"
+            className="inline-flex items-center gap-2 rounded-full bg-[#0e0e0e] text-white px-5 py-2.5 text-sm font-bold hover:bg-black transition"
+          >
+            Apply as a Vendor <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SponsorsPreview() {
+  return (
+    <section className="bg-off py-20 md:py-28">
+      <div className="max-w-[1160px] mx-auto px-6">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Partner With Us</p>
+        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
+          Sponsor a rescue.
+        </h2>
+        <div className="mt-10 grid md:grid-cols-3 gap-6">
+          <div className="rounded-[22px] border-2 border-red bg-[#0e0e0e] text-white p-7 flex flex-col">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-red">Featured</span>
+            <h3 className="mt-3 font-display text-2xl">Title Sponsor</h3>
+            <p className="mt-1 text-white/55 text-sm">$5,000 / project</p>
+            <ul className="mt-5 space-y-2 text-sm text-white/75 flex-1">
+              <li>· Logo on all project media</li>
+              <li>· Featured in video + social</li>
+              <li>· Dedicated sponsor page</li>
+              <li>· Tax receipt</li>
+            </ul>
+            <Link
+              to="/sponsors"
+              className="mt-7 rounded-full bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+            >
+              Become a Title Sponsor →
+            </Link>
+          </div>
+          <div className="rounded-[22px] border border-mid bg-white p-7 flex flex-col">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">Recurring</span>
+            <h3 className="mt-3 font-display text-2xl">Community Sponsor</h3>
+            <p className="mt-1 text-muted-foreground text-sm">$500 / month</p>
+            <ul className="mt-5 space-y-2 text-sm text-muted-foreground flex-1">
+              <li>· Logo on sponsor wall</li>
+              <li>· Monthly social mention</li>
+              <li>· Newsletter feature</li>
+            </ul>
+            <Link
+              to="/sponsors"
+              className="mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+            >
+              Become a Sponsor →
+            </Link>
+          </div>
+          <div className="rounded-[22px] border border-mid bg-white p-7 flex flex-col">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">Individual</span>
+            <h3 className="mt-3 font-display text-2xl">Donate</h3>
+            <p className="mt-1 text-muted-foreground text-sm">Any amount · tax-deductible</p>
+            <ul className="mt-5 space-y-2 text-sm text-muted-foreground flex-1">
+              <li>· Direct to active rescue</li>
+              <li>· 100% transparent ledger</li>
+              <li>· Secure via Slingshot</li>
+            </ul>
+            <Link
+              to="/rescue"
+              className="mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+            >
+              Donate Now →
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ClosingStrip() {
+  const r = activeRescue();
+  return (
+    <section className="bg-[#0e0e0e] text-white">
+      <div className="max-w-[1160px] mx-auto px-6 py-24 md:py-32 text-center">
+        <h2 className="font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.05] tracking-[-0.03em]">
+          Saving Homes. <em className="not-italic font-display text-red">Changing Lives.</em>
+        </h2>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          {r && (
+            <Link
+              to="/rescue/$slug"
+              params={{ slug: r.slug }}
+              className="inline-flex items-center gap-2 rounded-full bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+            >
+              Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
+          <Link
+            to="/apply"
+            className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+          >
+            Nominate a Home
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

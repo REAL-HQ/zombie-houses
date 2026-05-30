@@ -9,10 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WatchRouteImport } from './routes/watch'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as SellRouteImport } from './routes/sell'
+import { Route as DesignRouteImport } from './routes/design'
+import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RescueIndexRouteImport } from './routes/rescue/index'
 import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
 
+const WatchRoute = WatchRouteImport.update({
+  id: '/watch',
+  path: '/watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellRoute = SellRouteImport.update({
+  id: '/sell',
+  path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignRoute = DesignRouteImport.update({
+  id: '/design',
+  path: '/design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyRoute = ApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +61,116 @@ const RescueSlugRoute = RescueSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design': typeof DesignRoute
+  '/sell': typeof SellRoute
+  '/sponsors': typeof SponsorsRoute
+  '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design': typeof DesignRoute
+  '/sell': typeof SellRoute
+  '/sponsors': typeof SponsorsRoute
+  '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue': typeof RescueIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/apply': typeof ApplyRoute
+  '/design': typeof DesignRoute
+  '/sell': typeof SellRoute
+  '/sponsors': typeof SponsorsRoute
+  '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rescue/$slug' | '/rescue/'
+  fullPaths:
+    | '/'
+    | '/apply'
+    | '/design'
+    | '/sell'
+    | '/sponsors'
+    | '/watch'
+    | '/rescue/$slug'
+    | '/rescue/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rescue/$slug' | '/rescue'
-  id: '__root__' | '/' | '/rescue/$slug' | '/rescue/'
+  to:
+    | '/'
+    | '/apply'
+    | '/design'
+    | '/sell'
+    | '/sponsors'
+    | '/watch'
+    | '/rescue/$slug'
+    | '/rescue'
+  id:
+    | '__root__'
+    | '/'
+    | '/apply'
+    | '/design'
+    | '/sell'
+    | '/sponsors'
+    | '/watch'
+    | '/rescue/$slug'
+    | '/rescue/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApplyRoute: typeof ApplyRoute
+  DesignRoute: typeof DesignRoute
+  SellRoute: typeof SellRoute
+  SponsorsRoute: typeof SponsorsRoute
+  WatchRoute: typeof WatchRoute
   RescueSlugRoute: typeof RescueSlugRoute
   RescueIndexRoute: typeof RescueIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/watch': {
+      id: '/watch'
+      path: '/watch'
+      fullPath: '/watch'
+      preLoaderRoute: typeof WatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell': {
+      id: '/sell'
+      path: '/sell'
+      fullPath: '/sell'
+      preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design': {
+      id: '/design'
+      path: '/design'
+      fullPath: '/design'
+      preLoaderRoute: typeof DesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply': {
+      id: '/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApplyRoute: ApplyRoute,
+  DesignRoute: DesignRoute,
+  SellRoute: SellRoute,
+  SponsorsRoute: SponsorsRoute,
+  WatchRoute: WatchRoute,
   RescueSlugRoute: RescueSlugRoute,
   RescueIndexRoute: RescueIndexRoute,
 }

@@ -1,340 +1,511 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/SiteHeader";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { SiteLayout } from "@/components/SiteLayout";
 import { CampaignStatusBadge } from "@/components/CampaignStatusBadge";
-import { getRescue, type LedgerItem, type Phase, type Update, type Donor } from "@/data/rescues";
-import { ArrowLeft, Calendar, Copy, ExternalLink, Facebook, Instagram, MapPin, Users } from "lucide-react";
+import {
+  getRescue,
+  activeRescue,
+  currency,
+  daysRemaining,
+  percent,
+  timeAgo,
+  type LedgerItem,
+  type Phase,
+  type Update,
+  type Donor,
+  type Rescue,
+} from "@/data/rescues";
+import { AlertTriangle, ArrowRight, Check, Copy, Facebook, Instagram } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/rescue/$slug")({
-  head: ({ params }) => {
-    const r = getRescue(params.slug);
-    const title = r ? `${r.title} — Zombie Houses Rescue` : "Rescue — Zombie Houses";
-    const desc = r?.subtitle ?? "A Zombie House rescue campaign.";
+  loader: ({ params }) => {
+    const rescue = getRescue(params.slug);
+    if (!rescue) throw notFound();
+    return { rescue };
+  },
+  head: ({ loaderData }) => {
+    const r = loaderData?.rescue;
     return {
-      meta: [
-        { title },
-        { name: "description", content: desc },
-        { property: "og:title", content: title },
-        { property: "og:description", content: desc },
-        ...(r?.hero_image ? [{ property: "og:image", content: r.hero_image }] : []),
-      ],
+      meta: r
+        ? [
+            { title: `${r.title} — Zombie House Rescue` },
+            { name: "description", content: `${r.location} · ${r.urgency_line}` },
+            { property: "og:title", content: `${r.title} — Zombie House Rescue` },
+            { property: "og:description", content: r.urgency_line },
+            { property: "og:image", content: r.hero_image },
+          ]
+        : [{ title: "Rescue not found" }],
     };
   },
-  loader: ({ params }) => {
-    const r = getRescue(params.slug);
-    if (!r) throw notFound();
-    return r;
-  },
-  notFoundComponent: () => (
-    <div className="min-h-screen flex flex-col bg-background">
-      <SiteHeader />
-      <div className="flex-1 grid place-items-center text-center px-4">
-        <div>
-          <h1 className="font-display text-4xl">Rescue not found</h1>
-          <Link to="/rescue" className="mt-4 inline-flex items-center gap-1 text-red font-semibold"><ArrowLeft className="w-4 h-4" /> All rescues</Link>
-        </div>
-      </div>
-    </div>
-  ),
-  errorComponent: ({ reset }) => (
-    <div className="min-h-screen grid place-items-center"><button onClick={reset}>Retry</button></div>
-  ),
   component: CampaignPage,
 });
 
-const money = (n: number) => `$${n.toLocaleString()}`;
-
 function CampaignPage() {
-  const r = Route.useLoaderData();
-  const pct = Math.min(100, Math.round((r.raised / r.goal) * 100));
-  const daysLeft = Math.max(0, Math.ceil((new Date(r.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24)));
-  const isActive = r.status === "active";
+  const { rescue } = Route.useLoaderData();
+  if (rescue.status === "complete") return <CompletedPage r={rescue} />;
+  return <ActivePage r={rescue} />;
+}
 
+function Hero({ r }: { r: Rescue }) {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <SiteHeader />
+    <section className="relative bg-[#111] text-white overflow-hidden">
+      <img
+        src={r.hero_image}
+        alt={r.title}
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.46]"
+        style={{ objectPosition: "center 20%" }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(110deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.65) 48%, rgba(8,8,8,0.15) 100%)",
+        }}
+      />
+      <div className="relative max-w-[1160px] mx-auto px-6 pt-20 pb-16 md:pt-28 md:pb-24 min-h-[400px] flex flex-col justify-end">
+        <CampaignStatusBadge
+          status={r.status}
+          phase={r.status === "active" ? r.current_phase : undefined}
+        />
+        <h1 className="mt-5 font-display text-[clamp(2.2rem,6vw,3.2rem)] tracking-[-0.03em] leading-[1.05] max-w-3xl">
+          {r.title}
+        </h1>
+        <p className="mt-3 text-white/55 text-base">
+          {r.location} ·{" "}
+          {r.status === "complete" && r.completed_at
+            ? `Completed ${new Date(r.completed_at).toLocaleString("en", {
+                month: "long",
+                year: "numeric",
+              })}${r.duration_weeks ? ` · ${r.duration_weeks} weeks` : ""}`
+            : r.urgency_line}
+        </p>
+      </div>
+    </section>
+  );
+}
 
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="relative">
-          <div className="relative h-[55vh] min-h-[420px] w-full overflow-hidden">
-            <img src={r.hero_image} alt={r.title} className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
-            <div className="absolute inset-x-0 bottom-0 px-4 md:px-8 pb-10 max-w-6xl mx-auto">
-              <Link to="/rescue" className="inline-flex items-center gap-1 text-white/80 hover:text-white text-sm mb-4">
-                <ArrowLeft className="w-4 h-4" /> All rescues
-              </Link>
-              <div className="flex items-center gap-3 mb-4">
-                <CampaignStatusBadge status={r.status} />
-                <span className="text-white/80 text-sm flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {r.location}</span>
+function ActivePage({ r }: { r: Rescue }) {
+  const days = daysRemaining(r.deadline);
+  return (
+    <SiteLayout>
+      <Hero r={r} />
+
+      {r.urgency_message && days <= 14 && (
+        <div className="max-w-[1160px] mx-auto px-6 mt-8">
+          <div className="flex items-start gap-4 rounded-[14px] border-[1.5px] border-[#f5bfba] bg-[#fef0ef] p-5">
+            <div className="w-9 h-9 rounded-lg bg-red text-white flex items-center justify-center shrink-0">
+              <AlertTriangle className="w-[17px] h-[17px]" />
+            </div>
+            <p className="text-sm text-[#7d1f15] leading-relaxed">{r.urgency_message}</p>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-[1160px] mx-auto px-6 py-12 md:py-16 grid lg:grid-cols-[1fr_340px] gap-10">
+        <div className="space-y-14">
+          <Story r={r} />
+          <PhaseTimeline phases={r.phases} />
+          <TransparencyLedger items={r.ledger} />
+          <UpdatesFeed updates={r.updates} />
+        </div>
+        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <DonationCard r={r} />
+          <ShareCard r={r} />
+          <DonorsCard donors={r.recent_donors} />
+        </aside>
+      </div>
+    </SiteLayout>
+  );
+}
+
+function CompletedPage({ r }: { r: Rescue }) {
+  return (
+    <SiteLayout>
+      <Hero r={r} />
+      <div className="max-w-[1160px] mx-auto px-6 mt-8">
+        <div className="flex items-start gap-4 rounded-[14px] border-[1.5px] border-green/30 bg-[#e8f5ef] p-5">
+          <div className="w-9 h-9 rounded-lg bg-green text-white flex items-center justify-center shrink-0">
+            <Check className="w-5 h-5" />
+          </div>
+          <p className="text-sm text-[#0e3a22] leading-relaxed">
+            <strong>This rescue is complete.</strong> Thanks to {r.donor_count} donors, {r.title.split("'")[0]} is home.
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-[1160px] mx-auto px-6 py-12 md:py-16 grid lg:grid-cols-[1fr_340px] gap-10">
+        <div className="space-y-14">
+          <Story r={r} />
+          {r.completion_story_html && (
+            <div className="prose prose-neutral max-w-none">
+              <h2 className="font-display text-2xl mb-4">Coming Home</h2>
+              <div
+                className="text-[0.95rem] text-[#444] leading-[1.85]"
+                dangerouslySetInnerHTML={{ __html: r.completion_story_html }}
+              />
+            </div>
+          )}
+          <TransparencyLedger items={r.ledger} />
+          <UpdatesFeed updates={r.updates} />
+        </div>
+        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <CompletedCard r={r} />
+          <ShareCard r={r} completed />
+        </aside>
+      </div>
+    </SiteLayout>
+  );
+}
+
+function Story({ r }: { r: Rescue }) {
+  return (
+    <section>
+      <h2 className="font-display text-[1.6rem] mb-5">{r.title.split("'")[0]}'s Story</h2>
+      <div
+        className="text-[0.95rem] text-[#444] leading-[1.85] space-y-4 [&>p]:m-0"
+        dangerouslySetInnerHTML={{ __html: r.story_html }}
+      />
+      {r.pull_quote && (
+        <blockquote className="mt-7 border-l-[3px] border-red bg-off rounded-r-lg p-5 font-display italic text-[1.1rem] leading-relaxed">
+          "{r.pull_quote}"
+        </blockquote>
+      )}
+    </section>
+  );
+}
+
+function PhaseTimeline({ phases }: { phases: Phase[] }) {
+  if (!phases.length) return null;
+  return (
+    <section>
+      <h2 className="font-display text-[1.6rem] mb-6">Project Phases</h2>
+      <ol className="relative space-y-7">
+        {phases.map((p, i) => {
+          const isActive = p.status === "active";
+          const isComplete = p.status === "complete";
+          return (
+            <li key={p.number} className="relative pl-14">
+              {i < phases.length - 1 && (
+                <span className="absolute left-[17px] top-9 bottom-[-1.75rem] w-[2px] bg-mid" />
+              )}
+              <div
+                className={`absolute left-0 top-0 w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ${
+                  isActive
+                    ? "bg-red text-white"
+                    : isComplete
+                    ? "bg-green text-white"
+                    : "bg-off border-2 border-mid text-muted-foreground"
+                }`}
+              >
+                {isComplete ? <Check className="w-4 h-4" /> : p.number}
               </div>
-              <h1 className="font-display text-4xl md:text-6xl text-white max-w-3xl">{r.title}</h1>
-              <p className="mt-3 text-white/85 text-lg md:text-xl max-w-2xl">{r.subtitle}</p>
+              <p
+                className={`text-[0.65rem] font-bold uppercase tracking-[0.15em] ${
+                  isActive ? "text-red" : "text-muted-foreground"
+                }`}
+              >
+                {isActive
+                  ? `Active Now — Phase ${p.number}`
+                  : isComplete
+                  ? `Complete — Phase ${p.number}`
+                  : `Coming Next — Phase ${p.number}`}
+              </p>
+              <h3 className="mt-1 font-display text-xl">{p.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{p.description}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {p.tags.map((t) => (
+                  <span
+                    key={t}
+                    className={`text-[0.65rem] uppercase tracking-wider px-2 py-1 rounded-full ${
+                      isActive
+                        ? "bg-red/10 text-red"
+                        : "bg-off text-muted-foreground border border-mid"
+                    }`}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
+
+function TransparencyLedger({ items }: { items: LedgerItem[] }) {
+  if (!items.length) return null;
+  return (
+    <section>
+      <h2 className="font-display text-[1.6rem] mb-5">Where Every Dollar Goes</h2>
+      <div className="rounded-2xl bg-off border border-mid divide-y divide-mid">
+        {items.map((row, i) => (
+          <div
+            key={i}
+            className={`flex items-center justify-between gap-4 px-5 py-4 ${
+              row.is_total_row ? "bg-white rounded-b-2xl" : ""
+            }`}
+          >
+            <span
+              className={`text-sm ${
+                row.is_total_row ? "font-display text-lg" : "text-[#222]"
+              }`}
+            >
+              {row.label}
+            </span>
+            <div className="flex items-center gap-3">
+              <span
+                className={`tabular-nums ${
+                  row.is_total_row
+                    ? "font-display text-xl text-red"
+                    : "text-sm font-semibold"
+                }`}
+              >
+                {currency(row.amount)}
+              </span>
+              {!row.is_total_row && <LedgerStatus row={row} />}
             </div>
           </div>
-        </section>
-
-        <div className="px-4 md:px-8 py-12 max-w-6xl mx-auto grid lg:grid-cols-[1fr_360px] gap-10">
-          {/* Main column */}
-          <div className="space-y-12">
-            {/* Story */}
-            <article className="prose prose-neutral max-w-none">
-              <h2 className="font-display text-3xl mb-4">The Story</h2>
-              <div className="space-y-4 text-foreground/90 leading-relaxed [&_p]:text-[17px]" dangerouslySetInnerHTML={{ __html: r.story_html }} />
-            </article>
-
-            {/* Phases */}
-            {r.phases.length > 0 && (
-              <section>
-                <h2 className="font-display text-3xl mb-6">The Plan</h2>
-                <div className="space-y-6">
-                  {r.phases.map((p: Phase) => <PhaseItem key={p.number} phase={p} />)}
-                </div>
-              </section>
-            )}
-
-            {/* Ledger */}
-            {r.ledger.length > 0 && (
-              <section>
-                <h2 className="font-display text-3xl mb-2">Where Every Dollar Goes</h2>
-                <p className="text-muted-foreground mb-6">Full transparency. Updated as bills are paid.</p>
-                <div className="rounded-[20px] border border-border overflow-hidden">
-                  {r.ledger.map((it: LedgerItem, i: number) => <LedgerRow key={i} item={it} />)}
-                </div>
-              </section>
-            )}
-
-            {/* Updates */}
-            {r.updates.length > 0 && (
-              <section>
-                <h2 className="font-display text-3xl mb-6">Project Updates</h2>
-                <div className="space-y-6">
-                  {r.updates.map((u: Update) => <UpdateItem key={u.id} update={u} />)}
-                </div>
-              </section>
-            )}
-          </div>
-
-          {/* Sidebar */}
-          <aside className="space-y-6 lg:sticky lg:top-6 self-start">
-            {isActive ? (
-              <DonateCard
-                raised={r.raised}
-                goal={r.goal}
-                pct={pct}
-                donorCount={r.donor_count}
-                daysLeft={daysLeft}
-                slingshotUrl={r.slingshot_url}
-              />
-            ) : r.status === "complete" ? (
-              <MissionAccomplishedCard raised={r.raised} goal={r.goal} donorCount={r.donor_count} />
-            ) : (
-              <div className="rounded-[20px] border border-border bg-off p-6">
-                <h3 className="font-display text-xl">Phase 2 coming soon</h3>
-                <p className="mt-2 text-sm text-muted-foreground">This phase is fully funded. We'll open the next phase shortly.</p>
-              </div>
-            )}
-
-            <ShareCard title={r.title} />
-
-            {r.recent_donors.length > 0 && (
-              <RecentDonors donors={r.recent_donors} />
-            )}
-          </aside>
-        </div>
-      </main>
-    </div>
-  );
-}
-
-function PhaseItem({ phase }: { phase: Phase }) {
-  const isActive = phase.status === "active";
-  return (
-    <div className="rounded-[20px] border border-border p-6 bg-card">
-      <div className="flex items-start gap-4">
-        <div className={`h-10 w-10 rounded-full grid place-items-center font-semibold text-white ${isActive ? "bg-red" : "bg-muted-foreground"}`}>
-          {phase.number}
-        </div>
-        <div className="flex-1">
-          <p className={`text-xs uppercase tracking-wider font-semibold ${isActive ? "text-red" : "text-muted-foreground"}`}>
-            {phase.label}
-          </p>
-          <h3 className="font-display text-2xl mt-1">{phase.title}</h3>
-          <p className="mt-2 text-muted-foreground">{phase.description}</p>
-          {phase.goal && (
-            <p className="mt-3 text-sm font-semibold">Goal: ${phase.goal.toLocaleString()}</p>
-          )}
-        </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }
 
-function LedgerRow({ item }: { item: LedgerItem }) {
-  const statusColor = {
-    paid: "text-green",
-    due: "text-red",
-    pending: "text-muted-foreground",
-    returned: "text-muted-foreground",
-  }[item.status];
-
+function LedgerStatus({ row }: { row: LedgerItem }) {
+  const map = {
+    due: { bg: "bg-red/10", text: "text-red", label: row.due_label ?? "Due" },
+    pending: { bg: "bg-off", text: "text-muted-foreground", label: "Pending" },
+    paid: { bg: "bg-green/10", text: "text-green", label: "Paid" },
+    returned: { bg: "bg-green/10", text: "text-green", label: "Returned" },
+  } as const;
+  const s = map[row.status];
   return (
-    <div className={`flex items-center justify-between px-5 py-4 border-b border-border last:border-b-0 ${item.is_total_row ? "bg-off font-semibold" : ""}`}>
-      <div>
-        <p className={`${item.is_total_row ? "font-display text-lg" : ""}`}>{item.label}</p>
-        {item.due_label && !item.is_total_row && (
-          <p className="text-xs text-muted-foreground mt-0.5">{item.due_label}</p>
-        )}
-      </div>
-      <div className="text-right">
-        <p className={`${item.is_total_row ? "text-lg" : ""}`}>${item.amount.toLocaleString()}</p>
-        {!item.is_total_row && (
-          <p className={`text-xs uppercase tracking-wider font-semibold ${statusColor}`}>{item.status}</p>
-        )}
-      </div>
-    </div>
+    <span className={`text-[0.65rem] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${s.bg} ${s.text}`}>
+      {s.label}
+    </span>
   );
 }
 
-function UpdateItem({ update }: { update: Update }) {
+function UpdatesFeed({ updates }: { updates: Update[] }) {
+  if (!updates.length) return null;
   return (
-    <article className="rounded-[20px] border border-border p-6 bg-card">
-      <p className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-        <Calendar className="w-3 h-3" /> {new Date(update.created_at).toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" })}
-      </p>
-      <h3 className="font-display text-2xl mt-2">{update.title}</h3>
-      <div className="mt-3 text-foreground/90 [&_p]:leading-relaxed" dangerouslySetInnerHTML={{ __html: update.content_html }} />
-    </article>
+    <section>
+      <h2 className="font-display text-[1.6rem] mb-6">Project Updates</h2>
+      <ol className="relative space-y-7">
+        {updates.map((u, i) => (
+          <li key={u.id} className="relative pl-7">
+            {i < updates.length - 1 && (
+              <span className="absolute left-[5px] top-4 bottom-[-1.75rem] w-[2px] bg-mid" />
+            )}
+            <span className={`absolute left-0 top-1.5 w-3 h-3 rounded-full ${u.is_final ? "bg-green" : "bg-red"}`} />
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.15em] text-muted-foreground">
+              {new Date(u.created_at).toLocaleString("en", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            <h3 className="mt-1 font-display text-lg">{u.title}</h3>
+            <div
+              className="mt-2 text-sm text-[#444] leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: u.content_html }}
+            />
+          </li>
+        ))}
+      </ol>
+    </section>
   );
 }
 
-function DonateCard({ raised, goal, pct, donorCount, daysLeft, slingshotUrl }: {
-  raised: number; goal: number; pct: number; donorCount: number; daysLeft: number; slingshotUrl: string;
-}) {
+const AMOUNTS = [25, 50, 100, 250];
+
+function DonationCard({ r }: { r: Rescue }) {
   const [amount, setAmount] = useState<number>(50);
-  const presets = [25, 50, 100, 250];
-  const href = `${slingshotUrl}?amount=${amount}`;
+  const [custom, setCustom] = useState("");
+  const days = daysRemaining(r.deadline);
+  const pct = percent(r.raised, r.phase1_goal);
+  const finalAmount = custom ? Number(custom) || 0 : amount;
 
   return (
-    <div className="rounded-[20px] border border-border bg-card p-6 shadow-sm">
-      <div className="flex items-baseline justify-between">
-        <span className="font-display text-3xl">${raised.toLocaleString()}</span>
-        <span className="text-sm text-muted-foreground">{pct}%</span>
+    <div className="rounded-[22px] border-2 border-red bg-white p-6">
+      <p className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-red">Phase {r.current_phase} Goal</p>
+      <p className="mt-2 font-display text-[2.2rem] leading-none">{currency(r.raised)}</p>
+      <p className="mt-1 text-xs text-muted-foreground">raised of {currency(r.phase1_goal)}</p>
+      <div className="mt-4 h-2 bg-off rounded-full overflow-hidden">
+        <div className="h-full bg-red rounded-full" style={{ width: `${pct}%` }} />
       </div>
-      <p className="text-sm text-muted-foreground mt-1">raised of ${goal.toLocaleString()} goal</p>
-      <div className="mt-3 h-2 bg-off rounded-full overflow-hidden">
-        <div className="h-full bg-red rounded-full transition-all" style={{ width: `${pct}%` }} />
+      <div className="mt-4 grid grid-cols-3 gap-2 text-center border-t border-mid pt-4">
+        <div>
+          <p className="font-display text-lg">{r.donor_count}</p>
+          <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Donors</p>
+        </div>
+        <div>
+          <p className="font-display text-lg">{days}</p>
+          <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Days Left</p>
+        </div>
+        <div>
+          <p className="font-display text-lg">{pct}%</p>
+          <p className="text-[0.6rem] uppercase tracking-wider text-muted-foreground">Funded</p>
+        </div>
       </div>
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <span className="flex items-center gap-1.5 text-muted-foreground"><Users className="w-3.5 h-3.5" /> {donorCount} donors</span>
-        <span className="font-semibold text-red">{daysLeft} days left</span>
-      </div>
-
-      <div className="mt-6 grid grid-cols-4 gap-2">
-        {presets.map((p) => (
+      <div className="mt-5 grid grid-cols-2 gap-2">
+        {AMOUNTS.map((a) => (
           <button
-            key={p}
-            onClick={() => setAmount(p)}
-            className={`rounded-full border py-2 text-sm font-semibold transition ${amount === p ? "bg-red text-white border-red" : "border-border hover:border-red"}`}
+            key={a}
+            type="button"
+            onClick={() => {
+              setAmount(a);
+              setCustom("");
+            }}
+            className={`rounded-xl py-2.5 font-bold text-sm transition ${
+              !custom && amount === a
+                ? "bg-[#0e0e0e] text-white"
+                : "border border-mid hover:border-[#0e0e0e]"
+            }`}
           >
-            ${p}
+            ${a}
           </button>
         ))}
       </div>
-
+      <input
+        type="number"
+        placeholder="Other amount"
+        value={custom}
+        onChange={(e) => setCustom(e.target.value)}
+        className="mt-2 w-full rounded-xl border border-mid px-3 py-2.5 text-sm focus:outline-none focus:border-[#0e0e0e]"
+      />
       <a
-        href={href}
+        href={`${r.slingshot_url}?amount=${finalAmount}`}
         target="_blank"
         rel="noreferrer"
-        className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-full bg-red py-3.5 text-white font-semibold hover:opacity-90 transition"
+        className="mt-4 block w-full rounded-full bg-red text-white text-center py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
       >
-        Donate ${amount} <ExternalLink className="w-4 h-4" />
+        Donate {finalAmount ? currency(finalAmount) : ""} →
       </a>
-      <p className="mt-3 text-[11px] text-center text-muted-foreground">
-        Secure giving via Slingshot Giving · 100% goes to the rescue
+      <p className="mt-3 text-[0.65rem] text-center text-muted-foreground">
+        Powered by Slingshot Giving · Secure · Tax-deductible
       </p>
     </div>
   );
 }
 
-function MissionAccomplishedCard({ raised, goal, donorCount }: { raised: number; goal: number; donorCount: number }) {
+function CompletedCard({ r }: { r: Rescue }) {
+  const next = activeRescue();
   return (
-    <div className="rounded-[20px] border border-green/30 bg-green/5 p-6">
-      <p className="text-xs uppercase tracking-wider font-semibold text-green">Mission Accomplished</p>
-      <h3 className="font-display text-2xl mt-2">Home returned.</h3>
-      <p className="mt-2 text-sm text-muted-foreground">${raised.toLocaleString()} raised of ${goal.toLocaleString()} goal · {donorCount} donors made it happen.</p>
+    <div className="rounded-[22px] border-2 border-green bg-white p-6">
+      <span className="inline-flex items-center gap-1.5 rounded-full bg-green text-white text-[0.65rem] font-bold uppercase tracking-wider px-3 py-1">
+        <Check className="w-3 h-3" /> 100% Funded
+      </span>
+      <p className="mt-3 font-display text-[2.2rem] leading-none">{currency(r.raised)}</p>
+      <p className="mt-1 text-xs text-muted-foreground">raised from {r.donor_count} donors</p>
+      <div className="mt-4 h-2 bg-off rounded-full overflow-hidden">
+        <div className="h-full bg-green rounded-full w-full" />
+      </div>
+      <p className="mt-5 text-sm text-[#444] leading-relaxed">
+        This rescue is complete. {r.title.split("'")[0]} is home.
+      </p>
+      {next && (
+        <Link
+          to="/rescue/$slug"
+          params={{ slug: next.slug }}
+          className="mt-5 inline-flex items-center justify-center gap-2 w-full rounded-full bg-[#0e0e0e] text-white py-3 font-bold text-sm hover:bg-black transition"
+        >
+          Help the next rescue <ArrowRight className="w-4 h-4" />
+        </Link>
+      )}
     </div>
   );
 }
 
-function ShareCard({ title }: { title: string }) {
+function ShareCard({ r, completed = false }: { r: Rescue; completed?: boolean }) {
   const [copied, setCopied] = useState(false);
   const url = typeof window !== "undefined" ? window.location.href : "";
 
-  const copy = async () => {
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyLink = async () => {
+    const text = `${r.share_copy} ${url}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {}
   };
 
   return (
-    <div className="rounded-[20px] border border-border p-6">
-      <h3 className="font-display text-xl">Share {title}</h3>
-      <div className="mt-4 space-y-2">
-        <button
-          onClick={() => window.open(`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, "_blank")}
-          className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-border py-2.5 text-sm font-semibold hover:bg-off transition"
+    <div className="rounded-[22px] border border-mid bg-white p-6">
+      <h3 className="font-display text-lg">
+        {completed ? `Share ${r.title.split("'")[0]}'s story` : `Share ${r.title.split("'")[0]}'s campaign`}
+      </h3>
+      <p className="mt-1 text-xs text-muted-foreground">Help us reach more donors.</p>
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-xl border border-mid py-2.5 flex items-center justify-center hover:bg-off transition"
+          aria-label="Share on Facebook"
         >
-          <Facebook className="w-4 h-4" /> Share on Facebook
+          <Facebook className="w-4 h-4" />
+        </a>
+        <button
+          type="button"
+          onClick={copyLink}
+          className="rounded-xl border border-mid py-2.5 flex items-center justify-center hover:bg-off transition"
+          aria-label="Copy for Instagram"
+        >
+          <Instagram className="w-4 h-4" />
         </button>
         <button
-          onClick={copy}
-          className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-border py-2.5 text-sm font-semibold hover:bg-off transition"
+          type="button"
+          onClick={copyLink}
+          className="rounded-xl border border-mid py-2.5 flex items-center justify-center hover:bg-off transition"
+          aria-label="Copy link"
         >
-          <Instagram className="w-4 h-4" /> Share on Instagram
-        </button>
-        <button
-          onClick={copy}
-          className="w-full inline-flex items-center justify-center gap-2 rounded-full border border-border py-2.5 text-sm font-semibold hover:bg-off transition"
-        >
-          <Copy className="w-4 h-4" /> {copied ? "Link copied!" : "Copy campaign link"}
+          <Copy className="w-4 h-4" />
         </button>
       </div>
+      {copied && <p className="mt-3 text-xs text-green text-center">Copied to clipboard</p>}
     </div>
   );
 }
 
-function RecentDonors({ donors }: { donors: Donor[] }) {
+function DonorsCard({ donors }: { donors: Donor[] }) {
+  if (!donors.length) return null;
   return (
-    <div className="rounded-[20px] border border-border p-6">
-      <h3 className="font-display text-xl mb-4">Recent donors</h3>
-      <ul className="space-y-3">
-        {donors.map((d, i) => {
+    <div className="rounded-[22px] border border-mid bg-white p-6">
+      <h3 className="font-display text-lg">Recent Donors</h3>
+      <ul className="mt-4 space-y-3">
+        {donors.slice(0, 5).map((d, i) => {
+          const name = d.is_anonymous ? "Anonymous" : d.name;
           const initials = d.is_anonymous
             ? "?"
-            : d.name.split(" ").map((x) => x[0]).join("").slice(0, 2).toUpperCase();
+            : name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")
+                .slice(0, 2)
+                .toUpperCase();
           return (
             <li key={i} className="flex items-center gap-3">
-              <div className={`h-9 w-9 rounded-full grid place-items-center text-xs font-semibold ${d.is_anonymous ? "bg-off text-muted-foreground" : "bg-red/10 text-red"}`}>
+              <div
+                className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold ${
+                  d.is_anonymous
+                    ? "bg-off text-muted-foreground"
+                    : "bg-[#0e0e0e] text-white"
+                }`}
+              >
                 {initials}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate">{d.is_anonymous ? "Anonymous" : d.name}</p>
-                <p className="text-xs text-muted-foreground">{timeAgo(d.created_at)}</p>
+                <p className="text-sm font-semibold truncate">{name}</p>
+                <p className="text-[0.7rem] text-muted-foreground">{timeAgo(d.created_at)}</p>
               </div>
-              <span className="text-sm font-semibold">${d.amount}</span>
+              <span className="font-display text-sm">{currency(d.amount)}</span>
             </li>
           );
         })}
       </ul>
     </div>
   );
-}
-
-function timeAgo(iso: string) {
-  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
-  if (diff < 60) return "just now";
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return `${Math.floor(diff / 86400)}d ago`;
 }

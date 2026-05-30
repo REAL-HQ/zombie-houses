@@ -1,14 +1,13 @@
 import shermanHero from "@/assets/sherman-hero.jpg";
 
-export type RescueStatus = "active" | "funded" | "complete" | "paused";
+export type RescueStatus = "active" | "complete" | "paused";
 
 export interface Phase {
   number: number;
   status: "active" | "upcoming" | "complete";
-  label: string;
   title: string;
   description: string;
-  goal?: number;
+  tags: string[];
 }
 
 export interface LedgerItem {
@@ -24,6 +23,7 @@ export interface Update {
   created_at: string;
   title: string;
   content_html: string;
+  is_final?: boolean;
 }
 
 export interface Donor {
@@ -36,19 +36,25 @@ export interface Donor {
 export interface Rescue {
   slug: string;
   title: string;
-  subtitle: string;
   location: string;
+  urgency_line: string;
+  urgency_message?: string;
   status: RescueStatus;
+  current_phase: number;
   hero_image: string;
+  thumb_image?: string;
   story_html: string;
+  completion_story_html?: string;
+  pull_quote?: string;
   raised: number;
-  goal: number;
+  phase1_goal: number;
   donor_count: number;
   deadline: string;
   started_at: string;
   completed_at?: string;
   duration_weeks?: number;
   service_tags: string[];
+  share_copy: string;
   slingshot_url: string;
   phases: Phase[];
   ledger: LedgerItem[];
@@ -60,39 +66,54 @@ export const rescues: Rescue[] = [
   {
     slug: "shermans-home",
     title: "Sherman's Home",
-    subtitle: "An 84-year-old veteran. Three weeks from losing the home he built with his own hands.",
     location: "Tampa, FL",
+    urgency_line: "Tax-deed sale in 6 days",
+    urgency_message:
+      "Urgent: Sherman faces a tax deed sale in 6 days. We need to close $23,580 to stop the auction.",
     status: "active",
+    current_phase: 1,
     hero_image: shermanHero,
+    thumb_image: shermanHero,
     story_html: `
       <p>Sherman Whitfield bought his small block house off 22nd Avenue in 1974 — the year his daughter was born. He framed the back porch himself, planted the avocado tree out front, and raised three kids inside its walls.</p>
-      <p>Then his wife got sick. Medical bills piled up. A reverse-mortgage salesman knocked at the wrong moment. Within four years, Sherman was three property-tax cycles behind and a tax-deed sale was scheduled for the third week of next month.</p>
-      <p>If we don't close the gap by then, the home gets auctioned on the courthouse steps. Sherman moves into his daughter's spare room. The avocado tree gets bulldozed for a flip.</p>
-      <p>We're not letting that happen.</p>
+      <p>Then his wife got sick. Medical bills piled up. A reverse-mortgage salesman knocked at the wrong moment. Within four years, Sherman was three property-tax cycles behind and a tax-deed sale was scheduled.</p>
+      <p>If we don't close the gap by then, the home gets auctioned on the courthouse steps. We're not letting that happen.</p>
     `,
+    pull_quote:
+      "I built this porch with my own two hands. I'd like to die looking out from it.",
     raised: 11420,
-    goal: 35000,
+    phase1_goal: 35000,
     donor_count: 187,
     deadline: "2026-06-21",
     started_at: "2026-05-01",
     service_tags: ["Back Taxes", "Title Clearing", "Roof Repair"],
+    share_copy:
+      "Sherman is 84. He built his Tampa home with his own hands. We have 6 days to stop the auction. Help us save it:",
     slingshot_url: "https://slingshotgiving.com/c/shermans-home",
     phases: [
       {
         number: 1,
         status: "active",
-        label: "Active Now — Phase 1",
         title: "Stop the auction",
-        description: "Pay off three years of back property taxes plus penalties and clear the tax-deed lien before the June 21 sale date.",
-        goal: 35000,
+        description:
+          "Pay off three years of back property taxes plus penalties and clear the tax-deed lien before the June 21 sale date.",
+        tags: ["Back Taxes", "Penalties", "Title Clearing"],
       },
       {
         number: 2,
         status: "upcoming",
-        label: "Coming Next",
         title: "Roof, plumbing, safety repairs",
-        description: "Once the home is secure, Phase 2 funds a new roof, replaces the failing water heater, and brings electrical up to code so Sherman can age in place.",
-        goal: 28000,
+        description:
+          "Once the home is secure, Phase 2 funds a new roof, replaces the failing water heater, and brings electrical up to code.",
+        tags: ["Roof", "Plumbing", "Electrical"],
+      },
+      {
+        number: 3,
+        status: "upcoming",
+        title: "Comfort & dignity",
+        description:
+          "Fresh paint, new flooring in the bedrooms, a working AC unit, and restoration of the back porch Sherman built himself.",
+        tags: ["Paint", "Flooring", "AC"],
       },
     ],
     ledger: [
@@ -109,13 +130,15 @@ export const rescues: Rescue[] = [
         id: "u3",
         created_at: "2026-05-28",
         title: "We met Sherman this morning",
-        content_html: "<p>Sat on the porch for an hour. He showed us the original mortgage paperwork in a manila folder he's kept for 52 years. We're not letting this one go.</p>",
+        content_html:
+          "<p>Sat on the porch for an hour. He showed us the original mortgage paperwork in a manila folder he's kept for <strong>52 years</strong>. We're not letting this one go.</p>",
       },
       {
         id: "u2",
         created_at: "2026-05-20",
         title: "Title search came back clean",
-        content_html: "<p>No second mortgage, no judgments. Just the tax lien. That means once we settle the county, the home is fully Sherman's again — free and clear.</p>",
+        content_html:
+          "<p>No second mortgage, no judgments. Just the tax lien. Once we settle the county, the home is fully Sherman's again — free and clear.</p>",
       },
       {
         id: "u1",
@@ -135,27 +158,71 @@ export const rescues: Rescue[] = [
   {
     slug: "miss-eleanors-cottage",
     title: "Miss Eleanor's Cottage",
-    subtitle: "Saved from demolition. Restored. Returned.",
     location: "St. Petersburg, FL",
+    urgency_line: "Saved from demolition",
     status: "complete",
+    current_phase: 3,
     hero_image: shermanHero,
-    story_html: "<p>A 1942 bungalow rescued from a code-enforcement teardown order.</p>",
+    thumb_image: shermanHero,
+    story_html:
+      "<p>A 1942 bungalow rescued from a code-enforcement teardown order. Miss Eleanor had lived there for 61 years.</p>",
+    completion_story_html:
+      "<p>On December 10, 2025, Miss Eleanor walked back through her front door for the first time in eight months. She brought peach cobbler for the whole crew.</p>",
     raised: 42800,
-    goal: 40000,
+    phase1_goal: 40000,
     donor_count: 314,
     deadline: "2025-11-01",
     started_at: "2025-08-15",
     completed_at: "2025-12-10",
     duration_weeks: 17,
-    service_tags: ["Code Violations", "Roof Repair", "Foundation"],
+    service_tags: ["Code Violations", "Roof", "Foundation"],
+    share_copy: "Miss Eleanor is home. Share her story and inspire the next rescue:",
     slingshot_url: "https://slingshotgiving.com/c/miss-eleanors-cottage",
     phases: [],
-    ledger: [],
-    updates: [],
+    ledger: [
+      { label: "Code violation settlements", amount: 12400, status: "paid" },
+      { label: "Roof replacement", amount: 18900, status: "paid" },
+      { label: "Foundation repair", amount: 8200, status: "paid" },
+      { label: "Returned to rescue fund", amount: 3300, status: "returned" },
+      { label: "Project Total", amount: 42800, status: "paid", is_total_row: true },
+    ],
+    updates: [
+      {
+        id: "ue1",
+        created_at: "2025-12-10",
+        title: "Miss Eleanor came home",
+        content_html: "<p>She brought peach cobbler. We brought tissues. The neighbors clapped.</p>",
+        is_final: true,
+      },
+    ],
     recent_donors: [],
   },
 ];
 
 export const getRescue = (slug: string) => rescues.find((r) => r.slug === slug);
-export const activeRescues = () => rescues.filter((r) => r.status === "active" || r.status === "funded");
-export const pastRescues = () => rescues.filter((r) => r.status === "complete");
+export const activeRescue = () => rescues.find((r) => r.status === "active");
+export const pastRescues = () =>
+  rescues
+    .filter((r) => r.status === "complete")
+    .sort((a, b) => (b.completed_at ?? "").localeCompare(a.completed_at ?? ""));
+
+export const daysRemaining = (deadline: string) => {
+  const ms = new Date(deadline).getTime() - Date.now();
+  return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)));
+};
+
+export const currency = (n: number) =>
+  n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+export const percent = (raised: number, goal: number) =>
+  Math.min(100, Math.round((raised / goal) * 100));
+
+export const timeAgo = (iso: string) => {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  return `${d}d ago`;
+};
