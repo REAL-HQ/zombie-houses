@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import heroCouple from "@/assets/hero-couple.jpg";
 import {
   ArrowRight,
   Video,
