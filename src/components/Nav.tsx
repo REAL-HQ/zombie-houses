@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import logo from "@/assets/zombie-houses-logo.png";
 
 const links = [
   { to: "/watch", label: "Watch" },
@@ -11,31 +12,20 @@ const links = [
 
 export const Nav = () => {
   const { pathname } = useLocation();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const isHome = pathname === "/";
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const transparent = isHome && !scrolled && !open;
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-[200] transition-all duration-200 ${
-        transparent
-          ? "bg-transparent"
-          : "bg-white/90 backdrop-blur-md border-b border-mid"
-      }`}
-    >
-      <div className="max-w-[1160px] mx-auto px-6 h-[60px] md:h-[68px] flex items-center justify-between">
-        <Link to="/" className="font-display text-2xl md:text-[1.6rem] leading-none tracking-tight">
-          <span className={transparent ? "text-white" : "text-[#0e0e0e]"}>Zombie</span>
-          <span className="text-red">Houses</span>
+    <header className="fixed top-0 inset-x-0 z-[200] bg-[hsl(0_0%_15%)]">
+      <div className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between relative overflow-visible">
+        <Link
+          to="/"
+          className="relative z-40 block h-16 md:h-20 w-32 md:w-56 shrink-0 overflow-visible"
+        >
+          <img
+            src={logo}
+            alt="Zombie Houses"
+            className="absolute top-3 md:top-3 left-0 h-20 md:h-28 w-auto max-w-none object-contain drop-shadow-lg"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -45,9 +35,9 @@ export const Nav = () => {
               <Link
                 key={l.to}
                 to={l.to}
-                className={`text-[0.78rem] font-semibold uppercase tracking-[0.12em] transition-opacity ${
-                  transparent ? "text-white" : "text-[#0e0e0e]"
-                } ${active ? "opacity-100" : "opacity-60 hover:opacity-100"}`}
+                className={`text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-white transition-opacity ${
+                  active ? "opacity-100" : "opacity-70 hover:opacity-100"
+                }`}
               >
                 {l.label}
               </Link>
@@ -63,7 +53,7 @@ export const Nav = () => {
             Donate Now
           </Link>
           <button
-            className={`md:hidden ${transparent ? "text-white" : "text-[#0e0e0e]"}`}
+            className="md:hidden text-white"
             aria-label="Menu"
             onClick={() => setOpen((o) => !o)}
           >
@@ -73,13 +63,13 @@ export const Nav = () => {
       </div>
 
       {open && (
-        <div className="md:hidden fixed inset-0 top-[60px] z-[190] bg-white flex flex-col px-6 py-8 gap-6">
+        <div className="md:hidden fixed inset-0 top-16 z-[190] bg-[hsl(0_0%_15%)] flex flex-col px-6 py-8 gap-6">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className="font-display text-3xl text-[#0e0e0e]"
+              className="font-display text-3xl text-white"
             >
               {l.label}
             </Link>
@@ -87,14 +77,14 @@ export const Nav = () => {
           <Link
             to="/sponsors"
             onClick={() => setOpen(false)}
-            className="font-display text-3xl text-[#0e0e0e]"
+            className="font-display text-3xl text-white"
           >
             Sponsors
           </Link>
           <Link
             to="/apply"
             onClick={() => setOpen(false)}
-            className="font-display text-3xl text-[#0e0e0e]"
+            className="font-display text-3xl text-white"
           >
             Apply for Help
           </Link>

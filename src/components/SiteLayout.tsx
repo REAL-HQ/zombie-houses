@@ -12,7 +12,7 @@ export const SiteLayout = ({
 }) => (
   <div className="min-h-screen flex flex-col bg-background">
     <Nav />
-    <main className={`flex-1 ${transparentNavOffset ? "" : "pt-[60px] md:pt-[68px]"}`}>
+    <main className={`flex-1 ${transparentNavOffset ? "" : "pt-16 md:pt-20"}`}>
       {children}
     </main>
     <Footer />
