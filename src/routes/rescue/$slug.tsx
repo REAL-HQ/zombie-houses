@@ -88,7 +88,7 @@ function CampaignPage() {
               <section>
                 <h2 className="font-display text-3xl mb-6">The Plan</h2>
                 <div className="space-y-6">
-                  {r.phases.map((p) => <PhaseItem key={p.number} phase={p} />)}
+                  {r.phases.map((p: Phase) => <PhaseItem key={p.number} phase={p} />)}
                 </div>
               </section>
             )}
@@ -99,7 +99,7 @@ function CampaignPage() {
                 <h2 className="font-display text-3xl mb-2">Where Every Dollar Goes</h2>
                 <p className="text-muted-foreground mb-6">Full transparency. Updated as bills are paid.</p>
                 <div className="rounded-[20px] border border-border overflow-hidden">
-                  {r.ledger.map((it, i) => <LedgerRow key={i} item={it} />)}
+                  {r.ledger.map((it: LedgerItem, i: number) => <LedgerRow key={i} item={it} />)}
                 </div>
               </section>
             )}
@@ -109,7 +109,7 @@ function CampaignPage() {
               <section>
                 <h2 className="font-display text-3xl mb-6">Project Updates</h2>
                 <div className="space-y-6">
-                  {r.updates.map((u) => <UpdateItem key={u.id} update={u} />)}
+                  {r.updates.map((u: Update) => <UpdateItem key={u.id} update={u} />)}
                 </div>
               </section>
             )}
