@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import heroCouple from "@/assets/hero-couple.jpg";
 import {
   ArrowRight,
   Video,
@@ -84,29 +85,17 @@ function Hero() {
           </div>
         </div>
         <div className="hidden md:block">
-          <div className="relative rounded-[22px] border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-8 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(192,57,43,0.25),transparent_60%)]" />
-            <div className="relative">
-              <span className="inline-block rounded-full bg-red px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.15em]">
-                A&amp;E Network
-              </span>
-              <h3 className="mt-5 font-display text-3xl leading-tight">Zombie House Flipping</h3>
-              <p className="mt-2 text-white/55 text-sm">Now streaming · Season 12</p>
-              <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/10 pt-6">
-                {[
-                  ["200+", "Homes Saved"],
-                  ["12", "Seasons"],
-                  ["$0", "Rescue Cost"],
-                ].map(([num, label]) => (
-                  <div key={label}>
-                    <p className="font-display text-2xl">{num}</p>
-                    <p className="text-[0.7rem] text-white/50 uppercase tracking-wider mt-1">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="relative rounded-[22px] overflow-hidden aspect-[4/5]">
+            <img
+              src={heroCouple}
+              alt="Zombie House Rescue team standing in a neglected home"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0e0e0e] via-[#0e0e0e]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/70 via-transparent to-transparent" />
           </div>
         </div>
+
       </div>
     </section>
   );
