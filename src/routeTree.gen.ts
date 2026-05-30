@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RescueIndexRouteImport } from './routes/rescue/index'
+import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RescueIndexRoute = RescueIndexRouteImport.update({
+  id: '/rescue/',
+  path: '/rescue/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RescueSlugRoute = RescueSlugRouteImport.update({
+  id: '/rescue/$slug',
+  path: '/rescue/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/rescue/$slug': typeof RescueSlugRoute
+  '/rescue/': typeof RescueIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/rescue/$slug': typeof RescueSlugRoute
+  '/rescue': typeof RescueIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/rescue/$slug': typeof RescueSlugRoute
+  '/rescue/': typeof RescueIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/rescue/$slug' | '/rescue/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/rescue/$slug' | '/rescue'
+  id: '__root__' | '/' | '/rescue/$slug' | '/rescue/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RescueSlugRoute: typeof RescueSlugRoute
+  RescueIndexRoute: typeof RescueIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,12 +68,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rescue/': {
+      id: '/rescue/'
+      path: '/rescue'
+      fullPath: '/rescue/'
+      preLoaderRoute: typeof RescueIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rescue/$slug': {
+      id: '/rescue/$slug'
+      path: '/rescue/$slug'
+      fullPath: '/rescue/$slug'
+      preLoaderRoute: typeof RescueSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RescueSlugRoute: RescueSlugRoute,
+  RescueIndexRoute: RescueIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
