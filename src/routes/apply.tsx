@@ -42,14 +42,11 @@ function ApplyPage() {
           <In placeholder="Email" type="email" />
           <In placeholder="Homeowner Name" />
           <In placeholder="Property Address" />
-          <select required defaultValue="" className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]">
-            <option value="" disabled>Type of help needed</option>
-            <option>Back property taxes / tax-deed sale</option>
-            <option>Code enforcement / demolition order</option>
-            <option>Major repairs (roof, plumbing, electrical)</option>
-            <option>Reverse mortgage / foreclosure</option>
-            <option>Other</option>
-          </select>
+          <input
+            required
+            placeholder="Type of help needed"
+            className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+          />
           <textarea
             rows={6}
             required
