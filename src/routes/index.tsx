@@ -41,7 +41,7 @@ function Home() {
   return (
     <SiteLayout transparentNavOffset>
       <Hero />
-      <MissionStrip />
+      
       <Initiatives />
       {active && <RescueTeaser />}
       <SellInline />
