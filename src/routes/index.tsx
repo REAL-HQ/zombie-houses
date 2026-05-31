@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import heroCouple from "@/assets/hero-couple.jpg";
+import logoAE from "@/assets/logo-ae.png";
+import logoDIY from "@/assets/logo-diy.png";
+import logoHGTV from "@/assets/logo-hgtv.png";
+import logoTampa from "@/assets/logo-tampabay.png";
 import {
   ArrowRight,
   Video,
@@ -41,6 +45,8 @@ function Home() {
   return (
     <SiteLayout transparentNavOffset>
       <Hero />
+      <FoundersSeenOn />
+      
       
       <Initiatives />
       {active && <RescueTeaser />}
