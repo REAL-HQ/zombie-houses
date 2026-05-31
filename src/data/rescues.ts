@@ -82,9 +82,9 @@ export const rescues: Rescue[] = [
     pull_quote:
       "I built this porch with my own two hands. I'd like to die looking out from it.",
     raised: 11420,
-    phase1_goal: 35000,
+    phase1_goal: 25000,
     donor_count: 187,
-    deadline: "2026-06-21",
+    deadline: "2026-06-04",
     started_at: "2026-05-01",
     service_tags: ["Back Taxes", "Title Clearing", "Roof Repair"],
     share_copy:
