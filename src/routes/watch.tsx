@@ -1,6 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { Play, Instagram, Youtube, Facebook, Music2 } from "lucide-react";
+import { Play } from "lucide-react";
+
+const InstagramLogo = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <defs>
+      <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+        <stop offset="0%" stopColor="#fdf497" />
+        <stop offset="5%" stopColor="#fdf497" />
+        <stop offset="45%" stopColor="#fd5949" />
+        <stop offset="60%" stopColor="#d6249f" />
+        <stop offset="90%" stopColor="#285AEB" />
+      </radialGradient>
+    </defs>
+    <rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#ig-grad)" />
+    <circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" strokeWidth="1.8" />
+    <circle cx="17.6" cy="6.5" r="1.2" fill="#fff" />
+  </svg>
+);
+
+const TikTokLogo = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <path d="M16.5 2h-2.7v13.4a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .8.1V10a5.4 5.4 0 1 0 4.6 5.4V8.7a7 7 0 0 0 4.2 1.4V7.4c-2.3 0-4.2-1.9-4.2-5.4z" fill="#000" />
+    <path d="M17.3 2.8h-2.7v13.4a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .8.1v-2.8a5.4 5.4 0 1 0 4.6 5.4V9.5a7 7 0 0 0 4.2 1.4V8.2c-2.3 0-4.2-1.9-4.2-5.4z" fill="#25F4EE" opacity="0.8" style={{ mixBlendMode: "screen" }} />
+    <path d="M15.7 1.2H13v13.4a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .8.1V9.2a5.4 5.4 0 1 0 4.6 5.4V7.9a7 7 0 0 0 4.2 1.4V6.6c-2.3 0-4.2-1.9-4.2-5.4z" fill="#FE2C55" opacity="0.8" style={{ mixBlendMode: "multiply" }} />
+  </svg>
+);
+
+const FacebookLogo = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z" fill="#1877F2" />
+  </svg>
+);
+
+const YouTubeLogo = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 4 12 4 12 4s-7.5 0-9.4.4A3 3 0 0 0 .5 6.5C.1 8.4.1 12 .1 12s0 3.6.4 5.5a3 3 0 0 0 2.1 2.1C4.5 20 12 20 12 20s7.5 0 9.4-.4a3 3 0 0 0 2.1-2.1c.4-1.9.4-5.5.4-5.5s0-3.6-.4-5.5z" fill="#FF0000" />
+    <path d="M9.8 15.5V8.5L15.8 12l-6 3.5z" fill="#fff" />
+  </svg>
+);
 
 export const Route = createFileRoute("/watch")({
   head: () => ({
