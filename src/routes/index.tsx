@@ -205,7 +205,7 @@ function RescueTeaser() {
         <div>
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Zombie House Rescue</p>
           <h2 className="mt-3 font-display text-[clamp(2rem,4vw,2.8rem)] tracking-[-0.025em]">
-            Right now, we're saving {r.title.split("'")[0]}'s home.
+            Right Now, We're Saving {r.title.split("'")[0]}'s Home.
           </h2>
           <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
             {r.location} · Tax-deed sale in 6 days. From emergency tax payment, roof replacement and temporary relocation for repairs — we mobilize whatever the rescue requires. Every dollar is documented publicly.
