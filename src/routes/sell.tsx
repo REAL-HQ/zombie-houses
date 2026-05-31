@@ -342,7 +342,7 @@ function SellPage() {
             <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
               <p className="text-red font-bold tracking-wide uppercase">How It Works</p>
               <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-foreground leading-tight font-display">
-                3 Simple Steps. <span className="text-red">To Sell Your Home.</span>
+                3 Simple Steps <span className="text-red">To Sell Your Home.</span>
               </h2>
 
               <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
