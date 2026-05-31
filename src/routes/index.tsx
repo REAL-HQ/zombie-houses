@@ -468,8 +468,8 @@ function VendorPreview() {
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[18px] bg-white border border-mid px-6 py-5">
           <p className="text-sm">
-            <span className="font-bold">Contractor or service provider?</span>{" "}
-            <span className="text-muted-foreground">Join our vendor network.</span>
+            <span className="font-bold">Contractor Or Service Provider?</span>{" "}
+            <span className="text-muted-foreground">Join Our Vendor Network.</span>
           </p>
           <Link
             to="/sponsors"
