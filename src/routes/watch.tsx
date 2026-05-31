@@ -55,7 +55,7 @@ function WatchPage() {
 
         <section className="max-w-[1160px] mx-auto px-6 pb-16">
           <div className="relative aspect-video rounded-[22px] overflow-hidden bg-gradient-to-br from-[#3a1a14] via-[#1a0a07] to-[#0e0e0e] flex items-center justify-center group cursor-pointer">
-            <button className="w-20 h-20 rounded-full bg-red flex items-center justify-center group-hover:scale-110 transition-transform">
+            <button className="w-20 h-20 rounded-lg bg-red flex items-center justify-center group-hover:scale-110 transition-transform">
               <Play className="w-8 h-8 text-white fill-white ml-1" />
             </button>
             <div className="absolute bottom-6 left-6 right-6">
