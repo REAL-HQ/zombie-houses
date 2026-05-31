@@ -50,7 +50,7 @@ export const Nav = () => {
             to="/apply"
             className="hidden sm:inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-white/10 transition-colors"
           >
-            Apply
+            Nominate
           </Link>
           <Link
             to="/rescue"
