@@ -42,7 +42,7 @@ export const Footer = () => (
     <div className="border-t border-white/10">
       <div className="max-w-[1160px] mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/45">
         <p>© {new Date().getFullYear()} ZombieHouses.com</p>
-        <p>Zombie House Rescue is a charitable initiative of Zombie Houses.</p>
+        
       </div>
     </div>
   </footer>
