@@ -253,7 +253,7 @@ function SellInline() {
         <div>
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Zombie House Buyers</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-            Selling a tough house? <em className="not-italic text-red font-display">We'll buy it.</em>
+            Selling A Zombie House?<br /> <em className="not-italic text-red font-display">We'll Buy It.</em>
           </h2>
           <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
             No repairs. No commissions. No showings. Just a fair cash offer in 24 hours and a closing date you choose.
