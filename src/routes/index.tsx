@@ -452,7 +452,7 @@ function VendorPreview() {
     <section className="bg-off py-20 md:py-28">
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Vendor Network</p>
-        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
+        <h2 className="mt-3 font-display text-[clamp(1.4rem,3vw,2.4rem)] tracking-[-0.025em] whitespace-nowrap">
           Trusted Vendors. Nationwide Impact.
         </h2>
         <p className="mt-3 text-muted-foreground leading-relaxed max-w-2xl">
