@@ -102,18 +102,6 @@ function Hero() {
   );
 }
 
-function MissionStrip() {
-  return (
-    <section className="bg-[#0e0e0e] text-white border-t border-white/5">
-      <div className="max-w-[1160px] mx-auto px-6 py-20 md:py-24 text-center">
-        <p className="mt-5 max-w-[500px] mx-auto text-white/65 leading-relaxed">
-          Zombie House Rescue is a charitable initiative of Real Advisors — pulling homes back from
-          tax sales, code orders, and neglect, then handing the keys back to the families who built them.
-        </p>
-      </div>
-    </section>
-  );
-}
 
 function Initiatives() {
   const cards = [
