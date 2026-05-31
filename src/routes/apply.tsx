@@ -42,7 +42,11 @@ function ApplyPage() {
           <In placeholder="Email" type="email" />
           <In placeholder="Homeowner Name" />
           <In placeholder="Property Address" />
-          <In placeholder="Type of help needed" className="sm:col-span-2" />
+          <input
+            required
+            placeholder="Type of help needed"
+            className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+          />
           <textarea
             rows={6}
             required
