@@ -101,7 +101,7 @@ function Hero() {
             Saving Homes.<br />
             <em className="not-italic text-red font-display">Changing Lives.</em>
           </h1>
-          <p className="mt-6 text-[1.05rem] text-white/75 max-w-[460px] leading-relaxed">
+          <p className="mt-6 text-[1.05rem] text-white/75 max-w-[760px] leading-relaxed">
             We renovate neglected houses, rescue families in need, and give communities a second chance — one zombie house at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
