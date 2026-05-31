@@ -158,11 +158,11 @@ function Initiatives() {
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Three Initiatives</p>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.1] tracking-[-0.025em]">
-          We don't just flip houses.{" "}
-          <em className="not-italic font-display text-red">We rescue them.</em>
+          We Don't Just Flip Houses.{" "}
+          <em className="not-italic font-display text-red">We Rescue Them.</em>
         </h2>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
-          One mission. Three ways we show up.
+          One Mission. Three Ways We Show Up.
         </h2>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {cards.map((c) => (
