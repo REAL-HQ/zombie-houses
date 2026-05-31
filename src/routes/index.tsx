@@ -131,7 +131,7 @@ function Initiatives() {
     {
       icon: Video,
       title: "Zombie House Flipping",
-      body: "Twelve seasons on A&E documenting the worst houses on the block — and the crews that bring them back.",
+      body: "Four seasons on A&E documenting the worst houses on the block — and the crews that bring them back.",
       tag: "A&E Show",
       to: "/watch" as const,
       red: false,
