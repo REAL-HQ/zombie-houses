@@ -173,7 +173,7 @@ function SponsorsPage() {
       <section className="bg-off py-20">
         <div className="max-w-[1160px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground text-center">Our Sponsors</p>
-          <h2 className="mt-3 font-display text-3xl text-center">Powered by these partners</h2>
+          <h2 className="mt-3 font-display text-3xl text-center">Powered By These Partners</h2>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {SPONSORS.map((s) => (
               <div
