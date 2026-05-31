@@ -118,7 +118,7 @@ function LeadForm() {
           <option>Condemned or Distressed</option>
         </select>
         <textarea rows={3} placeholder="Optional notes" className="w-full rounded-xl border border-mid bg-off px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none" />
-        <button type="submit" className="w-full rounded-full bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
+        <button type="submit" className="w-full rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
           Get My Cash Offer →
         </button>
         <p className="text-[0.7rem] text-muted-foreground text-center">

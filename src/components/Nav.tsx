@@ -48,7 +48,7 @@ export const Nav = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/rescue"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-red px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-[#a93226] transition-colors"
+            className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-red px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-[#a93226] transition-colors"
           >
             Donate Now
           </Link>
@@ -91,7 +91,7 @@ export const Nav = () => {
           <Link
             to="/rescue"
             onClick={() => setOpen(false)}
-            className="mt-4 inline-flex items-center justify-center rounded-full bg-red px-6 py-3.5 text-white font-bold uppercase tracking-[0.1em] text-sm"
+            className="mt-4 inline-flex items-center justify-center rounded-lg bg-red px-6 py-3.5 text-white font-bold uppercase tracking-[0.1em] text-sm"
           >
             Donate Now
           </Link>

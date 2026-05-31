@@ -128,7 +128,7 @@ function SponsorsPage() {
               <option>Custom partnership</option>
             </select>
             <textarea rows={4} placeholder="Tell us about your brand and goals" className="sm:col-span-2 rounded-xl border border-mid bg-off px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none" />
-            <button type="submit" className="sm:col-span-2 rounded-full bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
+            <button type="submit" className="sm:col-span-2 rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
               Send Inquiry →
             </button>
           </form>
@@ -163,7 +163,7 @@ function SponsorsPage() {
             <Input placeholder="Phone" type="tel" />
             <Input placeholder="Email" type="email" />
             <Input placeholder="Website" />
-            <button type="submit" className="sm:col-span-2 rounded-full bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
+            <button type="submit" className="sm:col-span-2 rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">
               Submit Application →
             </button>
           </form>
@@ -244,8 +244,8 @@ function TierCard({
           to={ctaTo}
           className={
             ctaRed
-              ? "mt-7 rounded-full bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
-              : "mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              : "mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
           }
         >
           {ctaLabel}
@@ -255,10 +255,10 @@ function TierCard({
           href={ctaHref}
           className={
             ctaRed
-              ? "mt-7 rounded-full bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
               : featured
-              ? "mt-7 rounded-full border-[1.5px] border-white/35 text-white py-3 text-sm font-bold text-center hover:bg-white/10 transition"
-              : "mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+              ? "mt-7 rounded-lg border-[1.5px] border-white/35 text-white py-3 text-sm font-bold text-center hover:bg-white/10 transition"
+              : "mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
           }
         >
           {ctaLabel}

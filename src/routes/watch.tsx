@@ -59,7 +59,7 @@ function WatchPage() {
               <Play className="w-8 h-8 text-white fill-white ml-1" />
             </button>
             <div className="absolute bottom-6 left-6 right-6">
-              <span className="inline-block rounded-full bg-red text-[0.65rem] font-bold uppercase tracking-[0.15em] px-3 py-1">Featured</span>
+              <span className="inline-block rounded-lg bg-red text-[0.65rem] font-bold uppercase tracking-[0.15em] px-3 py-1">Featured</span>
               <h2 className="mt-3 font-display text-2xl md:text-3xl">Sherman's Story — First Look</h2>
             </div>
           </div>
@@ -78,7 +78,7 @@ function WatchPage() {
               >
                 <div className="aspect-video bg-gradient-to-br from-white/10 to-transparent relative flex items-center justify-center">
                   <Play className="w-10 h-10 text-white/40 group-hover:text-white transition-colors" />
-                  <span className="absolute top-3 left-3 rounded-full bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{s.tag}</span>
+                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{s.tag}</span>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-xl">{s.title}</h3>
@@ -118,7 +118,7 @@ function WatchPage() {
                 className="rounded-[14px] overflow-hidden bg-white/[0.04] border border-white/10 hover:border-white/30 transition-colors group"
               >
                 <div className="aspect-video bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08] relative">
-                  <span className="absolute top-3 left-3 rounded-full bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
+                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
                   <Play className="absolute inset-0 m-auto w-10 h-10 text-white/40 group-hover:text-white transition" />
                 </div>
                 <div className="p-4">

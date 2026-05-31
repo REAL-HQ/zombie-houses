@@ -93,7 +93,7 @@ function RescueIndex() {
                     {r.service_tags.map((t) => (
                       <span
                         key={t}
-                        className="text-[0.65rem] uppercase tracking-wider px-2 py-0.5 rounded-full bg-off text-muted-foreground border border-mid"
+                        className="text-[0.65rem] uppercase tracking-wider px-2 py-0.5 rounded-lg bg-off text-muted-foreground border border-mid"
                       >
                         {t}
                       </span>
@@ -148,7 +148,7 @@ function ActiveCard({ r }: { r: ReturnType<typeof activeRescue> & {} }) {
             <Stat label="Days Left" value={days.toString()} />
             <Stat label="Funded" value={`${pct}%`} />
           </div>
-          <div className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-red text-white px-6 py-3.5 font-bold text-sm group-hover:bg-[#a93226] transition">
+          <div className="mt-7 inline-flex items-center justify-center gap-2 rounded-lg bg-red text-white px-6 py-3.5 font-bold text-sm group-hover:bg-[#a93226] transition">
             Donate Now <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
           </div>
         </div>
