@@ -26,8 +26,7 @@ function ApplyPage() {
           Nominate A Home For Rescue.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground">
-          Know a homeowner facing a tax-deed sale, code-enforcement order, or major repair they can't afford?
-          Tell us their story. We review every submission.
+          Know a homeowner who needs help keeping their home? Tell us their story. We review every submission.
         </p>
       </section>
 
