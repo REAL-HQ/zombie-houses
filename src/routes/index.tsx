@@ -154,12 +154,14 @@ function CurrentRescueMission() {
         <div className="mt-12 grid lg:grid-cols-2 gap-8 items-stretch">
           {/* LEFT: Sherman story */}
           <div className="rounded-[22px] overflow-hidden border border-white/10 bg-white/[0.03] flex flex-col">
-            <div className="aspect-[4/3] overflow-hidden">
-              <img
-                src={shermanHero}
-                alt="Sherman on the porch of his Tampa home"
-                className="w-full h-full object-cover"
+            <div className="aspect-[9/16] max-h-[560px] overflow-hidden bg-black">
+              <iframe
+                src="https://www.youtube.com/embed/-mRQEHQz3gE?rel=0&playsinline=1"
+                title="Meet Sherman — Zombie House Rescue"
+                className="w-full h-full"
                 loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
               />
             </div>
             <div className="p-7 flex-1 flex flex-col">
