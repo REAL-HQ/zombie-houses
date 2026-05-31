@@ -139,7 +139,7 @@ function Initiatives() {
     {
       icon: HomeIcon,
       title: "Zombie House Buyers",
-      body: "We buy houses in any condition, fast. Fire damage, full gut, hoarder homes — doesn't matter. Cash in 24 hours.",
+      body: "We buy houses in any condition, fast. Fire damage, full gut, hoarder homes — doesn't matter. Cash in 3 days.",
       tag: "We Buy Houses",
       to: "/sell" as const,
       red: false,
