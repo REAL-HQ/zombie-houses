@@ -338,6 +338,52 @@ function SellPage() {
             </div>
           </section>
 
+          <section className="w-full bg-background py-16 md:py-24">
+            <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
+              <p className="text-red font-bold tracking-wide uppercase">How It Works</p>
+              <h2 className="mt-3 text-3xl md:text-5xl font-extrabold text-foreground leading-tight font-display">
+                3 Simple Steps To <span className="text-red">Sell Your Home</span>
+              </h2>
+              <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
+                No repairs, no commissions, no hassles. Get cash for your house in 3 days.
+              </p>
+
+              <div className="mt-12 grid md:grid-cols-3 gap-8">
+                {[
+                  {
+                    n: "1",
+                    title: "Tell Us About Your Home",
+                    desc: "Enter your property address and a few quick details. Takes less than 60 seconds.",
+                  },
+                  {
+                    n: "2",
+                    title: "Get Your Cash Offer",
+                    desc: "We review your property and send you a fair, no-obligation cash offer within 24 hours.",
+                  },
+                  {
+                    n: "3",
+                    title: "Close & Get Paid",
+                    desc: "Pick your closing date. We handle everything and put cash in your hand in as little as 3 days.",
+                  },
+                ].map((s) => (
+                  <div key={s.n} className="flex flex-col items-center text-center">
+                    <div className="w-20 h-20 rounded-full bg-red text-white flex items-center justify-center text-3xl font-extrabold font-display shadow-[0_6px_0_0_color-mix(in_oklab,var(--red)_60%,transparent)]">
+                      {s.n}
+                    </div>
+                    <h3 className="mt-6 text-xl md:text-2xl font-extrabold text-foreground font-display">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 text-muted-foreground text-base leading-relaxed max-w-xs">
+                      {s.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+
+
           <section className="w-full bg-muted py-12 md:py-16">
             <div className="max-w-6xl mx-auto px-4 md:px-8">
               <p className="text-center text-red font-bold tracking-wide uppercase">
