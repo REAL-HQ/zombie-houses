@@ -62,10 +62,10 @@ const SHOWS = [
 ];
 
 const SOCIALS = [
-  { icon: Instagram, handle: "@zombiehouses", platform: "Instagram", href: "https://instagram.com/zombiehouses" },
-  { icon: Music2, handle: "@zombiehouses", platform: "TikTok", href: "https://tiktok.com/@zombiehouses" },
-  { icon: Facebook, handle: "@zombiehouses", platform: "Facebook", href: "https://facebook.com/zombiehouses" },
-  { icon: Youtube, handle: "@zombiehouses", platform: "YouTube", href: "https://youtube.com/@zombiehouses" },
+  { icon: InstagramLogo, handle: "@zombiehouses", platform: "Instagram", href: "https://instagram.com/zombiehouses" },
+  { icon: TikTokLogo, handle: "@zombiehouses", platform: "TikTok", href: "https://tiktok.com/@zombiehouses" },
+  { icon: FacebookLogo, handle: "@zombiehouses", platform: "Facebook", href: "https://facebook.com/zombiehouses" },
+  { icon: YouTubeLogo, handle: "@zombiehouses", platform: "YouTube", href: "https://youtube.com/@zombiehouses" },
 ];
 
 const BTS = [
