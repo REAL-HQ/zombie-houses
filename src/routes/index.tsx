@@ -344,7 +344,7 @@ function DesignPreview() {
             to="/design"
             className="inline-flex items-center gap-2 text-sm font-bold underline-offset-4 hover:underline"
           >
-            See all inspiration <ArrowRight className="w-4 h-4" />
+            See All Inspiration <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
         <div className="mt-10 grid md:grid-cols-3 gap-6">
