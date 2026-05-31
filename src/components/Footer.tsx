@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/zombie-houses-logo.png";
 
 export const Footer = () => (
   <footer className="bg-[#0e0e0e] text-white">
     <div className="max-w-[1160px] mx-auto px-6 py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div>
-        <Link to="/" className="font-display text-2xl leading-none">
-          <span className="text-white">Zombie</span>
-          <span className="text-red">Houses</span>
+        <Link to="/" className="inline-block">
+          <img src={logo} alt="ZombieHouses" className="h-12 w-auto" />
         </Link>
         <p className="mt-4 text-sm text-white/55 max-w-xs leading-relaxed">
           Transforming neglected homes, rescuing families, and giving communities a second chance — one zombie house at a time.
