@@ -40,7 +40,7 @@ export const Footer = () => (
       />
     </div>
     <div className="border-t border-white/10">
-      <div className="max-w-[1160px] mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/45">
+      <div className="max-w-[1160px] mx-auto px-6 py-6 flex items-center justify-center gap-3 text-xs text-white/45">
         <p>© {new Date().getFullYear()} ZombieHouses.com</p>
         
       </div>
