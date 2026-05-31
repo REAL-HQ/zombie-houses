@@ -109,7 +109,7 @@ function WatchPage() {
         </section>
 
         <section className="max-w-[1160px] mx-auto px-6 py-20">
-          <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em] mb-8">Latest from the field</h2>
+          <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em] mb-8">Latest From The Field</h2>
           <div className="grid md:grid-cols-3 gap-5">
             {BTS.map((b, i) => (
               <a
