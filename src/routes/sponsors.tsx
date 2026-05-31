@@ -139,7 +139,7 @@ function SponsorsPage() {
         <div className="max-w-[1160px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Vendor Network</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-            Join the crews behind every rescue.
+            Join The Crews Behind Every Rescue.
           </h2>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {CATS.map((c) => (
