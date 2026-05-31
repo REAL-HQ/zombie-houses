@@ -413,7 +413,7 @@ function SponsorsPreview() {
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Partner With Us</p>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-          Sponsor a rescue.
+          Sponsor A Rescue.
         </h2>
         <div className="mt-10 grid md:grid-cols-3 gap-6">
           <div className="rounded-[22px] border-2 border-red bg-[#0e0e0e] text-white p-7 flex flex-col">
