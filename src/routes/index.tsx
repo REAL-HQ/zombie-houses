@@ -59,6 +59,22 @@ function Home() {
   );
 }
 
+function FoundersSeenOn() {
+  return (
+    <section className="w-full bg-[hsl(0_0%_15%)] py-0">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-wrap items-center justify-around gap-6">
+        <p className="text-white/90 font-bold tracking-widest text-sm md:text-base">
+          FOUNDERS SEEN ON
+        </p>
+        <img src={logoAE} alt="A&E" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
+        <img src={logoDIY} alt="DIY Network" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
+        <img src={logoHGTV} alt="HGTV" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
+        <img src={logoTampa} alt="Tampa Bay Times" loading="lazy" className="h-20 md:h-28 w-auto object-contain" />
+      </div>
+    </section>
+  );
+}
+
 function Hero() {
   return (
     <section className="relative bg-[#0e0e0e] text-white w-full overflow-hidden">
