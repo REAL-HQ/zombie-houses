@@ -148,7 +148,7 @@ function ActiveCard({ r }: { r: ReturnType<typeof activeRescue> & {} }) {
             <Stat label="Days Left" value={days.toString()} />
             <Stat label="Funded" value={`${pct}%`} />
           </div>
-          <div className="mt-7 inline-flex items-center justify-center gap-2 rounded-lg bg-red text-white px-6 py-3.5 font-bold text-sm group-hover:bg-[#a93226] transition">
+          <div className="mt-7 inline-flex items-center justify-center gap-2 rounded-lg bg-red text-white px-6 py-3.5 font-bold text-sm group-hover:bg-[#b81830] transition">
             Donate Now <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition" />
           </div>
         </div>

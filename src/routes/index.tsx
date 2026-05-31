@@ -225,7 +225,7 @@ function RescueTeaser() {
           <Link
             to="/rescue/$slug"
             params={{ slug: r.slug }}
-            className="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-red px-6 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+            className="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-red px-6 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
           >
             Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
           </Link>
@@ -422,7 +422,7 @@ function SponsorsPreview() {
             </ul>
             <Link
               to="/sponsors"
-              className="mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              className="mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#b81830] transition"
             >
               Become a Title Sponsor →
             </Link>
@@ -478,7 +478,7 @@ function ClosingStrip() {
             <Link
               to="/rescue/$slug"
               params={{ slug: r.slug }}
-              className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+              className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
             >
               Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
             </Link>

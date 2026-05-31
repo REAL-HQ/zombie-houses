@@ -244,7 +244,7 @@ function TierCard({
           to={ctaTo}
           className={
             ctaRed
-              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#b81830] transition"
               : "mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
           }
         >
@@ -255,7 +255,7 @@ function TierCard({
           href={ctaHref}
           className={
             ctaRed
-              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              ? "mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#b81830] transition"
               : featured
               ? "mt-7 rounded-lg border-[1.5px] border-white/35 text-white py-3 text-sm font-bold text-center hover:bg-white/10 transition"
               : "mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"

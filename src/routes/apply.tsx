@@ -56,7 +56,7 @@ function ApplyPage() {
             placeholder="Tell us the story. Who lives there? What happened? What's the deadline?"
             className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none"
           />
-          <button type="submit" className="sm:col-span-2 rounded-lg bg-red text-white py-3.5 font-bold text-sm hover:bg-[#a93226] transition">
+          <button type="submit" className="sm:col-span-2 rounded-lg bg-red text-white py-3.5 font-bold text-sm hover:bg-[#b81830] transition">
             Submit Nomination →
           </button>
           <p className="sm:col-span-2 text-[0.7rem] text-center text-muted-foreground">

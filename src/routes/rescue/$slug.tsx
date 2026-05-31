@@ -380,7 +380,7 @@ function DonationCard({ r }: { r: Rescue }) {
         href={`${r.slingshot_url}?amount=${finalAmount}`}
         target="_blank"
         rel="noreferrer"
-        className="mt-4 block w-full rounded-lg bg-red text-white text-center py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+        className="mt-4 block w-full rounded-lg bg-red text-white text-center py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
       >
         Donate {finalAmount ? currency(finalAmount) : ""} →
       </a>
