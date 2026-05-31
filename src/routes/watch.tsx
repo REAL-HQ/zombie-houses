@@ -46,7 +46,7 @@ function WatchPage() {
         <section className="max-w-[1160px] mx-auto px-6 pt-20 pb-12 md:pt-28 md:pb-16">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Watch</p>
           <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
-            Behind the Scenes. <em className="not-italic text-red font-display">Real Transformations.</em>
+            Behind the Scenes.<br /> <em className="not-italic text-red font-display">Real Transformations.</em>
           </h1>
           <p className="mt-5 text-white/55 max-w-2xl text-lg">
             From A&E to social — follow every flip, every rescue, and every before-and-after.
