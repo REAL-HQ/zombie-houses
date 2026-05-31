@@ -99,7 +99,7 @@ function DesignPage() {
             <div>
               <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Shop the Look</p>
               <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-                The exact finishes from our flips.
+                The Exact Finishes From Our Flips.
               </h2>
             </div>
             <p className="text-xs text-muted-foreground max-w-xs">

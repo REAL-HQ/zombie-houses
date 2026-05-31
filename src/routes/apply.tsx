@@ -23,7 +23,7 @@ function ApplyPage() {
       <section className="max-w-[820px] mx-auto px-6 pt-16 pb-12 md:pt-24">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Apply for Help</p>
         <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06]">
-          Nominate a home for rescue.
+          Nominate A Home For Rescue.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground">
           Know a homeowner facing a tax-deed sale, code-enforcement order, or major repair they can't afford?

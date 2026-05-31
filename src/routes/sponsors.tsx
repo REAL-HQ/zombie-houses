@@ -54,7 +54,7 @@ function SponsorsPage() {
       <section className="max-w-[1160px] mx-auto px-6 pt-16 pb-12 md:pt-24">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Partner With Us</p>
         <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
-          Sponsor a Rescue.
+          Sponsor A Rescue.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
           Your brand funds real transformations — documented on video and shared with our entire audience. Real impact. Real exposure.
@@ -111,7 +111,7 @@ function SponsorsPage() {
         <div className="max-w-[820px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Sponsor Inquiry</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-            Let's talk partnership.
+            Let's Talk Partnership.
           </h2>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -139,7 +139,7 @@ function SponsorsPage() {
         <div className="max-w-[1160px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Vendor Network</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-            Join the crews behind every rescue.
+            Join The Crews Behind Every Rescue.
           </h2>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
             {CATS.map((c) => (
@@ -173,7 +173,7 @@ function SponsorsPage() {
       <section className="bg-off py-20">
         <div className="max-w-[1160px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground text-center">Our Sponsors</p>
-          <h2 className="mt-3 font-display text-3xl text-center">Powered by these partners</h2>
+          <h2 className="mt-3 font-display text-3xl text-center">Powered By These Partners</h2>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {SPONSORS.map((s) => (
               <div

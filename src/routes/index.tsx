@@ -219,7 +219,7 @@ function RescueTeaser() {
           </Link>
         </div>
         <div className="rounded-[22px] bg-[#0e0e0e] text-white p-8 md:p-10">
-          <h3 className="font-display text-2xl">Help close the gap.</h3>
+          <h3 className="font-display text-2xl">Help Close The Gap.</h3>
           <p className="mt-2 text-white/55 text-sm">{r.urgency_message}</p>
           <div className="mt-6">
             <div className="flex items-baseline justify-between mb-2">
