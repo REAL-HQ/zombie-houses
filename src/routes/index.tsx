@@ -161,7 +161,7 @@ function Initiatives() {
           We Don't Just Flip Houses.{" "}
           <em className="not-italic font-display text-red">We Rescue Them.</em>
         </h2>
-        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
+        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] whitespace-nowrap">
           One Mission. Three Ways We Show Up.
         </h2>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
