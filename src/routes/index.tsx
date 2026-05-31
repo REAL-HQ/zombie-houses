@@ -207,8 +207,7 @@ function RescueTeaser() {
             Right now, we're saving {r.title.split("'")[0]}'s home.
           </h2>
           <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
-            {r.location} · {r.urgency_line}. From emergency lawn care to full roof replacements — we mobilize
-            whatever the rescue requires. Every dollar is documented publicly.
+            {r.location} · Tax-deed sale in 6 days. From emergency tax payment, roof replacement and temporary relocation for repairs — we mobilize whatever the rescue requires. Every dollar is documented publicly.
           </p>
           <Link
             to="/rescue/$slug"
