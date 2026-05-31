@@ -106,10 +106,6 @@ function MissionStrip() {
   return (
     <section className="bg-[#0e0e0e] text-white border-t border-white/5">
       <div className="max-w-[1160px] mx-auto px-6 py-20 md:py-24 text-center">
-        <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.1] tracking-[-0.025em]">
-          We don't just flip houses.{" "}
-          <em className="not-italic font-display text-red">We rescue them.</em>
-        </h2>
         <p className="mt-5 max-w-[500px] mx-auto text-white/65 leading-relaxed">
           Zombie House Rescue is a charitable initiative of Real Advisors — pulling homes back from
           tax sales, code orders, and neglect, then handing the keys back to the families who built them.
@@ -150,6 +146,10 @@ function Initiatives() {
     <section className="bg-white py-20 md:py-28">
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Three Initiatives</p>
+        <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.1] tracking-[-0.025em]">
+          We don't just flip houses.{" "}
+          <em className="not-italic font-display text-red">We rescue them.</em>
+        </h2>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
           One mission. Three ways we show up.
         </h2>
