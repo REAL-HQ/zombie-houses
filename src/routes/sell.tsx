@@ -22,12 +22,12 @@ import logoAE from "@/assets/logo-ae.png";
 import logoDIY from "@/assets/logo-diy.png";
 import logoHGTV from "@/assets/logo-hgtv.png";
 import logoTampa from "@/assets/logo-tampabay.png";
-import recent1 from "@/assets/recent-1.png";
-import recent2 from "@/assets/recent-2.png";
-import recent3 from "@/assets/recent-3.png";
-import recent4 from "@/assets/recent-4.png";
-import recent5 from "@/assets/recent-5.png";
-import recent6 from "@/assets/recent-6.png";
+import recent1 from "@/assets/recent-1.jpg";
+import recent2 from "@/assets/recent-2.jpg";
+import recent3 from "@/assets/recent-3.jpg";
+import recent4 from "@/assets/recent-4.jpg";
+import recent5 from "@/assets/recent-5.jpg";
+import recent6 from "@/assets/recent-6.jpg";
 
 export const Route = createFileRoute("/sell")({
   head: () => ({
