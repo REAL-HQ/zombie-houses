@@ -34,7 +34,7 @@ function RescueIndex() {
     <SiteLayout>
       <section className="max-w-[1160px] mx-auto px-6 pt-16 md:pt-24 pb-12">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Zombie House Rescue</p>
-        <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
+        <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] whitespace-nowrap">
           We Show Up When No One Else Will.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
