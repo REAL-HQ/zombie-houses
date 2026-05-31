@@ -41,7 +41,7 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.18 0.01 60);
   --card: oklch(1 0 0);
@@ -76,7 +76,8 @@
   textarea,
   select,
   [role="button"],
-  a.inline-flex {
+  a.inline-flex,
+  .inline-flex {
     border-radius: var(--radius) !important;
   }
   html, body {
