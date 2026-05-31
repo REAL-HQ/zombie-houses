@@ -47,10 +47,16 @@ export const Nav = () => {
 
         <div className="flex items-center gap-3">
           <Link
+            to="/apply"
+            className="hidden sm:inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-white/10 transition-colors"
+          >
+            Apply
+          </Link>
+          <Link
             to="/rescue"
             className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-red px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-[#b81830] transition-colors"
           >
-            Donate Now
+            Donate
           </Link>
           <button
             className="md:hidden text-white"
