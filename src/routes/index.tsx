@@ -301,17 +301,12 @@ function SellFormCard({ compact = false }: { compact?: boolean }) {
           placeholder="Phone"
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
-        <select
-          defaultValue=""
+        <input
           required
+          type="email"
+          placeholder="Email"
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
-        >
-          <option value="" disabled>Condition</option>
-          <option>Move-in Ready</option>
-          <option>Minor Repairs</option>
-          <option>Major Repairs</option>
-          <option>Condemned or Distressed</option>
-        </select>
+        />
         <button
           type="submit"
           className="w-full rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition"
