@@ -19,16 +19,16 @@ export const Nav = () => {
       <div className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between relative overflow-visible">
         <Link
           to="/"
-          className="relative z-40 block h-16 md:h-20 w-32 md:w-56 shrink-0 overflow-visible"
+          className="relative z-40 block h-16 md:h-20 w-24 md:w-40 shrink-0 overflow-visible"
         >
           <img
             src={logo}
             alt="Zombie Houses"
-            className="absolute top-3 md:top-3 left-0 h-20 md:h-28 w-auto max-w-none object-contain drop-shadow-lg"
+            className="absolute top-2 md:top-2 left-0 h-14 md:h-20 w-auto max-w-none object-contain drop-shadow-lg"
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-14">
           {links.map((l) => {
             const active = pathname.startsWith(l.to);
             return (
