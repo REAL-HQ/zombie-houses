@@ -158,11 +158,11 @@ function Initiatives() {
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Three Initiatives</p>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-[1.1] tracking-[-0.025em]">
-          We don't just flip houses.{" "}
-          <em className="not-italic font-display text-red">We rescue them.</em>
+          We Don't Just Flip Houses.{" "}
+          <em className="not-italic font-display text-red">We Rescue Them.</em>
         </h2>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
-          One mission. Three ways we show up.
+          One Mission. Three Ways We Show Up.
         </h2>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {cards.map((c) => (
@@ -205,7 +205,7 @@ function RescueTeaser() {
         <div>
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Zombie House Rescue</p>
           <h2 className="mt-3 font-display text-[clamp(2rem,4vw,2.8rem)] tracking-[-0.025em]">
-            Right now, we're saving {r.title.split("'")[0]}'s home.
+            Right Now, We're Saving {r.title.split("'")[0]}'s Home.
           </h2>
           <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
             {r.location} · Tax-deed sale in 6 days. From emergency tax payment, roof replacement and temporary relocation for repairs — we mobilize whatever the rescue requires. Every dollar is documented publicly.
@@ -337,7 +337,7 @@ function DesignPreview() {
           <div>
             <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Inspiration</p>
             <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-              Before-and-afters worth saving.
+              Before-And-Afters Worth Saving.
             </h2>
           </div>
           <Link
@@ -380,7 +380,7 @@ function VendorPreview() {
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Vendor Network</p>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] max-w-2xl">
-          The crews behind every rescue.
+          The Crews Behind Every Rescue.
         </h2>
         <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
           {cats.map((c) => (
@@ -413,7 +413,7 @@ function SponsorsPreview() {
       <div className="max-w-[1160px] mx-auto px-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Partner With Us</p>
         <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-          Sponsor a rescue.
+          Sponsor A Rescue.
         </h2>
         <div className="mt-10 grid md:grid-cols-3 gap-6">
           <div className="rounded-[22px] border-2 border-red bg-[#0e0e0e] text-white p-7 flex flex-col">
