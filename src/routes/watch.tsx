@@ -137,7 +137,7 @@ function WatchPage() {
                 rel="noreferrer"
                 className="rounded-[14px] border border-mid bg-white p-5 hover:border-[#0e0e0e] transition-colors"
               >
-                <s.icon className="w-5 h-5 text-red" />
+                <s.icon className="w-6 h-6" />
                 <p className="mt-3 text-[0.65rem] uppercase tracking-wider text-muted-foreground">{s.platform}</p>
                 <p className="font-semibold text-sm mt-0.5">{s.handle}</p>
                 <p className="mt-3 text-xs font-bold uppercase tracking-wider text-red">Follow →</p>
