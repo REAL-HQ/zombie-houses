@@ -42,13 +42,13 @@ const BTS = [
 function WatchPage() {
   return (
     <SiteLayout>
-      <div className="bg-[#0e0e0e] text-white">
+      <div className="bg-white text-[#0e0e0e]">
         <section className="max-w-[1160px] mx-auto px-6 pt-20 pb-12 md:pt-28 md:pb-16">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Watch</p>
           <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
             Behind the Scenes.<br /> <em className="not-italic text-red font-display">Real Transformations.</em>
           </h1>
-          <p className="mt-5 text-white/55 max-w-2xl text-lg">
+          <p className="mt-5 text-muted-foreground max-w-2xl text-lg">
             From A&E to social — follow every flip, every rescue, and every before-and-after.
           </p>
         </section>
@@ -66,7 +66,7 @@ function WatchPage() {
         </section>
 
         <section className="max-w-[1160px] mx-auto px-6 pb-20">
-          <h2 className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-white/55 mb-6">Where to Watch</h2>
+          <h2 className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground mb-6">Where to Watch</h2>
           <div className="grid md:grid-cols-3 gap-5">
             {SHOWS.map((s) => (
               <a
@@ -74,22 +74,22 @@ function WatchPage() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-[18px] bg-white/[0.04] border border-white/10 overflow-hidden hover:border-white/30 transition-colors group"
+                className="rounded-[18px] bg-off border border-mid overflow-hidden hover:border-[#0e0e0e]/40 transition-colors group"
               >
-                <div className="aspect-video bg-gradient-to-br from-white/10 to-transparent relative flex items-center justify-center">
-                  <Play className="w-10 h-10 text-white/40 group-hover:text-white transition-colors" />
-                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{s.tag}</span>
+                <div className="aspect-video bg-gradient-to-br from-[#0e0e0e]/10 to-transparent relative flex items-center justify-center">
+                  <Play className="w-10 h-10 text-[#0e0e0e]/40 group-hover:text-[#0e0e0e] transition-colors" />
+                  <span className="absolute top-3 left-3 rounded-lg bg-[#0e0e0e] text-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{s.tag}</span>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-xl">{s.title}</h3>
-                  <p className="mt-1 text-sm text-white/55">{s.subtitle}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{s.subtitle}</p>
                 </div>
               </a>
             ))}
           </div>
         </section>
 
-        <section className="bg-white/[0.03] border-y border-white/10">
+        <section className="bg-off border-y border-mid">
           <div className="max-w-[1160px] mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-4">
             {SOCIALS.map((s) => (
               <a
@@ -97,10 +97,10 @@ function WatchPage() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-[14px] border border-white/10 p-5 hover:border-white/40 transition-colors"
+                className="rounded-[14px] border border-mid bg-white p-5 hover:border-[#0e0e0e] transition-colors"
               >
                 <s.icon className="w-5 h-5 text-red" />
-                <p className="mt-3 text-[0.65rem] uppercase tracking-wider text-white/55">{s.platform}</p>
+                <p className="mt-3 text-[0.65rem] uppercase tracking-wider text-muted-foreground">{s.platform}</p>
                 <p className="font-semibold text-sm mt-0.5">{s.handle}</p>
                 <p className="mt-3 text-xs font-bold uppercase tracking-wider text-red">Follow →</p>
               </a>
@@ -115,11 +115,11 @@ function WatchPage() {
               <a
                 key={i}
                 href="#"
-                className="rounded-[14px] overflow-hidden bg-white/[0.04] border border-white/10 hover:border-white/30 transition-colors group"
+                className="rounded-[14px] overflow-hidden bg-off border border-mid hover:border-[#0e0e0e]/40 transition-colors group"
               >
                 <div className="aspect-video bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08] relative">
-                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
-                  <Play className="absolute inset-0 m-auto w-10 h-10 text-white/40 group-hover:text-white transition" />
+                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
+                  <Play className="absolute inset-0 m-auto w-10 h-10 text-white/60 group-hover:text-white transition" />
                 </div>
                 <div className="p-4">
                   <p className="font-semibold text-sm">{b.title}</p>
