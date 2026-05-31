@@ -55,47 +55,47 @@ function Home() {
 
 function Hero() {
   return (
-    <section className="relative bg-[#0e0e0e] text-white">
-      <div className="max-w-[1160px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]">
+    <section className="relative bg-[#0e0e0e] text-white w-full overflow-hidden">
+      {/* Full-bleed background image on the right, fading into the headline on the left */}
+      <div className="absolute inset-0">
+        <img
+          src={heroCouple}
+          alt="Zombie House Rescue team standing in a neglected home"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Fade to solid black on the left where the headline lives */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0e0e0e] from-15% via-[#0e0e0e]/85 via-40% to-transparent to-75%" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/80 via-transparent to-[#0e0e0e]/40" />
+      </div>
+
+      <div className="relative w-full px-6 md:px-12 lg:px-20 pt-32 pb-24 md:pt-40 md:pb-36 min-h-[72vh] flex items-center">
+        <div className="max-w-[600px]">
+          <span className="inline-flex items-center gap-2 rounded-lg bg-white/10 border border-white/15 px-3 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]">
             <span className="h-2 w-2 rounded-full bg-red pulse-dot" />
             As Seen on A&amp;E
           </span>
-          <h1 className="mt-6 font-display text-[clamp(2.4rem,6vw,3.4rem)] leading-[1.06] tracking-[-0.03em]">
+          <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,4rem)] leading-[1.04] tracking-[-0.03em]">
             Saving Homes.<br />
             <em className="not-italic text-red font-display">Changing Lives.</em>
           </h1>
-          <p className="mt-6 text-[1.05rem] text-white/65 max-w-[440px] leading-relaxed">
+          <p className="mt-6 text-[1.05rem] text-white/75 max-w-[460px] leading-relaxed">
             We renovate neglected houses, rescue families in need, and give communities a second chance — one zombie house at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
               to="/rescue"
-              className="inline-flex items-center gap-2 rounded-full bg-white text-[#0e0e0e] px-7 py-3.5 font-bold text-sm hover:bg-white/90 transition"
+              className="inline-flex items-center gap-2 rounded-lg bg-white text-[#0e0e0e] px-7 py-3.5 font-bold text-sm hover:bg-white/90 transition"
             >
               See Our Work <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/sell"
-              className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+              className="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
             >
               Sell Your Home
             </Link>
           </div>
         </div>
-        <div className="hidden md:block">
-          <div className="relative rounded-[22px] overflow-hidden aspect-[4/5]">
-            <img
-              src={heroCouple}
-              alt="Zombie House Rescue team standing in a neglected home"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0e0e0e] via-[#0e0e0e]/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/70 via-transparent to-transparent" />
-          </div>
-        </div>
-
       </div>
     </section>
   );
@@ -202,7 +202,7 @@ function RescueTeaser() {
           <Link
             to="/rescue/$slug"
             params={{ slug: r.slug }}
-            className="mt-8 inline-flex items-center gap-2 rounded-full border-[1.5px] border-[#0e0e0e] px-6 py-3 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg border-[1.5px] border-[#0e0e0e] px-6 py-3 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
           >
             Read {r.title.split("'")[0]}'s story <ArrowRight className="w-4 h-4" />
           </Link>
@@ -225,7 +225,7 @@ function RescueTeaser() {
           <Link
             to="/rescue/$slug"
             params={{ slug: r.slug }}
-            className="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-full bg-red px-6 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+            className="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-lg bg-red px-6 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
           >
             Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
           </Link>
@@ -304,7 +304,7 @@ function SellFormCard({ compact = false }: { compact?: boolean }) {
         </select>
         <button
           type="submit"
-          className="w-full rounded-full bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition"
+          className="w-full rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition"
         >
           Get My Cash Offer →
         </button>
@@ -391,7 +391,7 @@ function VendorPreview() {
           </p>
           <Link
             to="/sponsors"
-            className="inline-flex items-center gap-2 rounded-full bg-[#0e0e0e] text-white px-5 py-2.5 text-sm font-bold hover:bg-black transition"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0e0e0e] text-white px-5 py-2.5 text-sm font-bold hover:bg-black transition"
           >
             Apply as a Vendor <ArrowRight className="w-4 h-4" />
           </Link>
@@ -422,7 +422,7 @@ function SponsorsPreview() {
             </ul>
             <Link
               to="/sponsors"
-              className="mt-7 rounded-full bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#a93226] transition"
+              className="mt-7 rounded-lg bg-red text-white py-3 text-sm font-bold text-center hover:bg-[#b81830] transition"
             >
               Become a Title Sponsor →
             </Link>
@@ -438,7 +438,7 @@ function SponsorsPreview() {
             </ul>
             <Link
               to="/sponsors"
-              className="mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+              className="mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
             >
               Become a Sponsor →
             </Link>
@@ -454,7 +454,7 @@ function SponsorsPreview() {
             </ul>
             <Link
               to="/rescue"
-              className="mt-7 rounded-full border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
+              className="mt-7 rounded-lg border-[1.5px] border-[#0e0e0e] py-3 text-sm font-bold text-center hover:bg-[#0e0e0e] hover:text-white transition"
             >
               Donate Now →
             </Link>
@@ -478,14 +478,14 @@ function ClosingStrip() {
             <Link
               to="/rescue/$slug"
               params={{ slug: r.slug }}
-              className="inline-flex items-center gap-2 rounded-full bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+              className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
             >
               Donate to {r.title.split("'")[0]} <ArrowRight className="w-4 h-4" />
             </Link>
           )}
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+            className="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
           >
             Nominate a Home
           </Link>

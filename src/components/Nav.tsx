@@ -19,16 +19,16 @@ export const Nav = () => {
       <div className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between relative overflow-visible">
         <Link
           to="/"
-          className="relative z-40 block h-16 md:h-20 w-32 md:w-56 shrink-0 overflow-visible"
+          className="relative z-40 block h-16 md:h-20 w-24 md:w-40 shrink-0 overflow-visible"
         >
           <img
             src={logo}
             alt="Zombie Houses"
-            className="absolute top-3 md:top-3 left-0 h-20 md:h-28 w-auto max-w-none object-contain drop-shadow-lg"
+            className="absolute top-2 md:top-2 left-0 h-14 md:h-20 w-auto max-w-none object-contain drop-shadow-lg"
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-14">
           {links.map((l) => {
             const active = pathname.startsWith(l.to);
             return (
@@ -48,7 +48,7 @@ export const Nav = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/rescue"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-red px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-[#a93226] transition-colors"
+            className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-red px-5 py-2.5 text-white text-[0.78rem] font-bold uppercase tracking-[0.1em] hover:bg-[#b81830] transition-colors"
           >
             Donate Now
           </Link>
@@ -91,7 +91,7 @@ export const Nav = () => {
           <Link
             to="/rescue"
             onClick={() => setOpen(false)}
-            className="mt-4 inline-flex items-center justify-center rounded-full bg-red px-6 py-3.5 text-white font-bold uppercase tracking-[0.1em] text-sm"
+            className="mt-4 inline-flex items-center justify-center rounded-lg bg-red px-6 py-3.5 text-white font-bold uppercase tracking-[0.1em] text-sm"
           >
             Donate Now
           </Link>

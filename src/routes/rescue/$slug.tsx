@@ -216,7 +216,7 @@ function PhaseTimeline({ phases }: { phases: Phase[] }) {
                 {p.tags.map((t) => (
                   <span
                     key={t}
-                    className={`text-[0.65rem] uppercase tracking-wider px-2 py-1 rounded-full ${
+                    className={`text-[0.65rem] uppercase tracking-wider px-2 py-1 rounded-lg ${
                       isActive
                         ? "bg-red/10 text-red"
                         : "bg-off text-muted-foreground border border-mid"
@@ -282,7 +282,7 @@ function LedgerStatus({ row }: { row: LedgerItem }) {
   } as const;
   const s = map[row.status];
   return (
-    <span className={`text-[0.65rem] font-bold uppercase tracking-wider px-2 py-1 rounded-full ${s.bg} ${s.text}`}>
+    <span className={`text-[0.65rem] font-bold uppercase tracking-wider px-2 py-1 rounded-lg ${s.bg} ${s.text}`}>
       {s.label}
     </span>
   );
@@ -380,7 +380,7 @@ function DonationCard({ r }: { r: Rescue }) {
         href={`${r.slingshot_url}?amount=${finalAmount}`}
         target="_blank"
         rel="noreferrer"
-        className="mt-4 block w-full rounded-full bg-red text-white text-center py-3.5 font-bold text-sm hover:bg-[#a93226] transition"
+        className="mt-4 block w-full rounded-lg bg-red text-white text-center py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
       >
         Donate {finalAmount ? currency(finalAmount) : ""} →
       </a>
@@ -395,7 +395,7 @@ function CompletedCard({ r }: { r: Rescue }) {
   const next = activeRescue();
   return (
     <div className="rounded-[22px] border-2 border-green bg-white p-6">
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-green text-white text-[0.65rem] font-bold uppercase tracking-wider px-3 py-1">
+      <span className="inline-flex items-center gap-1.5 rounded-lg bg-green text-white text-[0.65rem] font-bold uppercase tracking-wider px-3 py-1">
         <Check className="w-3 h-3" /> 100% Funded
       </span>
       <p className="mt-3 font-display text-[2.2rem] leading-none">{currency(r.raised)}</p>
@@ -410,7 +410,7 @@ function CompletedCard({ r }: { r: Rescue }) {
         <Link
           to="/rescue/$slug"
           params={{ slug: next.slug }}
-          className="mt-5 inline-flex items-center justify-center gap-2 w-full rounded-full bg-[#0e0e0e] text-white py-3 font-bold text-sm hover:bg-black transition"
+          className="mt-5 inline-flex items-center justify-center gap-2 w-full rounded-lg bg-[#0e0e0e] text-white py-3 font-bold text-sm hover:bg-black transition"
         >
           Help the next rescue <ArrowRight className="w-4 h-4" />
         </Link>

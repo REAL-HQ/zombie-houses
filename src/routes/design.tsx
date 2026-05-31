@@ -59,7 +59,7 @@ function DesignPage() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+              className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
                 filter === f
                   ? "bg-[#0e0e0e] text-white"
                   : "border border-mid hover:border-[#0e0e0e]"
@@ -77,7 +77,7 @@ function DesignPage() {
             <article key={p.title} className="rounded-[18px] border border-mid bg-card overflow-hidden group">
               <div className="aspect-[4/3] relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#3a2418] via-[#5a3a26] to-[#1a0f08] group-hover:scale-105 transition-transform duration-500" />
-                <span className="absolute top-3 left-3 rounded-full bg-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">
+                <span className="absolute top-3 left-3 rounded-lg bg-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">
                   {p.tag}
                 </span>
               </div>
@@ -114,7 +114,7 @@ function DesignPage() {
                 className="group rounded-[14px] bg-white border border-mid overflow-hidden hover:border-[#0e0e0e] transition-colors"
               >
                 <div className="aspect-square bg-gradient-to-br from-[#e5e1da] to-[#f8f7f4] relative">
-                  <span className="absolute top-2 left-2 rounded-full bg-white/90 text-[0.6rem] font-bold uppercase tracking-wider px-2 py-0.5">
+                  <span className="absolute top-2 left-2 rounded-lg bg-white/90 text-[0.6rem] font-bold uppercase tracking-wider px-2 py-0.5">
                     {p.room}
                   </span>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
