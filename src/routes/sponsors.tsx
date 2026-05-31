@@ -111,7 +111,7 @@ function SponsorsPage() {
         <div className="max-w-[820px] mx-auto px-6">
           <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Sponsor Inquiry</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-            Let's talk partnership.
+            Let's Talk Partnership.
           </h2>
           <form
             onSubmit={(e) => e.preventDefault()}
