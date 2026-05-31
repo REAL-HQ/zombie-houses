@@ -147,7 +147,7 @@ function Initiatives() {
     {
       icon: Heart,
       title: "Zombie House Rescue",
-      body: "When a family is one missed payment from losing everything — we show up. Free services. Real rescues.",
+      body: "Hoarder homes, infestations, distressed occupied properties, families about to lose everything — we show up. Free services. Real rescues.",
       tag: "Free Services",
       to: "/rescue" as const,
       red: true,
