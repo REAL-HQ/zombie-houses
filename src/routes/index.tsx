@@ -144,7 +144,7 @@ function CurrentRescueMission() {
             Current Rescue Mission
           </p>
         </div>
-        <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.03em] max-w-3xl">
+        <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.05] tracking-[-0.03em] max-w-none whitespace-nowrap">
           Sherman Could Lose Everything <em className="not-italic text-red font-display">This Week.</em>
         </h2>
         <p className="mt-5 text-white/75 leading-relaxed max-w-2xl">
