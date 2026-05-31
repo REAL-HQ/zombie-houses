@@ -337,7 +337,7 @@ function DesignPreview() {
           <div>
             <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Inspiration</p>
             <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
-              Before-and-afters worth saving.
+              Before-And-Afters Worth Saving.
             </h2>
           </div>
           <Link
