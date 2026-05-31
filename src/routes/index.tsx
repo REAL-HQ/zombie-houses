@@ -103,7 +103,7 @@ function Hero() {
           </h1>
           <p className="mt-6 text-[1.05rem] text-white/75 max-w-[760px] leading-relaxed">
             We renovate neglected houses, rescue families in need,<br />
-            and give communities a second chance — one zombie house at a time.
+            and the neighborhoods they call home — one zombie house at a time.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link
