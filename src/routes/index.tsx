@@ -61,7 +61,7 @@ function Hero() {
         <img
           src={heroCouple}
           alt="Zombie House Rescue team standing in a neglected home"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover object-right"
         />
         {/* Fade to solid black on the left where the headline lives */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0e0e0e] from-15% via-[#0e0e0e]/85 via-40% to-transparent to-75%" />
