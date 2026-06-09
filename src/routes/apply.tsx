@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -18,6 +21,38 @@ export const Route = createFileRoute("/apply")({
 });
 
 function ApplyPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (submitting) return;
+    const fd = new FormData(e.currentTarget);
+    const payload = {
+      your_name: String(fd.get("your_name") || "").trim(),
+      relationship: String(fd.get("relationship") || "").trim(),
+      phone: String(fd.get("phone") || "").trim(),
+      email: String(fd.get("email") || "").trim(),
+      homeowner_name: String(fd.get("homeowner_name") || "").trim(),
+      property_address: String(fd.get("property_address") || "").trim(),
+      help_needed: String(fd.get("help_needed") || "").trim(),
+      story: String(fd.get("story") || "").trim(),
+    };
+
+    setSubmitting(true);
+    const { error } = await supabase.from("nominations").insert(payload);
+    setSubmitting(false);
+
+    if (error) {
+      console.error(error);
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
+    toast.success("Nomination submitted. We'll be in touch.");
+    setSubmitted(true);
+    (e.target as HTMLFormElement).reset();
+  }
+
   return (
     <SiteLayout>
       <section className="max-w-[820px] mx-auto px-6 pt-16 pb-12 md:pt-24">
@@ -31,34 +66,55 @@ function ApplyPage() {
       </section>
 
       <section className="max-w-[820px] mx-auto px-6 pb-24">
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="rounded-[20px] bg-off border border-mid p-8 grid sm:grid-cols-2 gap-4"
-        >
-          <In placeholder="Your Name" />
-          <In placeholder="Your Relationship to Homeowner" />
-          <In placeholder="Phone" type="tel" />
-          <In placeholder="Email" type="email" />
-          <In placeholder="Homeowner Name" />
-          <In placeholder="Property Address" />
-          <input
-            required
-            placeholder="Type of help needed"
-            className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
-          />
-          <textarea
-            rows={6}
-            required
-            placeholder="Tell us the story. Who lives there? What happened? What's the deadline?"
-            className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none"
-          />
-          <button type="submit" className="sm:col-span-2 rounded-lg bg-red text-white py-3.5 font-bold text-sm hover:bg-[#b81830] transition">
-            Submit Nomination →
-          </button>
-          <p className="sm:col-span-2 text-[0.7rem] text-center text-muted-foreground">
-            We review every application. Most rescues start with a tip from someone who knows the family.
-          </p>
-        </form>
+        {submitted ? (
+          <div className="rounded-[20px] bg-off border border-mid p-10 text-center">
+            <h2 className="font-display text-2xl mb-3">Thank you.</h2>
+            <p className="text-muted-foreground">
+              Your nomination has been received. We review every submission and will reach out if we can help.
+            </p>
+            <button
+              onClick={() => setSubmitted(false)}
+              className="mt-6 rounded-lg bg-red text-white px-6 py-3 font-bold text-sm hover:bg-[#b81830] transition"
+            >
+              Submit Another
+            </button>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-[20px] bg-off border border-mid p-8 grid sm:grid-cols-2 gap-4"
+          >
+            <In name="your_name" placeholder="Your Name" />
+            <In name="relationship" placeholder="Your Relationship to Homeowner" />
+            <In name="phone" placeholder="Phone" type="tel" />
+            <In name="email" placeholder="Email" type="email" />
+            <In name="homeowner_name" placeholder="Homeowner Name" />
+            <In name="property_address" placeholder="Property Address" />
+            <input
+              required
+              name="help_needed"
+              placeholder="Type of help needed"
+              className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
+            />
+            <textarea
+              rows={6}
+              required
+              name="story"
+              placeholder="Tell us the story. Who lives there? What happened? What's the deadline?"
+              className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none"
+            />
+            <button
+              type="submit"
+              disabled={submitting}
+              className="sm:col-span-2 rounded-lg bg-red text-white py-3.5 font-bold text-sm hover:bg-[#b81830] transition disabled:opacity-60"
+            >
+              {submitting ? "Submitting…" : "Submit Nomination →"}
+            </button>
+            <p className="sm:col-span-2 text-[0.7rem] text-center text-muted-foreground">
+              We review every application. Most rescues start with a tip from someone who knows the family.
+            </p>
+          </form>
+        )}
       </section>
     </SiteLayout>
   );
