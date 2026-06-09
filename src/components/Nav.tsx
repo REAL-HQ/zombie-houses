@@ -13,6 +13,8 @@ const links = [
 export const Nav = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
 
   return (
     <header className="fixed top-0 inset-x-0 z-[200] bg-[hsl(0_0%_15%)]">
