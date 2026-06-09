@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import logo from "@/assets/zombie-houses-logo.png";
 
 const links = [
@@ -13,6 +13,18 @@ const links = [
 export const Nav = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   return (
     <header className="fixed top-0 inset-x-0 z-[200] bg-[hsl(0_0%_15%)]">
@@ -28,7 +40,7 @@ export const Nav = () => {
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-14">
+        <nav className="hidden md:flex items-center gap-10">
           {links.map((l) => {
             const active = pathname.startsWith(l.to);
             return (
@@ -43,6 +55,41 @@ export const Nav = () => {
               </Link>
             );
           })}
+          <div className="relative" ref={moreRef}>
+            <button
+              onClick={() => setMoreOpen((o) => !o)}
+              className="flex items-center gap-1 text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-white opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="More options"
+            >
+              <Menu className="w-5 h-5" />
+              <ChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? "rotate-180" : ""}`} />
+            </button>
+            {moreOpen && (
+              <div className="absolute right-0 top-full mt-2 w-48 rounded-lg bg-[hsl(0_0%_20%)] border border-white/10 shadow-xl overflow-hidden z-[210]">
+                <Link
+                  to="/sponsors"
+                  onClick={() => setMoreOpen(false)}
+                  className="block px-4 py-3 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Sponsors
+                </Link>
+                <Link
+                  to="/about"
+                  onClick={() => setMoreOpen(false)}
+                  className="block px-4 py-3 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={() => setMoreOpen(false)}
+                  className="block px-4 py-3 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Contact
+                </Link>
+              </div>
+            )}
+          </div>
         </nav>
 
         <div className="flex items-center gap-3">
