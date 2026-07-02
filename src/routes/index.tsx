@@ -4,6 +4,7 @@ import heroCouple from "@/assets/hero-couple.jpg";
 import shermanHero from "@/assets/sherman-hero.jpg";
 import logoAE from "@/assets/logo-ae.png";
 import logoDIY from "@/assets/logo-diy.png";
+import logoFYI from "@/assets/logo-fyi.png";
 import logoHGTV from "@/assets/logo-hgtv.png";
 import logoTampa from "@/assets/logo-tampabay.png";
 import {
@@ -71,6 +72,7 @@ function FoundersSeenOn() {
         </p>
         <img src={logoAE} alt="A&E" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
         <img src={logoDIY} alt="DIY Network" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
+        <img src={logoFYI} alt="FYI" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
         <img src={logoHGTV} alt="HGTV" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
         <img src={logoTampa} alt="Tampa Bay Times" loading="lazy" className="h-20 md:h-28 w-auto object-contain" />
       </div>
