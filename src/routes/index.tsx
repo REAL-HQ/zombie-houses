@@ -65,22 +65,41 @@ function Home() {
 }
 
 function FoundersSeenOn() {
+  const logos = [
+    { src: logoAE, alt: "A&E" },
+    { src: logoDIY, alt: "DIY Network" },
+    { src: logoFYI, alt: "FYI" },
+    { src: logoHGTV, alt: "HGTV" },
+    { src: logoHulu, alt: "Hulu" },
+    { src: logoTampa, alt: "Tampa Bay Times" },
+  ];
+
   return (
     <section className="w-full bg-[hsl(0_0%_15%)] py-0">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-wrap items-center justify-around gap-6">
-        <p className="text-white/90 font-bold tracking-widest text-sm md:text-base">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-wrap items-center justify-between gap-6">
+        <p className="text-white/90 font-bold tracking-widest text-sm md:text-base shrink-0">
           FOUNDERS SEEN ON
         </p>
-        <img src={logoAE} alt="A&E" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-        <img src={logoDIY} alt="DIY Network" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-        <img src={logoFYI} alt="FYI" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-        <img src={logoHGTV} alt="HGTV" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-        <img src={logoHulu} alt="Hulu" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-        <img src={logoTampa} alt="Tampa Bay Times" loading="lazy" className="h-20 md:h-28 w-auto object-contain" />
+        <div className="flex flex-1 items-center justify-between gap-4 md:gap-6 min-w-0">
+          {logos.map((logo) => (
+            <div
+              key={logo.alt}
+              className="flex items-center justify-center h-16 md:h-24 w-[15%] min-w-[72px] max-w-[140px]"
+            >
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                loading="lazy"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
 
 function Hero() {
   return (
