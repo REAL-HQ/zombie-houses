@@ -264,25 +264,13 @@ function WatchPage() {
         </section>
 
         <section className="max-w-[1160px] mx-auto px-6 py-20">
-          <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em] mb-8">Latest From The Field</h2>
-          <div className="grid md:grid-cols-3 gap-5">
-            {BTS.map((b, i) => (
-              <a
-                key={i}
-                href="#"
-                className="rounded-[14px] overflow-hidden bg-off border border-mid hover:border-[#0e0e0e]/40 transition-colors group"
-              >
-                <div className="aspect-video bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08] relative">
-                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
-                  <Play className="absolute inset-0 m-auto w-10 h-10 text-white/60 group-hover:text-white transition" />
-                </div>
-                <div className="p-4">
-                  <p className="font-semibold text-sm">{b.title}</p>
-                </div>
-              </a>
-            ))}
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em]">Latest From The Field</h2>
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Live from our social feeds</p>
           </div>
+          <FieldTabs />
         </section>
+
       </div>
     </SiteLayout>
   );
