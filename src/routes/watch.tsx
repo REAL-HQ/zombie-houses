@@ -193,6 +193,37 @@ function SocialFeed({ platform }: { platform: SocialPlatform }) {
   );
 }
 
+function FieldTabs() {
+  const [active, setActive] = useState<SocialPlatform>("instagram");
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-6 border-b border-mid">
+        {FEED_TABS.map((tab) => {
+          const isActive = tab.id === active;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActive(tab.id)}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+                isActive
+                  ? "border-red text-[#0e0e0e]"
+                  : "border-transparent text-muted-foreground hover:text-[#0e0e0e]"
+              }`}
+            >
+              <tab.Icon className="w-4 h-4" />
+              {tab.label}
+              <span className="text-xs text-muted-foreground font-normal hidden sm:inline">{tab.handle}</span>
+            </button>
+          );
+        })}
+      </div>
+      <SocialFeed platform={active} />
+    </div>
+  );
+}
+
+
+
 
 function WatchPage() {
   return (
