@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Play } from "lucide-react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import {
+  fetchInstagram,
+  fetchTikTok,
+  fetchYouTube,
+  fetchFacebook,
+  type SocialPlatform,
+  type SocialFeedResult,
+} from "@/lib/social.functions";
 
 const InstagramLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
