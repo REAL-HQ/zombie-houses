@@ -84,7 +84,7 @@ const FEED_TABS: {
   label: string;
   handle: string;
   href: string;
-  Icon: (props: { className?: string }) => JSX.Element;
+  Icon: (props: { className?: string }) => React.ReactElement;
 }[] = [
   { id: "instagram", label: "Instagram", handle: "@zombiehouses", href: "https://instagram.com/zombiehouses", Icon: InstagramLogo },
   { id: "tiktok", label: "TikTok", handle: "@zombiehouses", href: "https://tiktok.com/@zombiehouses", Icon: TikTokLogo },
