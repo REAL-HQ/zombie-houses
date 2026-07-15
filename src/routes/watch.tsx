@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Play } from "lucide-react";
+import React, { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import {
+  fetchInstagram,
+  fetchTikTok,
+  fetchYouTube,
+  fetchFacebook,
+  type SocialPlatform,
+  type SocialFeedResult,
+} from "@/lib/social.functions";
 
 const InstagramLogo = ({ className = "" }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
@@ -68,14 +79,151 @@ const SOCIALS = [
   { icon: YouTubeLogo, handle: "@zombiehouses", platform: "YouTube", href: "https://youtube.com/@zombiehouses" },
 ];
 
-const BTS = [
-  { tag: "BTS", title: "First walkthrough at Sherman's" },
-  { tag: "Episode", title: "S12 E04 · The Lutz Teardown" },
-  { tag: "Rescue", title: "Code-enforcement save in Largo" },
-  { tag: "BTS", title: "Roof crew at 6am" },
-  { tag: "Episode", title: "S12 E03 · A 1955 ranch reborn" },
-  { tag: "BTS", title: "Sherman meets the team" },
+const FEED_TABS: {
+  id: SocialPlatform;
+  label: string;
+  handle: string;
+  href: string;
+  Icon: (props: { className?: string }) => React.ReactElement;
+}[] = [
+  { id: "instagram", label: "Instagram", handle: "@zombiehouses", href: "https://instagram.com/zombiehouses", Icon: InstagramLogo },
+  { id: "tiktok", label: "TikTok", handle: "@zombiehouses", href: "https://tiktok.com/@zombiehouses", Icon: TikTokLogo },
+  { id: "youtube", label: "YouTube", handle: "@zombiehouses", href: "https://youtube.com/@zombiehouses", Icon: YouTubeLogo },
+  { id: "facebook", label: "Facebook", handle: "@zombiehouses", href: "https://facebook.com/zombiehouses", Icon: FacebookLogo },
 ];
+
+function SocialFeed({ platform }: { platform: SocialPlatform }) {
+  const igFn = useServerFn(fetchInstagram);
+  const ttFn = useServerFn(fetchTikTok);
+  const ytFn = useServerFn(fetchYouTube);
+  const fbFn = useServerFn(fetchFacebook);
+  const fn =
+    platform === "instagram" ? igFn
+    : platform === "tiktok" ? ttFn
+    : platform === "youtube" ? ytFn
+    : fbFn;
+
+  const { data, isLoading } = useQuery<SocialFeedResult>({
+    queryKey: ["social-feed", platform],
+    queryFn: () => fn(),
+    staleTime: 0,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="grid md:grid-cols-3 gap-5">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="aspect-video rounded-[14px] bg-off border border-mid animate-pulse" />
+        ))}
+      </div>
+    );
+  }
+
+  if (!data?.configured) {
+    const tab = FEED_TABS.find((t) => t.id === platform)!;
+    return (
+      <div className="rounded-[18px] border border-dashed border-mid bg-off p-10 text-center">
+        <tab.Icon className="w-8 h-8 mx-auto" />
+        <p className="mt-4 font-display text-xl">{tab.label} isn't connected yet</p>
+        <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">
+          Once credentials are added, your latest {tab.label} posts from {tab.handle} will sync here automatically.
+        </p>
+        <a
+          href={tab.href}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-block mt-5 text-xs font-bold uppercase tracking-wider text-red"
+        >
+          View on {tab.label} →
+        </a>
+      </div>
+    );
+  }
+
+  if (data.items.length === 0) {
+    return (
+      <div className="rounded-[18px] border border-mid bg-off p-10 text-center text-sm text-muted-foreground">
+        No recent posts found.
+        {data.error ? <span className="block mt-2 text-xs text-red">{data.error}</span> : null}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid md:grid-cols-3 gap-5">
+      {data.items.slice(0, 9).map((post) => (
+        <a
+          key={post.id}
+          href={post.permalink}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-[14px] overflow-hidden bg-off border border-mid hover:border-[#0e0e0e]/40 transition-colors group"
+        >
+          <div className="aspect-video bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08] relative overflow-hidden">
+            {post.thumbnailUrl ? (
+              <img
+                src={post.thumbnailUrl}
+                alt={post.caption.slice(0, 80) || `${post.platform} post`}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            ) : null}
+            <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">
+              {post.mediaType}
+            </span>
+            {post.mediaType !== "image" ? (
+              <Play className="absolute inset-0 m-auto w-10 h-10 text-white/80 drop-shadow-lg" />
+            ) : null}
+          </div>
+          <div className="p-4">
+            <p className="font-semibold text-sm line-clamp-2">
+              {post.caption || `Post from ${post.platform}`}
+            </p>
+            {post.timestamp ? (
+              <p className="mt-1 text-xs text-muted-foreground">
+                {new Date(post.timestamp).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+              </p>
+            ) : null}
+          </div>
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function FieldTabs() {
+  const [active, setActive] = useState<SocialPlatform>("instagram");
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2 mb-6 border-b border-mid">
+        {FEED_TABS.map((tab) => {
+          const isActive = tab.id === active;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActive(tab.id)}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+                isActive
+                  ? "border-red text-[#0e0e0e]"
+                  : "border-transparent text-muted-foreground hover:text-[#0e0e0e]"
+              }`}
+            >
+              <tab.Icon className="w-4 h-4" />
+              {tab.label}
+              <span className="text-xs text-muted-foreground font-normal hidden sm:inline">{tab.handle}</span>
+            </button>
+          );
+        })}
+      </div>
+      <SocialFeed platform={active} />
+    </div>
+  );
+}
+
+
+
 
 function WatchPage() {
   return (
@@ -147,25 +295,13 @@ function WatchPage() {
         </section>
 
         <section className="max-w-[1160px] mx-auto px-6 py-20">
-          <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em] mb-8">Latest From The Field</h2>
-          <div className="grid md:grid-cols-3 gap-5">
-            {BTS.map((b, i) => (
-              <a
-                key={i}
-                href="#"
-                className="rounded-[14px] overflow-hidden bg-off border border-mid hover:border-[#0e0e0e]/40 transition-colors group"
-              >
-                <div className="aspect-video bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08] relative">
-                  <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur text-white text-[0.6rem] font-bold uppercase tracking-wider px-2.5 py-1">{b.tag}</span>
-                  <Play className="absolute inset-0 m-auto w-10 h-10 text-white/60 group-hover:text-white transition" />
-                </div>
-                <div className="p-4">
-                  <p className="font-semibold text-sm">{b.title}</p>
-                </div>
-              </a>
-            ))}
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.4rem)] tracking-[-0.025em]">Latest From The Field</h2>
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Live from our social feeds</p>
           </div>
+          <FieldTabs />
         </section>
+
       </div>
     </SiteLayout>
   );
