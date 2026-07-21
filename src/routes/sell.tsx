@@ -20,7 +20,9 @@ import {
 } from "lucide-react";
 import logoAE from "@/assets/logo-ae.png";
 import logoDIY from "@/assets/logo-diy.png";
+import logoFYI from "@/assets/logo-fyi.png";
 import logoHGTV from "@/assets/logo-hgtv.png";
+import logoHulu from "@/assets/logo-hulu.png";
 import logoTampa from "@/assets/logo-tampabay.png";
 import recent1 from "@/assets/recent-1.jpg";
 import recent2 from "@/assets/recent-2.jpg";
