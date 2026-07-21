@@ -20,7 +20,9 @@ import {
 } from "lucide-react";
 import logoAE from "@/assets/logo-ae.png";
 import logoDIY from "@/assets/logo-diy.png";
+import logoFYI from "@/assets/logo-fyi.png";
 import logoHGTV from "@/assets/logo-hgtv.png";
+import logoHulu from "@/assets/logo-hulu.png";
 import logoTampa from "@/assets/logo-tampabay.png";
 import recent1 from "@/assets/recent-1.jpg";
 import recent2 from "@/assets/recent-2.jpg";
@@ -327,16 +329,35 @@ function SellPage() {
       {step === "address" && (
         <>
           <section className="w-full bg-[hsl(0_0%_15%)] py-0">
-            <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-wrap items-center justify-around gap-6">
-              <p className="text-white/90 font-bold tracking-widest text-sm md:text-base">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-wrap items-center justify-between gap-6">
+              <p className="text-white/90 font-bold tracking-widest text-sm md:text-base shrink-0">
                 FOUNDERS SEEN ON
               </p>
-              <img src={logoAE} alt="A&E" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-              <img src={logoDIY} alt="DIY Network" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-              <img src={logoHGTV} alt="HGTV" loading="lazy" className="h-16 md:h-24 w-auto object-contain" />
-              <img src={logoTampa} alt="Tampa Bay Times" loading="lazy" className="h-20 md:h-28 w-auto object-contain" />
+              <div className="flex flex-1 items-center justify-between gap-4 md:gap-6 min-w-0">
+                {[
+                  { src: logoAE, alt: "A&E" },
+                  { src: logoDIY, alt: "DIY Network" },
+                  { src: logoFYI, alt: "FYI" },
+                  { src: logoHGTV, alt: "HGTV" },
+                  { src: logoHulu, alt: "Hulu" },
+                  { src: logoTampa, alt: "Tampa Bay Times" },
+                ].map((logo) => (
+                  <div
+                    key={logo.alt}
+                    className="flex items-center justify-center h-16 md:h-24 w-[15%] min-w-[72px] max-w-[140px]"
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
+
 
           <section className="w-full bg-background py-16 md:py-24">
             <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
