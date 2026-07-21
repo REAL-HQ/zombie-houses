@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import heroCouple from "@/assets/hero-couple.jpg";
 import shermanHero from "@/assets/sherman-hero.jpg";
+import storyLutz from "@/assets/recent-2.jpg";
+import storyCleanup from "@/assets/recent-5.jpg";
 import logoAE from "@/assets/logo-ae.png";
 import logoDIY from "@/assets/logo-diy.png";
 import logoFYI from "@/assets/logo-fyi.png";
