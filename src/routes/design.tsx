@@ -48,7 +48,7 @@ function DesignPage() {
     <SiteLayout>
       <section className="max-w-[1160px] mx-auto px-6 pt-16 pb-10 md:pt-24">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">Inspiration</p>
-        <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
+        <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] whitespace-nowrap">
           The Transformations That <em className="not-italic text-red font-display">Started It All.</em>
         </h1>
         <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
