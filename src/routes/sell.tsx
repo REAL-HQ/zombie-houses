@@ -88,8 +88,8 @@ function SellPage() {
         <div className={`w-full ${step === "address" ? "max-w-6xl" : "max-w-2xl"}`}>
           {step === "address" && (
             <section className="text-center animate-in fade-in duration-500 mx-auto">
-              <h1 className="text-3xl md:text-6xl font-extrabold leading-tight text-foreground whitespace-nowrap text-center font-display">
-                Cash In 3 Days. <span className="text-red">For Your House.</span>
+              <h1 className="text-3xl md:text-6xl font-extrabold leading-tight text-red whitespace-nowrap text-center font-display">
+                Cash In 3 Days For Your House.
               </h1>
               <p className="mt-4 text-muted-foreground text-lg md:text-xl whitespace-nowrap text-center">
                 Get A Free Cash Offer On Your House Regardless Of Location, Condition, Size, Price &amp; Equity
