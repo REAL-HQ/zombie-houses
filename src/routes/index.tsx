@@ -412,18 +412,24 @@ function MissionStories() {
       title: "Saving a home before tax sale.",
       desc: "Inside our race to stop a Tampa auction.",
       to: "/rescue" as const,
+      image: shermanHero,
+      alt: "Sherman's Tampa home facing tax-deed sale",
     },
     {
       tag: "Zombie House Flipping",
       title: "Inside the Lutz teardown.",
       desc: "How a 1968 ranch got a second life.",
       to: "/watch" as const,
+      image: storyLutz,
+      alt: "Foundation and siding repair on a 1968 ranch in Lutz",
     },
     {
       tag: "Community Cleanup",
       title: "Helping a homeowner reclaim their property.",
       desc: "A weekend, a crew, and a fresh start.",
       to: "/rescue" as const,
+      image: storyCleanup,
+      alt: "Neglected property being cleared and restored by the crew",
     },
   ];
   return (
@@ -446,7 +452,14 @@ function MissionStories() {
         <div className="mt-10 grid md:grid-cols-3 gap-6">
           {cards.map((c) => (
             <Link key={c.title} to={c.to} className="group rounded-[18px] bg-off border border-mid overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-              <div className="aspect-[4/3] bg-gradient-to-br from-[#2a1a0e] via-[#4a2f1c] to-[#1a0f08]" />
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={c.image}
+                  alt={c.alt}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
               <div className="p-5">
                 <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-red">{c.tag}</span>
                 <h3 className="mt-2 font-display text-xl">{c.title}</h3>
