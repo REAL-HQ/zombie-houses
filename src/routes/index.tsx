@@ -28,7 +28,10 @@ import {
   Zap,
   Snowflake,
 } from "lucide-react";
-import { activeRescue, currency, daysRemaining, percent } from "@/data/rescues";
+import { activeRescue, comingSoonRescue, currency, type Rescue } from "@/data/rescues";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,11 +54,13 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const active = activeRescue();
+  const comingSoon = comingSoonRescue();
   return (
     <SiteLayout transparentNavOffset>
       <Hero />
       <FoundersSeenOn />
       {active && <CurrentRescueMission />}
+      {!active && comingSoon && <ComingSoonMission />}
       <Initiatives />
       <SellInline />
       <MissionStories />
@@ -249,6 +254,95 @@ function CurrentRescueMission() {
                 className="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-[#0e0e0e] px-6 py-3.5 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
               >
                 <Share2 className="w-4 h-4" /> Share This Mission
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ComingSoonMission() {
+  const r = comingSoonRescue()!;
+  return (
+    <section className="relative bg-[#0e0e0e] text-white py-20 md:py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-red/5 via-transparent to-transparent pointer-events-none" />
+      <div className="relative max-w-[1160px] mx-auto px-6">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-red" />
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">
+            Why We're Launching Zombie House Rescue
+          </p>
+        </div>
+        <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.05] tracking-[-0.03em] max-w-3xl">
+          We Walked Into Sherman's Home.{" "}
+          <em className="not-italic text-red font-display">We Couldn't Walk Away.</em>
+        </h2>
+        <p className="mt-5 text-white/70 leading-relaxed max-w-2xl">
+          Sherman is 84. He built his Tampa home with his own hands in 1974. After years of medical
+          bills and a predatory reverse mortgage, three years of unpaid property taxes put his home on
+          the auction block. We went to buy it. Instead, we're fighting to save it. This is why Zombie
+          House Rescue exists.
+        </p>
+
+        <div className="mt-12 grid lg:grid-cols-2 gap-8 items-stretch">
+          <div className="rounded-[22px] overflow-hidden border border-white/10 bg-white/[0.03] flex flex-col">
+            <div className="aspect-[9/16] max-h-[560px] overflow-hidden bg-black">
+              <iframe
+                src="https://www.youtube.com/embed/-mRQEHQz3gE?rel=0&playsinline=1"
+                title="Meet Sherman — Why We're Launching Zombie House Rescue"
+                className="w-full h-full"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <div className="p-7 flex-1 flex flex-col">
+              <p className="text-white/70 leading-relaxed flex-1">
+                Sherman refused to sell. He said: <em>"I built this porch with my own two hands. I'd
+                like to die looking out from it."</em> We heard that and decided — we're not buying
+                this one. We're saving it.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-[22px] bg-white text-[#0e0e0e] p-8 md:p-10 flex flex-col shadow-2xl">
+            <span className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#555]" /> First Rescue — Launching Soon
+            </span>
+            <h3 className="font-display text-2xl md:text-3xl">{r.title}</h3>
+            <p className="mt-2 text-muted-foreground text-sm">{r.location}</p>
+
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              We're preparing Sherman's rescue campaign now — clearing title, verifying liens, and
+              building the full fundraising plan. When we launch, every dollar will be publicly
+              tracked and accounted for.
+            </p>
+
+            <div className="mt-6 rounded-xl border border-mid bg-off p-5">
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Phase 1 Goal
+              </p>
+              <p className="font-display text-3xl">{currency(r.phase1_goal)}</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Back taxes · Code violations · Title clearing · Temp housing
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3">
+              <Link
+                to="/rescue/$slug"
+                params={{ slug: r.slug }}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-red text-white px-6 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
+              >
+                Read Sherman's Story <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/apply"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-[#0e0e0e] px-6 py-3.5 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
+              >
+                Nominate a Home
               </Link>
             </div>
           </div>
