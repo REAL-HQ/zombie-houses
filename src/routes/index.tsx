@@ -28,7 +28,7 @@ import {
   Zap,
   Snowflake,
 } from "lucide-react";
-import { activeRescue, comingSoonRescue, currency, type Rescue } from "@/data/rescues";
+import { activeRescue, comingSoonRescue, currency } from "@/data/rescues";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
@@ -59,7 +59,6 @@ function Home() {
     <SiteLayout transparentNavOffset>
       <Hero />
       <FoundersSeenOn />
-      {active && <CurrentRescueMission />}
       {!active && comingSoon && <ComingSoonMission />}
       <Initiatives />
       <SellInline />
@@ -149,113 +148,6 @@ function Hero() {
             >
               Sell Your Home
             </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CurrentRescueMission() {
-  const r = activeRescue()!;
-  const pct = percent(r.raised, r.phase1_goal);
-  const days = daysRemaining(r.deadline);
-  const deadlineLabel = new Date(r.deadline).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    timeZone: "UTC",
-  });
-  return (
-    <section className="relative bg-[#0e0e0e] text-white py-20 md:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-red/10 via-transparent to-transparent pointer-events-none" />
-      <div className="relative max-w-[1160px] mx-auto px-6">
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-red pulse-dot" />
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-red">
-            Current Rescue Mission
-          </p>
-        </div>
-        <h2 className="mt-3 font-display text-[clamp(1.5rem,3.2vw,2.5rem)] leading-[1.05] tracking-[-0.03em] max-w-none whitespace-nowrap">
-          Sherman Could Lose Everything <em className="not-italic text-red font-display">This Week.</em>
-        </h2>
-        <p className="mt-5 text-white/75 leading-relaxed max-w-2xl">
-          Sherman is facing a tax deed sale, a collapsed roof, and a city order to vacate his home. Rain pours through the ceiling every time it storms. We're racing against time to help him keep the home he refuses to give up on.
-        </p>
-
-        <div className="mt-12 grid lg:grid-cols-2 gap-8 items-stretch">
-          {/* LEFT: Sherman story */}
-          <div className="rounded-[22px] overflow-hidden border border-white/10 bg-white/[0.03] flex flex-col">
-            <div className="aspect-[9/16] max-h-[560px] overflow-hidden bg-black">
-              <iframe
-                src="https://www.youtube.com/embed/-mRQEHQz3gE?rel=0&playsinline=1"
-                title="Meet Sherman — Zombie House Rescue"
-                className="w-full h-full"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-            <div className="p-7 flex-1 flex flex-col">
-              <p className="text-white/80 leading-relaxed flex-1">
-                Sherman, 84, built the back porch of his Tampa home with his own two hands in 1974. After his wife's illness drained their savings, three years of unpaid property taxes have put the home he raised his family in on the courthouse auction block.
-              </p>
-              <Link
-                to="/rescue/$slug"
-                params={{ slug: r.slug }}
-                className="mt-6 inline-flex items-center gap-2 self-start rounded-lg border-[1.5px] border-white/35 px-6 py-3 font-bold text-sm hover:bg-white/10 transition"
-              >
-                Meet Sherman <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* RIGHT: Campaign card */}
-          <div className="rounded-[22px] bg-white text-[#0e0e0e] p-8 md:p-10 flex flex-col shadow-2xl">
-            <h3 className="font-display text-2xl md:text-3xl flex items-center gap-2">
-              Save Sherman's Home <Heart className="w-6 h-6 text-red fill-red" />
-            </h3>
-
-            <div className="mt-6">
-              <div className="flex items-baseline justify-between mb-2">
-                <span className="font-display text-3xl md:text-4xl">{currency(r.raised)}</span>
-                <span className="text-sm text-muted-foreground">of {currency(r.phase1_goal)}</span>
-              </div>
-              <div className="h-3 bg-mid rounded-full overflow-hidden">
-                <div className="h-full bg-red rounded-full transition-all" style={{ width: `${pct}%` }} />
-              </div>
-              <p className="mt-3 text-xs text-muted-foreground">{r.donor_count} donors</p>
-            </div>
-
-            {/* Urgency block */}
-            <div className="mt-6 rounded-xl border-2 border-red bg-red/5 p-5">
-              <div className="flex items-center gap-2 text-red font-bold text-[0.7rem] uppercase tracking-[0.15em]">
-                <AlertCircle className="w-4 h-4" />
-                Tax Sale Deadline
-              </div>
-              <div className="mt-2 flex items-baseline justify-between gap-3">
-                <span className="font-display text-2xl text-[#0e0e0e]">{deadlineLabel}</span>
-                <span className="font-display text-3xl text-red">
-                  {days} <span className="text-base font-bold uppercase tracking-wider">days left</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link
-                to="/rescue/$slug"
-                params={{ slug: r.slug }}
-                className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-red text-white px-6 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
-              >
-                Donate Now <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/rescue/$slug"
-                params={{ slug: r.slug }}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border-[1.5px] border-[#0e0e0e] px-6 py-3.5 font-bold text-sm hover:bg-[#0e0e0e] hover:text-white transition"
-              >
-                <Share2 className="w-4 h-4" /> Share This Mission
-              </Link>
-            </div>
           </div>
         </div>
       </div>
@@ -450,11 +342,44 @@ function SellInline() {
 }
 
 function SellFormCard({ compact = false }: { compact?: boolean }) {
+  const [vals, setVals] = useState({ address: "", name: "", phone: "", email: "" });
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const parts = vals.name.trim().split(" ");
+      await supabase.from("sell_leads").insert({
+        address: vals.address,
+        first_name: parts[0] || vals.name,
+        last_name: parts.slice(1).join(" "),
+        email: vals.email,
+        phone: vals.phone,
+        status: "new",
+      });
+    } catch (err) {
+      console.error("Lead submission error:", err);
+    }
+    setLoading(false);
+    setDone(true);
+  };
+
+  if (done) {
+    return (
+      <div className="rounded-[20px] bg-white border border-mid p-8 md:p-9 text-center">
+        <CheckCircle2 className="w-12 h-12 text-red mx-auto mb-3" />
+        <h3 className="font-display text-2xl">You're All Set!</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          We'll call within 24 hours with your cash offer.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="rounded-[20px] bg-white border border-mid p-8 md:p-9"
-    >
+    <form onSubmit={handleSubmit} className="rounded-[20px] bg-white border border-mid p-8 md:p-9">
       {!compact && (
         <>
           <h3 className="font-display text-2xl">Get Your Cash Offer</h3>
@@ -465,30 +390,39 @@ function SellFormCard({ compact = false }: { compact?: boolean }) {
         <input
           required
           placeholder="Property Address"
+          value={vals.address}
+          onChange={(e) => setVals({ ...vals, address: e.target.value })}
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
         <input
           required
           placeholder="Your Name"
+          value={vals.name}
+          onChange={(e) => setVals({ ...vals, name: e.target.value })}
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
         <input
           required
           type="tel"
           placeholder="Phone"
+          value={vals.phone}
+          onChange={(e) => setVals({ ...vals, phone: e.target.value })}
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
         <input
           required
           type="email"
           placeholder="Email"
+          value={vals.email}
+          onChange={(e) => setVals({ ...vals, email: e.target.value })}
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
         <button
           type="submit"
-          className="w-full rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition"
+          disabled={loading}
+          className="w-full rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition disabled:opacity-60"
         >
-          Get My Cash Offer →
+          {loading ? "Sending..." : "Get My Cash Offer →"}
         </button>
         <p className="text-[0.7rem] text-muted-foreground text-center">
           Your info is never sold or shared. We'll call within 24 hours.
@@ -681,33 +615,30 @@ function SponsorsPreview() {
 }
 
 function ClosingStrip() {
-  const r = activeRescue();
   return (
     <section className="bg-[#0e0e0e] text-white">
       <div className="max-w-[1160px] mx-auto px-6 py-24 md:py-32 text-center">
         <h2 className="font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.05] tracking-[-0.03em]">
           Saving Homes. <em className="not-italic font-display text-red">Changing Lives.</em>
         </h2>
+        <p className="mt-5 text-white/55 max-w-xl mx-auto leading-relaxed">
+          Zombie House Rescue is launching soon. We're preparing our first campaign and are accepting
+          nominations, sponsors, and volunteers now. Get involved.
+        </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          {r && (
-            <Link
-              to="/rescue/$slug"
-              params={{ slug: r.slug }}
-              className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
-            >
-              <Heart className="w-4 h-4 fill-white" /> Help Sherman
-            </Link>
-          )}
           <Link
             to="/apply"
-            className="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+            className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-7 py-3.5 font-bold text-sm hover:bg-[#b81830] transition"
           >
             <HomeIcon className="w-4 h-4" /> Nominate A Homeowner
           </Link>
+          <Link
+            to="/sponsors"
+            className="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-white/35 text-white px-7 py-3.5 font-bold text-sm hover:bg-white/10 transition"
+          >
+            Become A Sponsor
+          </Link>
         </div>
-        <p className="mt-8 text-sm text-white/55 max-w-2xl mx-auto leading-relaxed">
-          Every donation, volunteer, vendor, and sponsor helps restore homes, hope, and dignity to families facing difficult situations.
-        </p>
       </div>
     </section>
   );
