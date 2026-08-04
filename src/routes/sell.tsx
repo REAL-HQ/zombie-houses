@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BUSINESS } from "@/lib/business";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -79,14 +80,28 @@ function SellPage() {
   const [contact, setContact] = useState({ first: "", last: "", email: "", phone: "" });
   const [smsConsent, setSmsConsent] = useState(false);
 
-  const handleSubmit = () => {
-    console.log("ZOMBIE HOUSES LEAD:", {
-      address,
-      factors,
-      ...contact,
-      sms_consent: smsConsent,
-      sms_consent_at: smsConsent ? new Date().toISOString() : null,
-    });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!contact.first || !contact.email || !contact.phone) return;
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.from("sell_leads").insert({
+        address,
+        first_name: contact.first,
+        last_name: contact.last,
+        email: contact.email,
+        phone: contact.phone,
+        factors,
+        sms_consent: smsConsent,
+        sms_consent_at: smsConsent ? new Date().toISOString() : null,
+        status: "new",
+      });
+      if (error) throw error;
+    } catch (err) {
+      console.error("Lead submission error:", err);
+    }
+    setSubmitting(false);
     setStep("thanks");
   };
 
@@ -290,10 +305,12 @@ function SellPage() {
               <Button
                 size="lg"
                 onClick={handleSubmit}
-                disabled={!contact.first || !contact.email || !contact.phone || !smsConsent}
+                disabled={
+                  submitting || !contact.first || !contact.email || !contact.phone || !smsConsent
+                }
                 className="mt-6 w-full h-14 text-lg font-extrabold uppercase tracking-wide bg-red hover:bg-red/90"
               >
-                See Your Offer <DollarSign className="ml-2" />
+                {submitting ? "Sending..." : "See Your Offer"} <DollarSign className="ml-2" />
               </Button>
 
               <TrustRow />

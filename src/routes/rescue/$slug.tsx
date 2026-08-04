@@ -16,6 +16,7 @@ import {
 } from "@/data/rescues";
 import { AlertTriangle, ArrowRight, Check, Copy, Facebook, Instagram } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/rescue/$slug")({
   loader: ({ params }) => {
@@ -43,6 +44,7 @@ export const Route = createFileRoute("/rescue/$slug")({
 function CampaignPage() {
   const { rescue } = Route.useLoaderData();
   if (rescue.status === "complete") return <CompletedPage r={rescue} />;
+  if (rescue.status === "coming_soon") return <ComingSoonPage r={rescue} />;
   return <ActivePage r={rescue} />;
 }
 
@@ -115,6 +117,137 @@ function ActivePage({ r }: { r: Rescue }) {
         </aside>
       </div>
     </SiteLayout>
+  );
+}
+
+function ComingSoonPage({ r }: { r: Rescue }) {
+  return (
+    <SiteLayout>
+      <Hero r={r} />
+      <div className="max-w-[1160px] mx-auto px-6 py-12 md:py-16 grid lg:grid-cols-[1fr_360px] gap-10 items-start">
+        <div>
+          <Story r={r} />
+
+          <div className="mt-10 rounded-[18px] overflow-hidden border border-mid aspect-video">
+            <iframe
+              src="https://www.youtube.com/embed/-mRQEHQz3gE?rel=0"
+              title="Meet Sherman"
+              className="w-full h-full"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="mt-12">
+            <h2 className="font-display text-[1.6rem] mb-6">Rescue Plan</h2>
+            <div className="space-y-5">
+              {r.phases.map((phase) => (
+                <div key={phase.number} className="flex gap-4">
+                  <div className="w-9 h-9 rounded-full shrink-0 flex items-center justify-center text-sm font-bold bg-off border-2 border-mid text-muted-foreground">
+                    {phase.number}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.1em] mb-1 text-muted-foreground">
+                      Phase {phase.number}
+                    </p>
+                    <h3 className="font-display text-lg mb-1">{phase.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{phase.description}</p>
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {phase.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="text-[0.65rem] uppercase tracking-wider px-2 py-1 rounded-lg bg-off border border-mid text-muted-foreground"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+          <NotifyCard slug={r.slug} />
+          <div className="rounded-[22px] border border-mid bg-white p-6">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.12em] text-muted-foreground mb-3">
+              Phase 1 Goal
+            </p>
+            <p className="font-display text-4xl">{currency(r.phase1_goal)}</p>
+            <div className="mt-4 space-y-1.5 text-xs text-muted-foreground">
+              <div className="flex justify-between"><span>Back taxes (3 years)</span><span className="font-semibold">$27,240</span></div>
+              <div className="flex justify-between"><span>Penalties + interest</span><span className="font-semibold">$4,210</span></div>
+              <div className="flex justify-between"><span>Title clearing + recording</span><span className="font-semibold">$1,850</span></div>
+              <div className="flex justify-between"><span>Temp housing + emergency</span><span className="font-semibold">$1,700</span></div>
+            </div>
+            <p className="mt-4 text-[0.7rem] text-muted-foreground leading-relaxed">
+              No funds are being collected yet. When the campaign launches, every dollar will be
+              tracked publicly in this ledger.
+            </p>
+          </div>
+          <ShareCard r={r} />
+        </aside>
+      </div>
+    </SiteLayout>
+  );
+}
+
+function NotifyCard({ slug }: { slug: string }) {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!email) return;
+    setLoading(true);
+    try {
+      await supabase.from("launch_notifications").insert({ email, rescue_slug: slug });
+    } catch (err) {
+      console.error("Notify signup error:", err);
+    }
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="rounded-[22px] border-2 border-red bg-white p-6">
+      {submitted ? (
+        <div className="text-center py-2">
+          <Check className="w-8 h-8 text-red mx-auto mb-2" />
+          <p className="font-bold text-sm">You're on the list.</p>
+          <p className="text-xs text-muted-foreground mt-1">
+            We'll email you the moment the campaign launches.
+          </p>
+        </div>
+      ) : (
+        <>
+          <p className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-red mb-1">
+            Campaign Launching Soon
+          </p>
+          <h4 className="font-display text-xl mb-2">Get Notified At Launch</h4>
+          <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
+            Be the first to know when Sherman's fundraiser goes live. We'll send one email — no spam.
+          </p>
+          <input
+            type="email"
+            placeholder="Your email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-xl border border-mid px-4 py-3 text-sm mb-3 focus:outline-none focus:border-[#0e0e0e]"
+          />
+          <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="w-full rounded-lg bg-red text-white py-3 font-bold text-sm hover:bg-[#b81830] transition disabled:opacity-50"
+          >
+            {loading ? "Saving..." : "Notify Me At Launch →"}
+          </button>
+        </>
+      )}
+    </div>
   );
 }
 
