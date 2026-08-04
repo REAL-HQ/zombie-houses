@@ -24,6 +24,8 @@ export type Database = {
           phone: string
           property_address: string
           relationship: string
+          sms_consent: boolean
+          sms_consent_at: string | null
           story: string
           your_name: string
         }
@@ -36,6 +38,8 @@ export type Database = {
           phone: string
           property_address: string
           relationship: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
           story: string
           your_name: string
         }
@@ -48,6 +52,8 @@ export type Database = {
           phone?: string
           property_address?: string
           relationship?: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
           story?: string
           your_name?: string
         }
