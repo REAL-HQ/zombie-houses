@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WatchRouteImport } from './routes/watch'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DesignRouteImport } from './routes/design'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
@@ -31,6 +32,11 @@ const SponsorsRoute = SponsorsRouteImport.update({
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignRoute = DesignRouteImport.update({
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/design': typeof DesignRoute
+  '/privacy': typeof PrivacyRoute
   '/sell': typeof SellRoute
   '/sponsors': typeof SponsorsRoute
   '/watch': typeof WatchRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/design': typeof DesignRoute
+  '/privacy': typeof PrivacyRoute
   '/sell': typeof SellRoute
   '/sponsors': typeof SponsorsRoute
   '/watch': typeof WatchRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
   '/design': typeof DesignRoute
+  '/privacy': typeof PrivacyRoute
   '/sell': typeof SellRoute
   '/sponsors': typeof SponsorsRoute
   '/watch': typeof WatchRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/design'
+    | '/privacy'
     | '/sell'
     | '/sponsors'
     | '/watch'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/design'
+    | '/privacy'
     | '/sell'
     | '/sponsors'
     | '/watch'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/apply'
     | '/design'
+    | '/privacy'
     | '/sell'
     | '/sponsors'
     | '/watch'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApplyRoute: typeof ApplyRoute
   DesignRoute: typeof DesignRoute
+  PrivacyRoute: typeof PrivacyRoute
   SellRoute: typeof SellRoute
   SponsorsRoute: typeof SponsorsRoute
   WatchRoute: typeof WatchRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design': {
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApplyRoute: ApplyRoute,
   DesignRoute: DesignRoute,
+  PrivacyRoute: PrivacyRoute,
   SellRoute: SellRoute,
   SponsorsRoute: SponsorsRoute,
   WatchRoute: WatchRoute,
