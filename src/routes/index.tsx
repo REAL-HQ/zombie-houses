@@ -158,6 +158,7 @@ function CurrentRescueMission() {
   const deadlineLabel = new Date(r.deadline).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
   });
   return (
     <section className="relative bg-[#0e0e0e] text-white py-20 md:py-28 overflow-hidden">
