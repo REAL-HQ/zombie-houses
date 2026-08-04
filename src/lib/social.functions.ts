@@ -28,10 +28,10 @@ const empty = (configured = false, error?: string): SocialFeedResult => ({
 export const fetchInstagram = createServerFn({ method: "GET" }).handler(
   async (): Promise<SocialFeedResult> => {
     const token = process.env.INSTAGRAM_ACCESS_TOKEN;
-    const userId = process.env.INSTAGRAM_USER_ID;
-    if (!token || !userId) return empty(false);
+    const userId = process.env.INSTAGRAM_USER_ID ?? "me";
+    if (!token) return empty(false);
     try {
-      const url = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=9&access_token=${token}`;
+      const url = `https://graph.instagram.com/${userId}/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=12&access_token=${token}`;
       const res = await fetch(url);
       if (!res.ok) return empty(true, `Instagram ${res.status}: ${await res.text()}`);
       const json = (await res.json()) as {
