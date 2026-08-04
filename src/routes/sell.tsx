@@ -280,10 +280,33 @@ function SellPage() {
                 </FormRow>
               </div>
 
+              <label className="mt-5 flex items-start gap-3 text-[0.78rem] leading-relaxed text-muted-foreground text-left">
+                <input
+                  type="checkbox"
+                  checked={smsConsent}
+                  onChange={(e) => setSmsConsent(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--red)]"
+                />
+                <span>
+                  By checking this box, I agree to receive text messages from {BUSINESS.legalName}{" "}
+                  about my cash offer at the number provided. Message and data rates may apply.
+                  Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a
+                  condition of any purchase or service. See our{" "}
+                  <Link to="/privacy" className="text-red font-semibold">
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link to="/sms-terms" className="text-red font-semibold">
+                    SMS Terms
+                  </Link>
+                  .
+                </span>
+              </label>
+
               <Button
                 size="lg"
                 onClick={handleSubmit}
-                disabled={!contact.first || !contact.email || !contact.phone}
+                disabled={!contact.first || !contact.email || !contact.phone || !smsConsent}
                 className="mt-6 w-full h-14 text-lg font-extrabold uppercase tracking-wide bg-red hover:bg-red/90"
               >
                 See Your Offer <DollarSign className="ml-2" />
