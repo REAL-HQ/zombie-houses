@@ -29,6 +29,7 @@ function ApplyPage() {
     e.preventDefault();
     if (submitting) return;
     const fd = new FormData(e.currentTarget);
+    const smsConsent = fd.get("sms_consent") === "on";
     const payload = {
       your_name: String(fd.get("your_name") || "").trim(),
       relationship: String(fd.get("relationship") || "").trim(),
@@ -38,6 +39,8 @@ function ApplyPage() {
       property_address: String(fd.get("property_address") || "").trim(),
       help_needed: String(fd.get("help_needed") || "").trim(),
       story: String(fd.get("story") || "").trim(),
+      sms_consent: smsConsent,
+      sms_consent_at: smsConsent ? new Date().toISOString() : null,
     };
 
     setSubmitting(true);
