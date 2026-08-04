@@ -77,9 +77,16 @@ function SellPage() {
   const [address, setAddress] = useState("");
   const [factors, setFactors] = useState("");
   const [contact, setContact] = useState({ first: "", last: "", email: "", phone: "" });
+  const [smsConsent, setSmsConsent] = useState(false);
 
   const handleSubmit = () => {
-    console.log("ZOMBIE HOUSES LEAD:", { address, factors, ...contact });
+    console.log("ZOMBIE HOUSES LEAD:", {
+      address,
+      factors,
+      ...contact,
+      sms_consent: smsConsent,
+      sms_consent_at: smsConsent ? new Date().toISOString() : null,
+    });
     setStep("thanks");
   };
 
