@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WatchRouteImport } from './routes/watch'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as SellRouteImport } from './routes/sell'
@@ -23,6 +24,11 @@ import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
 const WatchRoute = WatchRouteImport.update({
   id: '/watch',
   path: '/watch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SponsorsRoute = SponsorsRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/sell': typeof SellRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
+  '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/sell': typeof SellRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
+  '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue': typeof RescueIndexRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/sell': typeof SellRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
+  '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/sell'
     | '/sms-terms'
     | '/sponsors'
+    | '/terms'
     | '/watch'
     | '/rescue/$slug'
     | '/rescue/'
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/sell'
     | '/sms-terms'
     | '/sponsors'
+    | '/terms'
     | '/watch'
     | '/rescue/$slug'
     | '/rescue'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/sell'
     | '/sms-terms'
     | '/sponsors'
+    | '/terms'
     | '/watch'
     | '/rescue/$slug'
     | '/rescue/'
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   SellRoute: typeof SellRoute
   SmsTermsRoute: typeof SmsTermsRoute
   SponsorsRoute: typeof SponsorsRoute
+  TermsRoute: typeof TermsRoute
   WatchRoute: typeof WatchRoute
   RescueSlugRoute: typeof RescueSlugRoute
   RescueIndexRoute: typeof RescueIndexRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/watch'
       fullPath: '/watch'
       preLoaderRoute: typeof WatchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sponsors': {
@@ -243,6 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   SellRoute: SellRoute,
   SmsTermsRoute: SmsTermsRoute,
   SponsorsRoute: SponsorsRoute,
+  TermsRoute: TermsRoute,
   WatchRoute: WatchRoute,
   RescueSlugRoute: RescueSlugRoute,
   RescueIndexRoute: RescueIndexRoute,
