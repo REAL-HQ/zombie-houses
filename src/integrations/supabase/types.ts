@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      launch_notifications: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          rescue_slug: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          rescue_slug?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          rescue_slug?: string
+        }
+        Relationships: []
+      }
       nominations: {
         Row: {
           created_at: string
@@ -56,6 +77,51 @@ export type Database = {
           sms_consent_at?: string | null
           story?: string
           your_name?: string
+        }
+        Relationships: []
+      }
+      sell_leads: {
+        Row: {
+          address: string
+          created_at: string
+          email: string
+          factors: string | null
+          first_name: string
+          id: string
+          last_name: string
+          notes: string | null
+          phone: string
+          sms_consent: boolean
+          sms_consent_at: string | null
+          status: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          email: string
+          factors?: string | null
+          first_name: string
+          id?: string
+          last_name?: string
+          notes?: string | null
+          phone: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          status?: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          email?: string
+          factors?: string | null
+          first_name?: string
+          id?: string
+          last_name?: string
+          notes?: string | null
+          phone?: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          status?: string
         }
         Relationships: []
       }

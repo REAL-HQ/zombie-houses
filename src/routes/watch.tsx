@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Play } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -225,6 +225,53 @@ function FieldTabs() {
 
 
 
+const BEHOLD_FEED_ID = import.meta.env.VITE_BEHOLD_FEED_ID as string | undefined;
+
+function InstagramFeed() {
+  useEffect(() => {
+    if (!BEHOLD_FEED_ID) return;
+    const script = document.createElement("script");
+    script.src = "https://w.behold.so/widget.js";
+    script.type = "module";
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <section className="bg-white py-20 md:py-28 border-t border-mid">
+      <div className="max-w-[1160px] mx-auto px-6">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground mb-2">
+          @ZombieHouses
+        </p>
+        <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em] mb-10">
+          Follow The Mission On Instagram
+        </h2>
+        {BEHOLD_FEED_ID ? (
+          React.createElement("behold-widget", { "feed-id": BEHOLD_FEED_ID })
+        ) : (
+          <div className="rounded-[18px] border border-mid bg-off p-10 text-center">
+            <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+              The live Instagram grid turns on as soon as the @zombieshouses feed is connected.
+              Create a feed at behold.so, then add its Feed ID as{" "}
+              <code className="font-mono text-xs">VITE_BEHOLD_FEED_ID</code>.
+            </p>
+            <a
+              href="https://www.instagram.com/zombiehouses/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#0e0e0e] text-white px-6 py-3 font-bold text-sm hover:bg-black transition"
+            >
+              View @zombiehouses On Instagram →
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function WatchPage() {
   return (
     <SiteLayout>
@@ -301,6 +348,8 @@ function WatchPage() {
           </div>
           <FieldTabs />
         </section>
+
+        <InstagramFeed />
 
       </div>
     </SiteLayout>

@@ -20,6 +20,7 @@ import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RescueIndexRouteImport } from './routes/rescue/index'
 import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
+import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
 
 const WatchRoute = WatchRouteImport.update({
   id: '/watch',
@@ -76,6 +77,11 @@ const RescueSlugRoute = RescueSlugRouteImport.update({
   path: '/rescue/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue': typeof RescueIndexRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
   '/watch': typeof WatchRoute
+  '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms'
     | '/watch'
+    | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue/'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms'
     | '/watch'
+    | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/terms'
     | '/watch'
+    | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue/'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   SponsorsRoute: typeof SponsorsRoute
   TermsRoute: typeof TermsRoute
   WatchRoute: typeof WatchRoute
+  AdminLeadsRoute: typeof AdminLeadsRoute
   RescueSlugRoute: typeof RescueSlugRoute
   RescueIndexRoute: typeof RescueIndexRoute
 }
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RescueSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorsRoute: SponsorsRoute,
   TermsRoute: TermsRoute,
   WatchRoute: WatchRoute,
+  AdminLeadsRoute: AdminLeadsRoute,
   RescueSlugRoute: RescueSlugRoute,
   RescueIndexRoute: RescueIndexRoute,
 }
