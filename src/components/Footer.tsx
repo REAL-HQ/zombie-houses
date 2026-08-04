@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/zombie-houses-logo.png";
+import { BUSINESS } from "@/lib/business";
 
 export const Footer = () => (
   <footer className="bg-[#0e0e0e] text-white">
