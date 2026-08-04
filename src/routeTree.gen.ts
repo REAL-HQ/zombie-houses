@@ -21,6 +21,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RescueIndexRouteImport } from './routes/rescue/index'
 import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
 import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
+import { Route as ApiPublicRefreshInstagramTokenRouteImport } from './routes/api/public/refresh-instagram-token'
 
 const WatchRoute = WatchRouteImport.update({
   id: '/watch',
@@ -82,6 +83,12 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicRefreshInstagramTokenRoute =
+  ApiPublicRefreshInstagramTokenRouteImport.update({
+    id: '/api/public/refresh-instagram-token',
+    path: '/api/public/refresh-instagram-token',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
+  '/api/public/refresh-instagram-token': typeof ApiPublicRefreshInstagramTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +118,7 @@ export interface FileRoutesByTo {
   '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue': typeof RescueIndexRoute
+  '/api/public/refresh-instagram-token': typeof ApiPublicRefreshInstagramTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +134,7 @@ export interface FileRoutesById {
   '/admin/leads': typeof AdminLeadsRoute
   '/rescue/$slug': typeof RescueSlugRoute
   '/rescue/': typeof RescueIndexRoute
+  '/api/public/refresh-instagram-token': typeof ApiPublicRefreshInstagramTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue/'
+    | '/api/public/refresh-instagram-token'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue'
+    | '/api/public/refresh-instagram-token'
   id:
     | '__root__'
     | '/'
@@ -169,6 +181,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/rescue/$slug'
     | '/rescue/'
+    | '/api/public/refresh-instagram-token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +197,7 @@ export interface RootRouteChildren {
   AdminLeadsRoute: typeof AdminLeadsRoute
   RescueSlugRoute: typeof RescueSlugRoute
   RescueIndexRoute: typeof RescueIndexRoute
+  ApiPublicRefreshInstagramTokenRoute: typeof ApiPublicRefreshInstagramTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/refresh-instagram-token': {
+      id: '/api/public/refresh-instagram-token'
+      path: '/api/public/refresh-instagram-token'
+      fullPath: '/api/public/refresh-instagram-token'
+      preLoaderRoute: typeof ApiPublicRefreshInstagramTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -288,6 +309,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLeadsRoute: AdminLeadsRoute,
   RescueSlugRoute: RescueSlugRoute,
   RescueIndexRoute: RescueIndexRoute,
+  ApiPublicRefreshInstagramTokenRoute: ApiPublicRefreshInstagramTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
