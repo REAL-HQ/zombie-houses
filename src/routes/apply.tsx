@@ -103,6 +103,28 @@ function ApplyPage() {
               placeholder="Tell us the story. Who lives there? What happened? What's the deadline?"
               className="sm:col-span-2 rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e] resize-none"
             />
+            <label className="sm:col-span-2 flex items-start gap-3 text-[0.78rem] leading-relaxed text-muted-foreground">
+              <input
+                type="checkbox"
+                name="sms_consent"
+                required
+                className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--red)]"
+              />
+              <span>
+                By checking this box, I agree to receive text messages from {BUSINESS.legalName}{" "}
+                about this nomination at the number provided. Message and data rates may apply.
+                Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a
+                condition of any purchase or service. See our{" "}
+                <Link to="/privacy" className="text-red font-semibold">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="/sms-terms" className="text-red font-semibold">
+                  SMS Terms
+                </Link>
+                .
+              </span>
+            </label>
             <button
               type="submit"
               disabled={submitting}
