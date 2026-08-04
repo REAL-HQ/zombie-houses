@@ -1,6 +1,6 @@
 import shermanHero from "@/assets/sherman-hero.jpg";
 
-export type RescueStatus = "active" | "complete" | "paused";
+export type RescueStatus = "coming_soon" | "active" | "complete" | "paused";
 
 export interface Phase {
   number: number;
@@ -67,28 +67,26 @@ export const rescues: Rescue[] = [
     slug: "shermans-home",
     title: "Sherman's Home",
     location: "Tampa, FL",
-    urgency_line: "Tax-deed sale in 6 days",
-    urgency_message:
-      "Urgent: Sherman faces a tax deed sale in 6 days. We need to close $23,580 to stop the auction.",
-    status: "active",
+    urgency_line: "Our first rescue — launching soon",
+    status: "coming_soon",
     current_phase: 1,
     hero_image: shermanHero,
     thumb_image: shermanHero,
     story_html: `
       <p>Sherman Whitfield bought his small block house off 22nd Avenue in 1974 — the year his daughter was born. He framed the back porch himself, planted the avocado tree out front, and raised three kids inside its walls.</p>
       <p>Then his wife got sick. Medical bills piled up. A reverse-mortgage salesman knocked at the wrong moment. Within four years, Sherman was three property-tax cycles behind and a tax-deed sale was scheduled.</p>
-      <p>If we don't close the gap by then, the home gets auctioned on the courthouse steps. We're not letting that happen.</p>
+      <p>We went to buy the house. Instead, we decided to fight for it. Sherman's rescue campaign is in final preparation now — and it will be the first campaign Zombie House Rescue ever launches.</p>
     `,
     pull_quote:
       "I built this porch with my own two hands. I'd like to die looking out from it.",
-    raised: 11420,
-    phase1_goal: 25000,
-    donor_count: 187,
-    deadline: "2026-06-04",
+    raised: 0,
+    phase1_goal: 35000,
+    donor_count: 0,
+    deadline: "",
     started_at: "2026-05-01",
     service_tags: ["Back Taxes", "Title Clearing", "Roof Repair"],
     share_copy:
-      "Sherman is 84. He built his Tampa home with his own hands. We have 6 days to stop the auction. Help us save it:",
+      "Sherman is 84. He built his Tampa home with his own hands. Zombie House Rescue is launching his campaign soon:",
     slingshot_url: "https://slingshotgiving.com/c/shermans-home",
     phases: [
       {
@@ -140,60 +138,6 @@ export const rescues: Rescue[] = [
         content_html:
           "<p>No second mortgage, no judgments. Just the tax lien. Once we settle the county, the home is fully Sherman's again — free and clear.</p>",
       },
-      {
-        id: "u1",
-        created_at: "2026-05-12",
-        title: "Campaign live on Slingshot",
-        content_html: "<p>First $1,200 came in within six hours of the soft launch. Thank you to the early supporters.</p>",
-      },
-    ],
-    recent_donors: [
-      { name: "Maria L.", is_anonymous: false, amount: 250, created_at: "2026-05-29T14:20:00Z" },
-      { name: "Anonymous", is_anonymous: true, amount: 1000, created_at: "2026-05-29T11:05:00Z" },
-      { name: "Devon K.", is_anonymous: false, amount: 50, created_at: "2026-05-29T09:42:00Z" },
-      { name: "The Patel Family", is_anonymous: false, amount: 500, created_at: "2026-05-28T20:15:00Z" },
-      { name: "Anonymous", is_anonymous: true, amount: 25, created_at: "2026-05-28T18:33:00Z" },
-    ],
-  },
-  {
-    slug: "miss-eleanors-cottage",
-    title: "Miss Eleanor's Cottage",
-    location: "St. Petersburg, FL",
-    urgency_line: "Saved from demolition",
-    status: "complete",
-    current_phase: 3,
-    hero_image: shermanHero,
-    thumb_image: shermanHero,
-    story_html:
-      "<p>A 1942 bungalow rescued from a code-enforcement teardown order. Miss Eleanor had lived there for 61 years.</p>",
-    completion_story_html:
-      "<p>On December 10, 2025, Miss Eleanor walked back through her front door for the first time in eight months. She brought peach cobbler for the whole crew.</p>",
-    raised: 42800,
-    phase1_goal: 40000,
-    donor_count: 314,
-    deadline: "2025-11-01",
-    started_at: "2025-08-15",
-    completed_at: "2025-12-10",
-    duration_weeks: 17,
-    service_tags: ["Code Violations", "Roof", "Foundation"],
-    share_copy: "Miss Eleanor is home. Share her story and inspire the next rescue:",
-    slingshot_url: "https://slingshotgiving.com/c/miss-eleanors-cottage",
-    phases: [],
-    ledger: [
-      { label: "Code violation settlements", amount: 12400, status: "paid" },
-      { label: "Roof replacement", amount: 18900, status: "paid" },
-      { label: "Foundation repair", amount: 8200, status: "paid" },
-      { label: "Returned to rescue fund", amount: 3300, status: "returned" },
-      { label: "Project Total", amount: 42800, status: "paid", is_total_row: true },
-    ],
-    updates: [
-      {
-        id: "ue1",
-        created_at: "2025-12-10",
-        title: "Miss Eleanor came home",
-        content_html: "<p>She brought peach cobbler. We brought tissues. The neighbors clapped.</p>",
-        is_final: true,
-      },
     ],
     recent_donors: [],
   },
@@ -201,12 +145,14 @@ export const rescues: Rescue[] = [
 
 export const getRescue = (slug: string) => rescues.find((r) => r.slug === slug);
 export const activeRescue = () => rescues.find((r) => r.status === "active");
+export const comingSoonRescue = () => rescues.find((r) => r.status === "coming_soon");
 export const pastRescues = () =>
   rescues
     .filter((r) => r.status === "complete")
     .sort((a, b) => (b.completed_at ?? "").localeCompare(a.completed_at ?? ""));
 
 export const daysRemaining = (deadline: string) => {
+  if (!deadline) return 0;
   const ms = new Date(deadline).getTime() - Date.now();
   return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)));
 };
