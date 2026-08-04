@@ -131,31 +131,7 @@ function SellPage() {
                   </div>
                 </button>
 
-                <div className="mt-6 flex justify-center">
-                  <a
-                    href="https://www.trustpilot.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 text-base md:text-xl text-foreground hover:opacity-80"
-                  >
-                    <span className="font-bold">Excellent</span>
-                    <span className="inline-flex gap-0.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <span
-                          key={i}
-                          className="w-7 h-7 md:w-8 md:h-8 bg-[#00B67A] inline-flex items-center justify-center"
-                        >
-                          <Star size={20} fill="white" strokeWidth={0} className="text-white" />
-                        </span>
-                      ))}
-                    </span>
-                    <span className="underline">5,019 reviews on</span>
-                    <span className="inline-flex items-center gap-1 font-bold">
-                      <Star size={22} fill="#00B67A" strokeWidth={0} />
-                      Trustpilot
-                    </span>
-                  </a>
-                </div>
+
               </div>
 
               <p className="mt-8 text-base md:text-2xl font-extrabold italic leading-snug whitespace-nowrap text-center">
