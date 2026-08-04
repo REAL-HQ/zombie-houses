@@ -23,8 +23,6 @@ import {
   Wrench,
   HardHat,
   ShieldAlert,
-  Share2,
-  AlertCircle,
   Zap,
   Snowflake,
 } from "lucide-react";
