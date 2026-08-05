@@ -127,6 +127,9 @@ function DesignPage() {
               </a>
             ))}
           </div>
+          <p className="mt-10 text-xs text-muted-foreground">
+            As an Amazon Associate we earn from qualifying purchases.
+          </p>
         </div>
       </section>
     </SiteLayout>
