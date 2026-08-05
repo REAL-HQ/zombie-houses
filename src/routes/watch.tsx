@@ -225,7 +225,7 @@ function FieldTabs() {
 
 
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       "behold-widget": React.DetailedHTMLProps<
