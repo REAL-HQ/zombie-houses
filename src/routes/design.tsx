@@ -102,9 +102,6 @@ function DesignPage() {
                 The Exact Finishes From Our Flips.
               </h2>
             </div>
-            <p className="text-xs text-muted-foreground max-w-xs">
-              As an Amazon Associate we earn from qualifying purchases.
-            </p>
           </div>
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5">
             {PRODUCTS.map((p) => (
@@ -130,6 +127,9 @@ function DesignPage() {
               </a>
             ))}
           </div>
+          <p className="mt-10 text-xs text-muted-foreground">
+            As an Amazon Associate we earn from qualifying purchases.
+          </p>
         </div>
       </section>
     </SiteLayout>
