@@ -40,7 +40,7 @@ function RescueIndex() {
         <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] whitespace-nowrap">
           We Show Up When No One Else Will.
         </h1>
-        <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
+        <p className="mt-5 text-lg text-muted-foreground">
           Zombie House Rescue is launching soon. Sherman's campaign is our first — currently in
           preparation. Every rescue will be fully documented and 100% transparent from day one.
         </p>
