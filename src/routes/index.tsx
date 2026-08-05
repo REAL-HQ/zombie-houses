@@ -34,16 +34,16 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ZombieHouses — Saving Homes. Changing Lives." },
+      { title: "Zombie Houses — Saving Homes. Changing Lives." },
       {
         name: "description",
         content:
           "We renovate neglected houses, rescue families in need, and restore hope to the communities they call home — one zombie house at a time.",
       },
-      { property: "og:title", content: "ZombieHouses — Saving Homes. Changing Lives." },
+      { property: "og:title", content: "Zombie Houses — Saving Homes. Changing Lives." },
       {
         property: "og:description",
-        content: "Watch the A&E show. Sponsor a rescue. Sell your home fast. All in one place.",
+        content: "We renovate neglected houses, rescue families in need, and restore hope to the communities they call home — one zombie house at a time.",
       },
     ],
   }),

@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Zombie Houses — Saving Homes. Changing Lives." },
+      { name: "description", content: "We renovate neglected houses, rescue families in need, and restore hope to the communities they call home — one zombie house at a time." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Zombie Houses — Saving Homes. Changing Lives." },
+      { property: "og:description", content: "We renovate neglected houses, rescue families in need, and restore hope to the communities they call home — one zombie house at a time." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Zombie Houses — Saving Homes. Changing Lives." },
+      { name: "twitter:description", content: "We renovate neglected houses, rescue families in need, and restore hope to the communities they call home — one zombie house at a time." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/47f9dd68-9964-47a1-bd83-4c674f8b1d11/id-preview-f3049642--5a7614f5-c5ec-4456-acb7-c85d94dee678.lovable.app-1785901262402.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/47f9dd68-9964-47a1-bd83-4c674f8b1d11/id-preview-f3049642--5a7614f5-c5ec-4456-acb7-c85d94dee678.lovable.app-1785901262402.png" },
     ],
     links: [
       {
