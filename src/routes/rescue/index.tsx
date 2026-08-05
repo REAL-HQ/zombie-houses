@@ -41,8 +41,11 @@ function RescueIndex() {
           We Show Up When No One Else Will.
         </h1>
         <p className="mt-5 text-lg text-muted-foreground">
-          Zombie House Rescue is launching soon. Sherman's campaign is our first — currently in
-          preparation. Every rescue will be fully documented and 100% transparent from day one.
+          Zombie House Rescue is launching soon.
+          <br />
+          Sherman's campaign is our first — currently in preparation.
+          <br />
+          Every rescue will be fully documented and 100% transparent from day one.
         </p>
       </section>
 
