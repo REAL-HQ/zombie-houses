@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Play } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -225,6 +225,32 @@ function FieldTabs() {
 
 
 
+declare module "react" {
+  namespace JSX {
+    interface IntrinsicElements {
+      "behold-widget": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & { "feed-id": string },
+        HTMLElement
+      >;
+    }
+  }
+}
+
+const BEHOLD_FEED_ID = import.meta.env["VITE_BEHOLD_FEED_ID"] as string | undefined;
+
+function BeholdWidget({ feedId }: { feedId: string }) {
+  useEffect(() => {
+    const existing = document.querySelector('script[src="https://w.behold.so/widget.js"]');
+    if (existing) return;
+    const script = document.createElement("script");
+    script.src = "https://w.behold.so/widget.js";
+    script.type = "module";
+    document.head.appendChild(script);
+  }, []);
+
+  return <behold-widget feed-id={feedId} />;
+}
+
 function InstagramFeed() {
   const fetchIg = useServerFn(fetchInstagram);
   const { data, isLoading } = useQuery({
@@ -258,7 +284,9 @@ function InstagramFeed() {
           </a>
         </div>
 
-        {isLoading && (
+        {BEHOLD_FEED_ID && <BeholdWidget feedId={BEHOLD_FEED_ID} />}
+
+        {!BEHOLD_FEED_ID && isLoading && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="aspect-square rounded-[14px] bg-off animate-pulse" />
@@ -266,7 +294,7 @@ function InstagramFeed() {
           </div>
         )}
 
-        {!isLoading && posts.length > 0 && (
+        {!BEHOLD_FEED_ID && !isLoading && posts.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {posts.slice(0, 12).map((post) => (
               <a
@@ -297,7 +325,7 @@ function InstagramFeed() {
           </div>
         )}
 
-        {!isLoading && posts.length === 0 && (
+        {!BEHOLD_FEED_ID && !isLoading && posts.length === 0 && (
           <div className="rounded-[18px] border border-mid bg-off p-10 text-center">
             <p className="text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
               {configured
