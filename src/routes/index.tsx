@@ -129,7 +129,7 @@ function Hero() {
             Saving Homes.<br />
             <em className="not-italic text-red font-display">Changing Lives.</em>
           </h1>
-          <p className="mt-6 text-[1.05rem] text-white/75 max-w-[760px] leading-relaxed">
+          <p className="mt-6 text-[1.05rem] text-white/75 leading-relaxed">
             We renovate neglected houses, rescue families in need, and restore hope<br />
             to the communities they call home — one zombie house at a time.
           </p>
@@ -169,7 +169,7 @@ function ComingSoonMission() {
           We Walked Into Sherman's Home.<br />
           <em className="not-italic text-red font-display">We Couldn't Walk Away.</em>
         </h2>
-        <p className="mt-5 text-white/70 leading-relaxed max-w-2xl">
+        <p className="mt-5 text-white/70 leading-relaxed">
           Sherman is 84. He built his Tampa home with his own hands in 1974. After years of medical
           bills and a predatory reverse mortgage, three years of unpaid property taxes put his home on
           the auction block. We went to buy it. Instead, we're fighting to save it. This is why Zombie
@@ -321,7 +321,7 @@ function SellInline() {
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
             Got A Zombie House?<br /> <em className="not-italic text-red font-display">We'll Buy It.</em>
           </h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
+          <p className="mt-5 text-muted-foreground leading-relaxed">
             No repairs. No commissions. No showings. Just a fair cash offer in 24 hours and a closing date you choose.
           </p>
           <ul className="mt-8 space-y-3">
@@ -520,7 +520,7 @@ function VendorPreview() {
         <h2 className="mt-3 font-display text-[clamp(1.4rem,3vw,2.4rem)] tracking-[-0.025em] whitespace-nowrap">
           Trusted Vendors. Nationwide Impact.
         </h2>
-        <p className="mt-3 text-muted-foreground leading-relaxed max-w-2xl">
+        <p className="mt-3 text-muted-foreground leading-relaxed">
           Join the network helping us rescue homes and transform communities.
         </p>
         <div className="mt-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
