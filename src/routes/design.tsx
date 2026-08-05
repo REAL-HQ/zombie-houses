@@ -51,7 +51,7 @@ function DesignPage() {
         <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] whitespace-nowrap">
           The Transformations That <em className="not-italic text-red font-display">Started It All.</em>
         </h1>
-        <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
+        <p className="mt-5 text-lg text-muted-foreground">
           Get inspired by our before-and-afters. Shop the look. Explore floor plans and design ideas from our A&E projects.
         </p>
         <div className="mt-10 flex flex-wrap gap-2">

@@ -356,7 +356,7 @@ function WatchPage() {
           <h1 className="mt-3 font-display text-[clamp(2.4rem,5vw,3.4rem)] tracking-[-0.03em] leading-[1.06] max-w-3xl">
             Behind the Scenes.<br /> <em className="not-italic text-red font-display">Real Transformations.</em>
           </h1>
-          <p className="mt-5 text-muted-foreground max-w-2xl text-lg">
+          <p className="mt-5 text-muted-foreground text-lg">
             From A&E to social — follow every flip, every rescue, and every before-and-after.
           </p>
         </section>
