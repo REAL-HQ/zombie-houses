@@ -25,7 +25,7 @@ export const Footer = () => (
         title="Explore"
         items={[
           { label: "Watch", to: "/watch" },
-          { label: "Design", to: "/design" },
+          { label: "Design & Shop the Look", to: "/design" },
           { label: "Sponsor", to: "/sponsors" },
           { label: "Apply for Help", to: "/apply" },
         ]}

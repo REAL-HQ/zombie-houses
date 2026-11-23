@@ -12,6 +12,7 @@ import heroBg from "@/assets/recent-3.jpg";
 type ServiceLink = "/cleanouts" | "/property-cleanouts" | "/sell";
 export interface ServiceLandingConfig {
   page: string;
+  heroImage?: string;
   sourcePage: string;
   service: string;
   eyebrow: string;
@@ -63,7 +64,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
     <main>
       <section className="relative overflow-hidden border-b border-service-border bg-service-surface">
         <img
-          src={heroBg}
+          src={config.heroImage ?? heroBg}
           alt=""
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"

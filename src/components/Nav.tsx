@@ -7,7 +7,7 @@ const links = [
   { to: "/watch", label: "Watch" },
   { to: "/rescue", label: "Rescue" },
   { to: "/sell", label: "Sell" },
-  { to: "/design", label: "Design" },
+  { to: "/services", label: "Services" },
 ] as const;
 
 export const Nav = () => {

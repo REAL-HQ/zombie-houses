@@ -15,6 +15,7 @@ import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as RemodelRouteImport } from './routes/remodel'
 import { Route as PropertyCleanoutsRouteImport } from './routes/property-cleanouts'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as JunkRouteImport } from './routes/junk'
@@ -57,6 +58,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RemodelRoute = RemodelRouteImport.update({
+  id: '/remodel',
+  path: '/remodel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropertyCleanoutsRoute = PropertyCleanoutsRouteImport.update({
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
   '/property-cleanouts': typeof PropertyCleanoutsRoute
+  '/remodel': typeof RemodelRoute
   '/sell': typeof SellRoute
   '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
@@ -157,6 +164,7 @@ export interface FileRoutesByTo {
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
   '/property-cleanouts': typeof PropertyCleanoutsRoute
+  '/remodel': typeof RemodelRoute
   '/sell': typeof SellRoute
   '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
@@ -179,6 +187,7 @@ export interface FileRoutesById {
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
   '/property-cleanouts': typeof PropertyCleanoutsRoute
+  '/remodel': typeof RemodelRoute
   '/sell': typeof SellRoute
   '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/junk'
     | '/privacy'
     | '/property-cleanouts'
+    | '/remodel'
     | '/sell'
     | '/services'
     | '/sms-terms'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/junk'
     | '/privacy'
     | '/property-cleanouts'
+    | '/remodel'
     | '/sell'
     | '/services'
     | '/sms-terms'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/junk'
     | '/privacy'
     | '/property-cleanouts'
+    | '/remodel'
     | '/sell'
     | '/services'
     | '/sms-terms'
@@ -266,6 +278,7 @@ export interface RootRouteChildren {
   JunkRoute: typeof JunkRoute
   PrivacyRoute: typeof PrivacyRoute
   PropertyCleanoutsRoute: typeof PropertyCleanoutsRoute
+  RemodelRoute: typeof RemodelRoute
   SellRoute: typeof SellRoute
   ServicesRoute: typeof ServicesRoute
   SmsTermsRoute: typeof SmsTermsRoute
@@ -320,6 +333,13 @@ declare module '@tanstack/react-router' {
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/remodel': {
+      id: '/remodel'
+      path: '/remodel'
+      fullPath: '/remodel'
+      preLoaderRoute: typeof RemodelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/property-cleanouts': {
@@ -426,6 +446,7 @@ const rootRouteChildren: RootRouteChildren = {
   JunkRoute: JunkRoute,
   PrivacyRoute: PrivacyRoute,
   PropertyCleanoutsRoute: PropertyCleanoutsRoute,
+  RemodelRoute: RemodelRoute,
   SellRoute: SellRoute,
   ServicesRoute: ServicesRoute,
   SmsTermsRoute: SmsTermsRoute,

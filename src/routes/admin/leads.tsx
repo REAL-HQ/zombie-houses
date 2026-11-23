@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { listLeads, updateLead } from "@/lib/leads.functions";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ServiceLeadsViewer } from "@/components/services/ServiceLeadsViewer";
 import {
   CheckCircle2,
   Clock,
@@ -19,6 +21,8 @@ export const Route = createFileRoute("/admin/leads")({
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "Lead Back Office — Zombie House Buyers" },
       { property: "og:description", content: "Internal lead management." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AdminLeads,
@@ -128,6 +132,10 @@ function AdminLeads() {
         </div>
       </div>
 
+      <Tabs defaultValue="sell">
+        <TabsList className="mx-4 mt-4 h-14 md:mx-6"><TabsTrigger value="sell" className="min-h-12 px-5">Sell Leads</TabsTrigger><TabsTrigger value="services" className="min-h-12 px-5">Service Leads</TabsTrigger></TabsList>
+        <TabsContent value="services"><ServiceLeadsViewer pin={pin} /></TabsContent>
+        <TabsContent value="sell">
       <div className="flex flex-col lg:flex-row lg:h-[calc(100vh-64px)]">
         <div className="lg:w-[400px] shrink-0 border-r border-mid bg-white flex flex-col">
           <div className="flex gap-1 p-3 border-b border-mid overflow-x-auto">
@@ -302,6 +310,8 @@ function AdminLeads() {
           </div>
         )}
       </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
