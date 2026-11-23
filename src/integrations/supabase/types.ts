@@ -80,6 +80,120 @@ export type Database = {
         }
         Relationships: []
       }
+      quote_requests: {
+        Row: {
+          admin_notes: string | null
+          ai_error: string | null
+          ai_estimate: Json | null
+          ai_model: string | null
+          ai_status: string
+          created_at: string
+          description: string | null
+          discount: number
+          email: string | null
+          heavy_material: boolean
+          hoarder: boolean
+          id: string
+          location: string
+          long_carry: boolean
+          name: string
+          outcome: string
+          phone: string
+          photo_paths: string[]
+          price_high: number | null
+          price_low: number | null
+          pricing_version: string | null
+          quote_lines: Json | null
+          referrer: string | null
+          sms_consent: boolean
+          sms_consent_at: string | null
+          source_page: string | null
+          stairs_flights: number
+          status: string
+          truck_eighths: number | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          zip: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          ai_error?: string | null
+          ai_estimate?: Json | null
+          ai_model?: string | null
+          ai_status: string
+          created_at?: string
+          description?: string | null
+          discount?: number
+          email?: string | null
+          heavy_material?: boolean
+          hoarder?: boolean
+          id?: string
+          location: string
+          long_carry?: boolean
+          name: string
+          outcome: string
+          phone: string
+          photo_paths?: string[]
+          price_high?: number | null
+          price_low?: number | null
+          pricing_version?: string | null
+          quote_lines?: Json | null
+          referrer?: string | null
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          source_page?: string | null
+          stairs_flights?: number
+          status?: string
+          truck_eighths?: number | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          zip: string
+        }
+        Update: {
+          admin_notes?: string | null
+          ai_error?: string | null
+          ai_estimate?: Json | null
+          ai_model?: string | null
+          ai_status?: string
+          created_at?: string
+          description?: string | null
+          discount?: number
+          email?: string | null
+          heavy_material?: boolean
+          hoarder?: boolean
+          id?: string
+          location?: string
+          long_carry?: boolean
+          name?: string
+          outcome?: string
+          phone?: string
+          photo_paths?: string[]
+          price_high?: number | null
+          price_low?: number | null
+          pricing_version?: string | null
+          quote_lines?: Json | null
+          referrer?: string | null
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          source_page?: string | null
+          stairs_flights?: number
+          status?: string
+          truck_eighths?: number | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          zip?: string
+        }
+        Relationships: []
+      }
       sell_leads: {
         Row: {
           address: string

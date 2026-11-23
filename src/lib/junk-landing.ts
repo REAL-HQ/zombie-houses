@@ -55,5 +55,6 @@ export const junkLanding: ServiceLandingConfig = {
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP in the form and we'll confirm." },
     { question: "Can You Help If I'm Thinking About Selling?", answer: "Yes. We also buy houses as-is. Mention it in the form and we'll talk through both options.", to: "/sell" },
   ],
+  photoQuote: { heading: "Get a Photo Quote", description: "Snap a few photos of the pile. Our AI estimates how much of the truck it fills & shows your price range right away. A real person confirms it before we start.", defaultLocation: "curbside" },
   quoteHeading: "Get Your Free Photo Quote",
 };

@@ -42,5 +42,6 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     { question: "Do You Handle Biohazard Cleanup?", answer: "Not ourselves. Biohazards need a specialized company, and we'll help point you to one." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP and we'll confirm." },
   ],
+  photoQuote: { heading: "Get a Photo Quote", description: "Send a few photos of the rooms. You'll see a price range right away, or for a full house we'll set up a quick, judgment-free walkthrough.", defaultLocation: "inside" },
   quoteHeading: "Get Your Free Photo Quote",
 };

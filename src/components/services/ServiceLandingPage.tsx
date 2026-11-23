@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, ClipboardList, MessageSquare, Phone, type LucideIcon } from "lucide-react";
+import { ArrowRight, Camera, Check, ClipboardList, MessageSquare, Phone, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ServiceLeadForm } from "./ServiceLeadForm";
 import { ServiceNoticeBand } from "./ServiceNoticeBand";
 import { JobPhotoFigure, JobPhotoGrid } from "./JobPhotoGrid";
 import { SeenOnStrip } from "./SeenOnStrip";
+import { PhotoQuote, QUOTE_MAX_PHOTOS } from "./PhotoQuote";
+import { AD_ANCHOR_PRICE, QUOTE_DISCLAIMER } from "@/lib/junk-quote-pricing";
 import { OWNER_THUMBS, type JobPhoto } from "@/lib/job-photos";
 import { track } from "@/lib/track";
 import logo from "@/assets/zombie-houses-logo.png";
@@ -39,6 +41,8 @@ export interface ServiceLandingConfig {
   related?: readonly { title: string; to: ServiceLink }[];
   faqs: readonly { question: string; answer: string; to?: ServiceLink }[];
   quoteHeading: string;
+  /** AI Photo Quote section (photo upload, instant price range). */
+  photoQuote?: { heading: string; description: string; defaultLocation?: "curbside" | "inside" };
 }
 
 const sectionClass = "mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-20";
@@ -107,10 +111,33 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15 md:size-9"><Check className="size-4 text-red md:size-5" aria-hidden="true" /></span>{bullet}
             </li>)}
           </ul>
+          {config.photoQuote && <a href="#photo-quote" onClick={() => track("click_photo_quote", { page: config.page })} className="group flex min-h-14 items-center justify-between gap-3 rounded-lg border border-red/60 bg-red/10 px-4 py-3 text-sm font-bold text-service-foreground transition-colors hover:bg-red/20 md:px-5 md:text-base lg:col-span-2">
+            <span className="flex items-center gap-3"><Camera className="size-5 shrink-0 text-red" aria-hidden="true" />Get a Photo Quote: See Your Price Range in About a Minute</span>
+            <ArrowRight className="size-5 shrink-0 text-red motion-safe:transition-transform motion-safe:group-hover:translate-x-1" aria-hidden="true" />
+          </a>}
         </div>
       </section>
 
       <SeenOnStrip />
+
+      {config.photoQuote && <section id="photo-quote" className="scroll-mt-4 border-b border-service-border">
+        <div className={`${sectionClass} grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(360px,480px)] lg:gap-14`}>
+          <div className="min-w-0">
+            <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">Instant Photo Quote</p>
+            <h2 className={`${headingClass} mt-2`}>{config.photoQuote.heading}</h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-service-muted md:text-lg">{config.photoQuote.description}</p>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {[`Upload Up to ${QUOTE_MAX_PHOTOS} Photos`, "See a Price Range in About a Minute", `Junk Removal From $${AD_ANCHOR_PRICE}`, "Final Price Confirmed Before We Start"].map((item) => <li key={item} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-surface px-4 py-3 text-sm font-semibold md:text-base">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15"><Check className="size-4 text-red" aria-hidden="true" /></span>{item}
+              </li>)}
+            </ul>
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-service-muted">{QUOTE_DISCLAIMER}</p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-5 text-card-foreground shadow-2xl md:p-7">
+            <PhotoQuote sourcePage={config.sourcePage} defaultLocation={config.photoQuote.defaultLocation} />
+          </div>
+        </div>
+      </section>}
 
       <section className={sectionClass}>
         <h2 className={headingClass}>How It Works</h2>

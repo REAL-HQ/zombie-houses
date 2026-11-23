@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 import { listLeads, updateLead } from "@/lib/leads.functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ServiceLeadsViewer } from "@/components/services/ServiceLeadsViewer";
+import { PhotoQuotesViewer } from "@/components/services/PhotoQuotesViewer";
 import {
   CheckCircle2,
   Clock,
@@ -133,8 +134,9 @@ function AdminLeads() {
       </div>
 
       <Tabs defaultValue="sell">
-        <TabsList className="mx-4 mt-4 h-14 md:mx-6"><TabsTrigger value="sell" className="min-h-12 px-5">Sell Leads</TabsTrigger><TabsTrigger value="services" className="min-h-12 px-5">Service Leads</TabsTrigger></TabsList>
+        <TabsList className="mx-4 mt-4 h-14 max-w-[calc(100%-2rem)] md:mx-6"><TabsTrigger value="sell" className="min-h-12 px-3 sm:px-5">Sell Leads</TabsTrigger><TabsTrigger value="services" className="min-h-12 px-3 sm:px-5">Service Leads</TabsTrigger><TabsTrigger value="quotes" className="min-h-12 px-3 sm:px-5">Photo Quotes</TabsTrigger></TabsList>
         <TabsContent value="services"><ServiceLeadsViewer pin={pin} /></TabsContent>
+        <TabsContent value="quotes"><PhotoQuotesViewer pin={pin} /></TabsContent>
         <TabsContent value="sell">
       <div className="flex flex-col lg:flex-row lg:h-[calc(100vh-64px)]">
         <div className="lg:w-[400px] shrink-0 border-r border-mid bg-white flex flex-col">

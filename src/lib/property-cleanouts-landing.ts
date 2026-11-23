@@ -44,5 +44,6 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
     { question: "What Can't You Take?", answer: "Hazardous waste, paint, chemicals & biohazards. We'll tell you up front." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP to confirm." },
   ],
+  photoQuote: { heading: "Get a Photo Quote", description: "Upload photos of the unit, garage or lot. You'll see a price range right away, or for bigger turnovers we'll set up a quick walkthrough.", defaultLocation: "inside" },
   quoteHeading: "Get Your Free Photo Quote",
 };
