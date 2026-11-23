@@ -19,8 +19,10 @@ import { Route as PropertyCleanoutsRouteImport } from './routes/property-cleanou
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as JunkRouteImport } from './routes/junk'
 import { Route as DesignRouteImport } from './routes/design'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CleanoutsRouteImport } from './routes/cleanouts'
 import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RescueIndexRouteImport } from './routes/rescue/index'
 import { Route as RescueSlugRouteImport } from './routes/rescue/$slug'
@@ -77,6 +79,11 @@ const DesignRoute = DesignRouteImport.update({
   path: '/design',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CleanoutsRoute = CleanoutsRouteImport.update({
   id: '/cleanouts',
   path: '/cleanouts',
@@ -85,6 +92,11 @@ const CleanoutsRoute = CleanoutsRouteImport.update({
 const ApplyRoute = ApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -116,8 +128,10 @@ const ApiPublicRefreshInstagramTokenRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
@@ -135,8 +149,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
@@ -155,8 +171,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
@@ -176,8 +194,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/contact'
     | '/design'
     | '/junk'
     | '/privacy'
@@ -195,8 +215,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/contact'
     | '/design'
     | '/junk'
     | '/privacy'
@@ -214,8 +236,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/contact'
     | '/design'
     | '/junk'
     | '/privacy'
@@ -234,8 +258,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ApplyRoute: typeof ApplyRoute
   CleanoutsRoute: typeof CleanoutsRoute
+  ContactRoute: typeof ContactRoute
   DesignRoute: typeof DesignRoute
   JunkRoute: typeof JunkRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -324,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cleanouts': {
       id: '/cleanouts'
       path: '/cleanouts'
@@ -336,6 +369,13 @@ declare module '@tanstack/react-router' {
       path: '/apply'
       fullPath: '/apply'
       preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -378,8 +418,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ApplyRoute: ApplyRoute,
   CleanoutsRoute: CleanoutsRoute,
+  ContactRoute: ContactRoute,
   DesignRoute: DesignRoute,
   JunkRoute: JunkRoute,
   PrivacyRoute: PrivacyRoute,
