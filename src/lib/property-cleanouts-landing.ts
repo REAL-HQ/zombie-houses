@@ -11,10 +11,10 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   eyebrow: "For Landlords & Realtors",
   headline: "Property Cleanouts, Turned Fast",
   subhead: "Move-outs, evictions, foreclosures & pre-listing cleanouts across Tampa Bay. Send photos, get an upfront quote.",
-  bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Photos When the Job Is Done"],
+  bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Photos When The Job Is Done"],
   steps: [
-    { title: "Send Photos or a Lockbox Code", description: "Share photos & access details. We can quote from what you send.", icon: Camera },
-    { title: "Approve the Quote", description: "Upfront quote before we start. No surprises at the end.", icon: ClipboardCheck },
+    { title: "Send Photos Or A Lockbox Code", description: "Share photos & access details. We can quote from what you send.", icon: Camera },
+    { title: "Approve The Quote", description: "Upfront quote before we start. No surprises at the end.", icon: ClipboardCheck },
     { title: "We Clear & Report Back", description: "We haul it, sweep up & send you photos when we're done.", icon: Truck },
   ],
   audiences: [
@@ -39,11 +39,11 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   ownerHeading: "Meet Dolmar & Keisha",
   ownerDescription: "We're Dolmar & Keisha Cross. We buy & rehab Tampa properties ourselves, so we know what a fast, clean turnover is worth to a landlord or realtor. You may know Dolmar from A&E's Zombie House Flipping. We've spent years working on distressed Tampa houses, from move-outs to full gut jobs. Our own crew clears the property, hauls everything away & leaves it clean & ready for the next step. You'll deal with us & our crew directly, not a call center. Send photos & we'll quote it upfront.",
   faqs: [
-    { question: "Do I Need to Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
+    { question: "Do I Need To Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
     { question: "Can You Handle Repeat Turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },
     { question: "What Can't You Take?", answer: "Hazardous waste, paint, chemicals & biohazards. We'll tell you up front." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP to confirm." },
   ],
-  photoQuote: { heading: "Get a Photo Quote", description: "Upload photos of the unit, garage or lot. You'll see a price range right away, or for bigger turnovers we'll set up a quick walkthrough.", defaultLocation: "inside" },
+  photoQuote: { heading: "Get A Photo Quote", description: "Upload photos of the unit, garage or lot. You'll see a price range right away, or for bigger turnovers we'll set up a quick walkthrough.", defaultLocation: "inside" },
   quoteHeading: "Get Your Free Photo Quote",
 };

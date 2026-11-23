@@ -4,6 +4,10 @@ import thumbLeilaBefore3Src from "@/assets/jobs/thumb-leila-before-3.webp";
 import thumbBoardwalkBefore2Src from "@/assets/jobs/thumb-boardwalk-before-2.webp";
 import thumbCourtlandCavedCeilingSrc from "@/assets/jobs/thumb-courtland-caved-ceiling.webp";
 import thumbLeilaHoarder2Src from "@/assets/jobs/thumb-leila-hoarder-2.webp";
+import thumbJonesHoarderPorchSrc from "@/assets/jobs/thumb-jones-hoarder-porch.webp";
+import thumbJonesHoarderLivingSrc from "@/assets/jobs/thumb-jones-hoarder-living.webp";
+import thumbBoardwalkBurnedCeilingSrc from "@/assets/jobs/thumb-boardwalk-burned-ceiling.webp";
+import thumbCourtlandInsulationCollapseSrc from "@/assets/jobs/thumb-courtland-insulation-collapse.webp";
 import courtlandBefore1Src from "@/assets/jobs/courtland-before-1.webp";
 import courtlandBefore2Src from "@/assets/jobs/courtland-before-2.webp";
 import courtlandBefore3Src from "@/assets/jobs/courtland-before-3.webp";
@@ -45,8 +49,8 @@ export interface JobPhoto { src: string; alt: string; caption: string; before: b
 export const JOB_PHOTOS = {
   // AI-enhanced illustration (approved by Dolmar), not a real job photo: keep the caption generic, no city, no Before badge.
   junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie House Buyers truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
-  truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: false },
-  jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a house", caption: "Yard Debris, Tampa", before: true },
+  truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: true },
+  jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a hoarder house", caption: "Hoarder House, Tampa", before: true },
   jonesBefore3: { src: jonesBefore3Src, alt: "Living room filled with bags, clothes & stacked belongings", caption: "Hoarder Cleanout, Tampa", before: true },
   jonesBefore4: { src: jonesBefore4Src, alt: "Hallway & bedroom piled high with clothes, bikes & boxes", caption: "Hoarder Cleanout, Tampa", before: true },
   jonesBefore5: { src: jonesBefore5Src, alt: "Cluttered kitchen with counters & table covered in cookware & supplies", caption: "Kitchen Cleanout, Tampa", before: true },
@@ -82,10 +86,14 @@ export const JOB_PHOTOS = {
   goldenBefore6: { src: goldenBefore6Src, alt: "Overgrown backyard with a collapsing wood fence & shed buried in brush", caption: "Overgrown Yard, Tampa", before: true },
 } satisfies Record<string, JobPhoto>;
 
-// Small job thumbnails for the shared "Meet Dolmar & Keisha" section (not used elsewhere on the landing pages).
+// Job thumbnails for the shared "Meet Dolmar & Keisha" section (8 tiles, 2 rows of 4 on desktop). None repeat a landing page's hero, Meet photo or Recent Jobs photo.
 export const OWNER_THUMBS: readonly JobPhoto[] = [
   { src: thumbCourtlandCavedCeilingSrc, alt: "Room with a caved-in ceiling, hanging insulation & debris piled on the floor", caption: "Caved-In Ceiling, Tampa", before: true },
-  { src: thumbLeilaBefore3Src, alt: "Hoarder house room piled high with clutter under a gutted ceiling", caption: "Hoarder House, Tampa", before: true },
+  { src: thumbJonesHoarderPorchSrc, alt: "Screened porch packed with boxes, bags, appliances & stacked belongings", caption: "Hoarder House, Tampa", before: true },
   { src: thumbBoardwalkBefore2Src, alt: "Fire-damaged room with burned-out ceiling & exposed rafters", caption: "Fire Damage, Holiday", before: true },
   { src: thumbLeilaHoarder2Src, alt: "Bedroom buried in boxes, papers & trash", caption: "Hoarder Cleanout, Tampa", before: true },
+  { src: thumbLeilaBefore3Src, alt: "Gutted room with open walls & ceiling & debris piled on the floor", caption: "Gutted Interior, Tampa", before: true },
+  { src: thumbJonesHoarderLivingSrc, alt: "Living room piled high with bags, boxes, baskets & household items", caption: "Packed Living Room, Tampa", before: true },
+  { src: thumbBoardwalkBurnedCeilingSrc, alt: "Ceiling broken open with charred framing & hanging insulation", caption: "Broken-Through Ceiling, Holiday", before: true },
+  { src: thumbCourtlandInsulationCollapseSrc, alt: "Collapsed ceiling with insulation & wiring hanging into the room", caption: "Insulation Collapse, Tampa", before: true },
 ];

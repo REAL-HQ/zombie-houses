@@ -136,8 +136,8 @@ export function computeQuote(estimate: AiEstimate | null, answers: QuoteAnswers)
     const step = estimate.confidence === "low" ? 2 : 1;
     const low = tier(eighths);
     const high = tier(Math.min(8, eighths + step));
-    sizeLabel = low.label === high.label ? `About ${low.label}` : `About ${low.label} to ${high.label}`;
-    lines.push({ label: low.label === high.label ? low.label : `${low.label} to ${high.label}`, low: low.price, high: high.price });
+    sizeLabel = low.label === high.label ? `About ${low.label}` : `About ${low.label} To ${high.label}`;
+    lines.push({ label: low.label === high.label ? low.label : `${low.label} To ${high.label}`, low: low.price, high: high.price });
     if (eighths === 8) notes.push(`If it needs a second truck, the 2nd truck is ${MULTI_TRUCK_DISCOUNT * 100}% off.`);
   }
 
@@ -151,9 +151,9 @@ export function computeQuote(estimate: AiEstimate | null, answers: QuoteAnswers)
   each(estimate.freon_appliances, ADD_ONS.freonAppliance, "Freon Appliance");
   each(estimate.tvs_monitors, ADD_ONS.tvOrMonitor, "TV / Monitor");
   each(estimate.hot_tubs, ADD_ONS.hotTubFrom, "Hot Tub (From)");
-  each(estimate.pianos_safes_pool_tables, ADD_ONS.pianoSafePoolTableFrom, "Piano, Safe or Pool Table (From)");
+  each(estimate.pianos_safes_pool_tables, ADD_ONS.pianoSafePoolTableFrom, "Piano, Safe Or Pool Table (From)");
   const flights = clampInt(answers.stairsFlights, 0, 3);
-  if (flights > 1) lines.push({ label: `Stairs, ${flights - 1} Extra Flight${flights > 2 ? "s" : ""}${flights === 3 ? " or More" : ""}`, low: (flights - 1) * ADD_ONS.extraStairFlight, high: (flights - 1) * ADD_ONS.extraStairFlight });
+  if (flights > 1) lines.push({ label: `Stairs, ${flights - 1} Extra Flight${flights > 2 ? "s" : ""}${flights === 3 ? " Or More" : ""}`, low: (flights - 1) * ADD_ONS.extraStairFlight, high: (flights - 1) * ADD_ONS.extraStairFlight });
   if (answers.longCarry) lines.push({ label: `Carry Over ${LONG_CARRY_FEET} Ft`, low: ADD_ONS.longCarry, high: ADD_ONS.longCarry });
   const yards = Math.max(0, Number(estimate.heavy_material_cubic_yards) || 0);
   if (answers.heavyMaterial || yards > 0) {
