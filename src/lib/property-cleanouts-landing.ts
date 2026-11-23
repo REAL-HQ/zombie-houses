@@ -8,7 +8,7 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   eyebrow: "For Landlords & Realtors",
   headline: "Property Cleanouts, Turned Fast",
   subhead: "Move-outs, evictions, foreclosures & pre-listing cleanouts across Tampa Bay. Send photos, get an upfront quote.",
-  bullets: ["Free photo quote", "Upfront quote before we start", "Photos when the job is done"],
+  bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Photos When the Job Is Done"],
   steps: [
     { title: "Send Photos or a Lockbox Code", description: "Share photos & access details. We can quote from what you send.", icon: Camera },
     { title: "Approve the Quote", description: "Upfront quote before we start. No surprises at the end.", icon: ClipboardCheck },
@@ -36,10 +36,10 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   ownerHeading: "Meet Dolmar",
   ownerDescription: "I'm Dolmar Cross. I buy & rehab Tampa properties myself, so I know what a fast, clean turnover is worth. You'll deal with me & my crew directly.",
   faqs: [
-    { question: "Do I need to meet you there?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
-    { question: "Can you handle repeat turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },
-    { question: "What can't you take?", answer: "Hazardous waste, paint, chemicals & biohazards. We'll tell you up front." },
-    { question: "What areas do you serve?", answer: "Tampa Bay. Enter your ZIP to confirm." },
+    { question: "Do I Need to Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
+    { question: "Can You Handle Repeat Turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },
+    { question: "What Can't You Take?", answer: "Hazardous waste, paint, chemicals & biohazards. We'll tell you up front." },
+    { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP to confirm." },
   ],
   quoteHeading: "Get Your Free Photo Quote",
 };

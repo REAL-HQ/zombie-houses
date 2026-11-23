@@ -49,8 +49,8 @@ function ServicesPage() {
   function getStarted(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const to = serviceDestination(service);
-    if (!to) { setError("Choose what you need."); return; }
-    if (!/^\d{5}$/.test(zip)) { setError("Enter a 5-digit ZIP code."); return; }
+    if (!to) { setError("Choose What You Need"); return; }
+    if (!/^\d{5}$/.test(zip)) { setError("Enter a 5-Digit ZIP Code"); return; }
     setError("");
     // Numeric-looking strings are JSON-quoted by the router; leading-zero ZIPs remain strings.
     void navigate({ to, search: { zip: zip.startsWith("0") ? zip : Number(zip) } });
@@ -64,15 +64,15 @@ function ServicesPage() {
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-service-muted md:text-xl">Cleanouts, junk removal &amp; home projects from a Tampa house flipper.</p>
         <form onSubmit={getStarted} className="mt-8 grid gap-3 rounded-lg bg-card p-3 text-card-foreground md:grid-cols-[minmax(0,1fr)_200px_180px] md:items-end md:p-4">
           <div className="min-w-0 space-y-2">
-            <label htmlFor="services-choice" className="block text-sm font-semibold">What do you need?</label>
+            <label htmlFor="services-choice" className="block text-sm font-semibold">What Do You Need?</label>
             <Select value={service} onValueChange={setService}>
-              <SelectTrigger id="services-choice" className="min-h-14 whitespace-normal text-left text-base [&>span]:line-clamp-none"><SelectValue placeholder="Choose a service" /></SelectTrigger>
+              <SelectTrigger id="services-choice" className="min-h-14 whitespace-normal text-left text-base [&>span]:line-clamp-none"><SelectValue placeholder="Choose a Service" /></SelectTrigger>
               <SelectContent>{SERVICE_DESTINATIONS.map((item) => <SelectItem key={item.to} value={item.title} className="min-h-12">{item.title}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
             <label htmlFor="services-zip" className="block text-sm font-semibold">ZIP Code</label>
-            <div className="relative"><MapPin className="pointer-events-none absolute left-3 top-5 size-4 text-red" aria-hidden="true" /><Input id="services-zip" inputMode="numeric" autoComplete="postal-code" pattern="[0-9]{5}" required maxLength={5} placeholder="5-digit ZIP" value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} className="h-14 pl-10 text-base" /></div>
+            <div className="relative"><MapPin className="pointer-events-none absolute left-3 top-5 size-4 text-red" aria-hidden="true" /><Input id="services-zip" inputMode="numeric" autoComplete="postal-code" pattern="[0-9]{5}" required maxLength={5} placeholder="5-Digit ZIP" value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} className="h-14 pl-10 text-base" /></div>
           </div>
           <Button type="submit" className="h-14 text-base font-bold">Get Started<ArrowRight /></Button>
           {error && <p role="alert" className="text-sm text-destructive md:col-span-3">{error}</p>}

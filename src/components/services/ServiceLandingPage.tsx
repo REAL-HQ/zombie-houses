@@ -79,7 +79,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
             <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-3 md:text-6xl">{config.headline}</h1>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-4 md:text-xl">{config.subhead}</p>
           </div>
-          <div aria-label="Quick quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:row-span-2 md:p-7">
+          <div aria-label="Quick Quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:row-span-2 md:p-7">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
           </div>
           <ul className="grid gap-2.5 pt-1 md:self-start md:gap-3 md:pt-0">
@@ -153,7 +153,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         <h2 className={headingClass}>Recent Jobs</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {/* Replace each placeholder with an img using Dolmar's real job photo, descriptive alt text, and the same aspect ratio. Never substitute stock photos. */}
-          {[1, 2, 3].map((job) => <div key={job} className="flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-service-muted bg-service-surface p-6 text-center"><Camera className="size-9 text-service-muted" aria-hidden="true" /><p className="max-w-56 text-sm font-medium leading-relaxed text-service-muted">Placeholder: Dolmar's real before &amp; after photo goes here</p></div>)}
+          {[1, 2, 3].map((job) => <div key={job} className="flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-service-muted bg-service-surface p-6 text-center"><Camera className="size-9 text-service-muted" aria-hidden="true" /><p className="max-w-56 text-sm font-medium leading-relaxed text-service-muted">Placeholder: Dolmar's Real Before &amp; After Photo Goes Here</p></div>)}
         </div>
       </section>
 
@@ -195,7 +195,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
       </nav>
     </footer>
 
-    <nav aria-label="Quick contact" className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 gap-2 border-t border-service-border bg-service-surface px-3 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] md:hidden">
+    <nav aria-label="Quick Contact" className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-3 gap-2 border-t border-service-border bg-service-surface px-3 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] md:hidden">
       <Button asChild variant="outline" className="h-12 min-h-12 border-service-border bg-service-background text-base font-bold text-service-foreground hover:bg-service-surface hover:text-service-foreground"><a href="tel:8139232042" onClick={call}><Phone aria-hidden="true" />Call</a></Button>
       <Button asChild variant="outline" className="h-12 min-h-12 border-service-border bg-service-background text-base font-bold text-service-foreground hover:bg-service-surface hover:text-service-foreground"><a href="sms:8139232042" onClick={text}><MessageSquare aria-hidden="true" />Text</a></Button>
       <Button className="h-12 min-h-12 bg-red text-base font-bold text-primary-foreground hover:bg-red/90" onClick={scrollToQuote}><ClipboardList aria-hidden="true" />Quote</Button>

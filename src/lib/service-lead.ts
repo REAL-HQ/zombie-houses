@@ -9,19 +9,19 @@ export function zipFromSearch(search: string): string {
   return /^\d{5}$/.test(value) ? value : "";
 }
 export const serviceStepOneSchema = z.object({
-  zip: z.string().regex(/^\d{5}$/, "Enter a 5-digit ZIP code."),
-  service_type: z.enum(SERVICE_TYPES, { errorMap: () => ({ message: "Choose a service type." }) }),
+  zip: z.string().regex(/^\d{5}$/, "Enter a 5-Digit ZIP Code"),
+  service_type: z.enum(SERVICE_TYPES, { errorMap: () => ({ message: "Choose a Service Type" }) }),
 });
 export const serviceContactSchema = z.object({
-  name: z.string().trim().min(1, "Enter your name.").max(200),
-  phone: z.string().trim().max(40).refine((value) => value.replace(/\D/g, "").length >= 10, "Enter a valid mobile phone number."),
-  email: z.union([z.literal(""), z.string().trim().email("Enter a valid email address.").max(254)]),
+  name: z.string().trim().min(1, "Enter Your Name").max(200),
+  phone: z.string().trim().max(40).refine((value) => value.replace(/\D/g, "").length >= 10, "Enter a Valid Mobile Phone Number"),
+  email: z.union([z.literal(""), z.string().trim().email("Enter a Valid Email Address").max(254)]),
 });
 
 export function validatePhotos(files: readonly Pick<File, "type" | "size">[]): string | null {
-  if (files.length > MAX_PHOTOS) return "Please choose up to 5 images.";
-  if (files.some((file) => !file.type.startsWith("image/"))) return "Please choose image files only.";
-  if (files.some((file) => file.size > MAX_PHOTO_BYTES)) return "Each image must be 10MB or smaller.";
+  if (files.length > MAX_PHOTOS) return "Choose Up to 5 Images";
+  if (files.some((file) => !file.type.startsWith("image/"))) return "Choose Image Files Only";
+  if (files.some((file) => file.size > MAX_PHOTO_BYTES)) return "Each Image Must Be 10MB or Smaller";
   return null;
 }
 

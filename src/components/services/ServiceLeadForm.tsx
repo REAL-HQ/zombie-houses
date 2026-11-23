@@ -73,7 +73,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
     if (locked.current) return;
     if (step === 1) {
       const result = serviceStepOneSchema.safeParse({ zip, service_type: serviceType });
-      if (!result.success) { setError(result.error.issues[0]?.message ?? "Check your details."); return; }
+      if (!result.success) { setError(result.error.issues[0]?.message ?? "Check Your Details"); return; }
       changeStep(2);
       return;
     }
@@ -81,7 +81,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
     const first = serviceStepOneSchema.safeParse({ zip, service_type: serviceType });
     const result = serviceContactSchema.safeParse(contact);
     if (!first.success || !result.success) {
-      setError(!result.success ? result.error.issues[0]?.message ?? "Check your contact details." : "Check your ZIP and service type.");
+      setError(!result.success ? result.error.issues[0]?.message ?? "Check Your Contact Details" : "Check Your ZIP & Service Type");
       return;
     }
     const photoError = validatePhotos(photos);
@@ -162,13 +162,13 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
       <fieldset disabled={busy} className={cn("min-w-0", compact ? "space-y-3.5" : "space-y-5")}>
         {step === 1 && <>
           <div className="space-y-1.5">
-            <label htmlFor={`${id}-zip`} className="text-sm font-semibold">ZIP code</label>
-            <Input id={`${id}-zip`} value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} required pattern="[0-9]{5}" maxLength={5} inputMode="numeric" autoComplete="postal-code" placeholder="5-digit ZIP code" className={cn("text-base", compact ? "h-12 md:h-14" : "h-14")} />
+            <label htmlFor={`${id}-zip`} className="text-sm font-semibold">ZIP Code</label>
+            <Input id={`${id}-zip`} value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} required pattern="[0-9]{5}" maxLength={5} inputMode="numeric" autoComplete="postal-code" placeholder="5-Digit ZIP Code" className={cn("text-base", compact ? "h-12 md:h-14" : "h-14")} />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor={`${id}-service`} className="text-sm font-semibold">Service type</label>
+            <label htmlFor={`${id}-service`} className="text-sm font-semibold">Service Type</label>
             <Select value={serviceType} onValueChange={setServiceType}>
-              <SelectTrigger id={`${id}-service`} className={cn("whitespace-normal text-left text-base [&>span]:line-clamp-none", compact ? "min-h-12 md:min-h-14" : "min-h-14")}><SelectValue placeholder="Choose a service" /></SelectTrigger>
+              <SelectTrigger id={`${id}-service`} className={cn("whitespace-normal text-left text-base [&>span]:line-clamp-none", compact ? "min-h-12 md:min-h-14" : "min-h-14")}><SelectValue placeholder="Choose a Service" /></SelectTrigger>
               <SelectContent>{SERVICE_TYPES.map((service) => <SelectItem key={service} value={service} className="min-h-12 whitespace-normal">{service}</SelectItem>)}</SelectContent>
             </Select>
           </div>
@@ -177,31 +177,31 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
           <div className="space-y-2">
             <label htmlFor={`${id}-timing`} className="text-sm font-semibold">Timing</label>
             <Select value={timing} onValueChange={setTiming}>
-              <SelectTrigger id={`${id}-timing`} className="h-14 text-base"><SelectValue placeholder="Choose timing (optional)" /></SelectTrigger>
+              <SelectTrigger id={`${id}-timing`} className="h-14 text-base"><SelectValue placeholder="Choose Timing (Optional)" /></SelectTrigger>
               <SelectContent>{TIMING_OPTIONS.map((option) => <SelectItem key={option} value={option} className="min-h-12">{option}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <label htmlFor={`${id}-description`} className="text-sm font-semibold">Short description (optional)</label>
+            <label htmlFor={`${id}-description`} className="text-sm font-semibold">Short Description (Optional)</label>
             <Textarea id={`${id}-description`} value={description} maxLength={5000} onChange={(event) => setDescription(event.target.value)} className="min-h-28 text-base" />
           </div>
           <div className="space-y-3">
-            <p className="text-sm font-semibold">Photos (optional) · Up to 5 images, 10MB each</p>
-            <Input ref={fileInput} type="file" accept="image/*" multiple aria-label="Upload photos" className="sr-only" tabIndex={-1} onChange={(event) => { addPhotos(Array.from(event.target.files ?? [])); event.target.value = ""; }} />
+            <p className="text-sm font-semibold">Photos (Optional) · Up to 5 Images, 10MB Each</p>
+            <Input ref={fileInput} type="file" accept="image/*" multiple aria-label="Upload Photos" className="sr-only" tabIndex={-1} onChange={(event) => { addPhotos(Array.from(event.target.files ?? [])); event.target.value = ""; }} />
             <Button type="button" variant="outline" className="min-h-12 w-full" disabled={photos.length >= 5} onClick={() => fileInput.current?.click()}><Upload />Add Photos</Button>
-            {photos.length > 0 && <ul className="space-y-2">{photos.map((photo, index) => <li key={`${photo.name}-${index}`} className="flex min-h-12 items-center justify-between gap-3 border-b border-border text-sm"><span className="min-w-0 break-all">{photo.name}</span><Button type="button" variant="ghost" size="icon" className="size-12 shrink-0" aria-label={`Remove ${photo.name}`} title="Remove photo" onClick={() => { setPhotos(photos.filter((_, photoIndex) => photoIndex !== index)); setError(""); }}><X /></Button></li>)}</ul>}
+            {photos.length > 0 && <ul className="space-y-2">{photos.map((photo, index) => <li key={`${photo.name}-${index}`} className="flex min-h-12 items-center justify-between gap-3 border-b border-border text-sm"><span className="min-w-0 break-all">{photo.name}</span><Button type="button" variant="ghost" size="icon" className="size-12 shrink-0" aria-label={`Remove ${photo.name}`} title="Remove Photo" onClick={() => { setPhotos(photos.filter((_, photoIndex) => photoIndex !== index)); setError(""); }}><X /></Button></li>)}</ul>}
           </div>
         </>}
         {step === 3 && <>
           {(["name", "phone", "email"] as const).map((field) => <div className="space-y-2" key={field}>
-            <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile phone" : "Email (optional)"}</label>
+            <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
             <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className="h-14 text-base" />
           </div>)}
           <div className="space-y-2">
-            <label htmlFor={`${id}-selling`} className="text-sm font-semibold">Thinking about selling the property? (optional)</label>
+            <label htmlFor={`${id}-selling`} className="text-sm font-semibold">Thinking About Selling the Property? (Optional)</label>
             <Select value={selling} onValueChange={setSelling}>
-              <SelectTrigger id={`${id}-selling`} className="h-14 text-base"><SelectValue placeholder="Choose an answer" /></SelectTrigger>
-              <SelectContent><SelectItem value="yes" className="min-h-12">Yes</SelectItem><SelectItem value="no" className="min-h-12">No</SelectItem><SelectItem value="unsure" className="min-h-12">Not sure</SelectItem></SelectContent>
+              <SelectTrigger id={`${id}-selling`} className="h-14 text-base"><SelectValue placeholder="Choose an Answer" /></SelectTrigger>
+              <SelectContent><SelectItem value="yes" className="min-h-12">Yes</SelectItem><SelectItem value="no" className="min-h-12">No</SelectItem><SelectItem value="unsure" className="min-h-12">Not Sure</SelectItem></SelectContent>
             </Select>
           </div>
           <div className="flex items-start gap-3">
@@ -211,7 +211,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
         </>}
         {error && <p role="alert" className="break-words text-sm font-medium text-destructive">{error}</p>}
         <div className="flex gap-3">
-          {step > 1 && <Button type="button" variant="outline" className="min-h-14 px-4" onClick={() => changeStep(step - 1)} aria-label="Previous step" title="Previous step"><ArrowLeft /></Button>}
+          {step > 1 && <Button type="button" variant="outline" className="min-h-14 px-4" onClick={() => changeStep(step - 1)} aria-label="Previous Step" title="Previous Step"><ArrowLeft /></Button>}
           <Button type="submit" disabled={busy} className={cn("min-w-0 flex-1 whitespace-normal px-4 text-base font-bold", compact ? "min-h-12 md:min-h-14" : "min-h-14")}>{busy ? <><Loader2 className="motion-safe:animate-spin" />Sending...</> : <>{step === 2 ? "Next" : buttonLabel}<ArrowRight /></>}</Button>
         </div>
       </fieldset>

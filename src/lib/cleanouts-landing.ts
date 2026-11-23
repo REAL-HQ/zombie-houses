@@ -8,7 +8,7 @@ export const cleanoutsLanding: ServiceLandingConfig = {
   eyebrow: "Hoarder & Estate Cleanouts",
   headline: "Cleanouts Without Judgment",
   subhead: "Whether it built up over years or you just inherited a full house, we clear it quietly & respectfully.",
-  bullets: ["Free photo quote", "Upfront quote before we start", "Discreet, local crew"],
+  bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Discreet, Local Crew"],
   steps: [
     { title: "Tell Us What's Going On", description: "Share a few photos or just describe it. No need to clean up first.", icon: Camera },
     { title: "Walk Through Together", description: "We confirm what stays, what goes & anything to set aside for family.", icon: HeartHandshake },
@@ -28,16 +28,16 @@ export const cleanoutsLanding: ServiceLandingConfig = {
   sellingOption: {
     description: "Not sure you want to keep the house? We also buy houses in any condition. Clear it out & sell it yourself, or sell it to us as-is. We'll talk through both, with no pressure.",
     buttonLabel: "See My Selling Options",
-    quoteLinkLabel: "Or keep going with a cleanout quote",
+    quoteLinkLabel: "Or Keep Going With a Cleanout Quote",
   },
   ownerHeading: "Meet Dolmar",
   ownerDescription: "I'm Dolmar Cross. I've spent years buying & rehabbing Tampa houses most people wouldn't walk into. My crew knows how to clear a property fast and leave it clean. When you call, you're dealing with a local owner, not a call center. I've walked into a lot of houses like this. Nobody gets judged here.",
   faqs: [
-    { question: "Do I need to be there?", answer: "Not always. We can plan access with you or a family member ahead of time." },
-    { question: "What happens to items worth keeping?", answer: "We set aside anything you ask us to look for, plus photos, papers & keepsakes we come across." },
-    { question: "Can you help if the house needs to be sold?", answer: "Yes. We buy houses as-is too. Mark it in the form and we'll cover both options." },
-    { question: "Do you handle biohazard cleanup?", answer: "Not ourselves. Biohazards need a specialized company, and we'll help point you to one." },
-    { question: "What areas do you serve?", answer: "Tampa Bay. Enter your ZIP and we'll confirm." },
+    { question: "Do I Need to Be There?", answer: "Not always. We can plan access with you or a family member ahead of time." },
+    { question: "What Happens to Items Worth Keeping?", answer: "We set aside anything you ask us to look for, plus photos, papers & keepsakes we come across." },
+    { question: "Can You Help If the House Needs to Be Sold?", answer: "Yes. We buy houses as-is too. Mark it in the form and we'll cover both options." },
+    { question: "Do You Handle Biohazard Cleanup?", answer: "Not ourselves. Biohazards need a specialized company, and we'll help point you to one." },
+    { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP and we'll confirm." },
   ],
   quoteHeading: "Get Your Free Photo Quote",
 };
