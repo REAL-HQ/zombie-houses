@@ -100,9 +100,9 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
   function addPhotos(files: File[]) {
     start();
     const next = [...photos.map((photo) => photo.file), ...files];
-    if (next.length > QUOTE_MAX_PHOTOS) { setError(`Choose Up to ${QUOTE_MAX_PHOTOS} Photos`); return; }
+    if (next.length > QUOTE_MAX_PHOTOS) { setError(`Choose Up To ${QUOTE_MAX_PHOTOS} Photos`); return; }
     if (files.some((file) => !file.type.startsWith("image/") && !/\.(heic|heif)$/i.test(file.name))) { setError("Choose Image Files Only"); return; }
-    if (files.some((file) => file.size > MAX_BYTES * 2)) { setError("Each Photo Must Be 20MB or Smaller"); return; }
+    if (files.some((file) => file.size > MAX_BYTES * 2)) { setError("Each Photo Must Be 20MB Or Smaller"); return; }
     setError("");
     setPhotos([...photos, ...files.map((file) => { const url = URL.createObjectURL(file); previewUrls.current.add(url); return { file, url }; })]);
   }
@@ -120,11 +120,11 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
     start();
     if (locked.current) return;
     if (step === 1) {
-      if (!photos.length) { setError("Add at Least 1 Photo"); return; }
+      if (!photos.length) { setError("Add At Least 1 Photo"); return; }
       go(2); return;
     }
     if (step === 2) {
-      if (!/^\d{5}$/.test(zip)) { setError("Enter a 5-Digit ZIP Code"); return; }
+      if (!/^\d{5}$/.test(zip)) { setError("Enter A 5-Digit ZIP Code"); return; }
       go(3); return;
     }
     const result = serviceContactSchema.safeParse(contact);
@@ -143,7 +143,7 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
         const existing = uploaded.current.get(file);
         if (existing) { paths.push(existing); continue; }
         const blob = await prepare(file);
-        if (blob.size > MAX_BYTES) throw new Error("Each Photo Must Be 10MB or Smaller");
+        if (blob.size > MAX_BYTES) throw new Error("Each Photo Must Be 10MB Or Smaller");
         const type = blob.type || (/\.heif$/i.test(file.name) ? "image/heif" : /\.heic$/i.test(file.name) ? "image/heic" : "image/jpeg");
         const extension = type === "image/png" ? "png" : type === "image/webp" ? "webp" : type === "image/heic" ? "heic" : type === "image/heif" ? "heif" : "jpg";
         const path = `quotes/${folder.current}/${crypto.randomUUID()}.${extension}`;
@@ -211,7 +211,7 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
 
   const headingClass = "font-display text-2xl font-extrabold leading-tight tracking-normal text-foreground";
   const callButtons = <div className="grid grid-cols-2 gap-3">
-    <Button asChild className="min-h-14 text-base font-bold"><a href="tel:+18139232042" onClick={() => track("click_call", { page: sourcePage.replace(/^\//, ""), from: "photo_quote" })}><Phone />Call to Book</a></Button>
+    <Button asChild className="min-h-14 text-base font-bold"><a href="tel:+18139232042" onClick={() => track("click_call", { page: sourcePage.replace(/^\//, ""), from: "photo_quote" })}><Phone />Call To Book</a></Button>
     <Button asChild variant="outline" className="min-h-14 text-base font-bold"><a href="sms:+18139232042" onClick={() => track("click_text", { page: sourcePage.replace(/^\//, ""), from: "photo_quote" })}><MessageSquare />Text Us</a></Button>
   </div>;
 
@@ -234,14 +234,14 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
       {callButtons}
     </> : quote.outcome === "walkthrough" ? <>
       <ClipboardCheck className="size-10 text-red" aria-hidden="true" />
-      <h2 ref={heading} tabIndex={-1} className={headingClass}>Let's Do a Quick Walkthrough</h2>
+      <h2 ref={heading} tabIndex={-1} className={headingClass}>Let's Do A Quick Walkthrough</h2>
       <p className="text-base leading-relaxed">{quote.reason === "hoarder" ? "Homes packed with belongings need a quick look in person so we can plan the crew & give you a fair, upfront price. No judgment, ever." : "This looks like more than one truckload, so we'll give you an exact price after a quick walkthrough. Every extra truck on the same job is 10% off."}</p>
       <p className="text-base leading-relaxed">We got your photos & we'll text you shortly to set up a time.</p>
       {quote.notes.map((note) => <p key={note} className="text-sm text-muted-foreground">{note}</p>)}
       {callButtons}
     </> : <>
       <CheckCircle2 className="size-10 text-red" aria-hidden="true" />
-      <h2 ref={heading} tabIndex={-1} className={headingClass}>Thanks, We'll Text You a Quote</h2>
+      <h2 ref={heading} tabIndex={-1} className={headingClass}>Thanks, We'll Text You A Quote</h2>
       <p className="text-base leading-relaxed">We got your photos. We couldn't build an instant price this time, so we'll look them over & text you an upfront quote shortly, usually the same business day.</p>
       {callButtons}
     </>}
@@ -254,7 +254,7 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
         <p className="text-xs font-semibold text-red" aria-live="polite">Step {step} of 3</p>
       </div>
       <div className="flex gap-1.5" aria-hidden="true">{[1, 2, 3].map((dot) => <span key={dot} className={cn("h-1 flex-1 rounded-full transition-colors", dot <= step ? "bg-red" : "bg-border")} />)}</div>
-      <h2 ref={heading} tabIndex={-1} className={headingClass}>{step === 1 ? "Add Photos of Your Junk" : step === 2 ? "A Few Quick Questions" : "Where Should We Send Your Quote?"}</h2>
+      <h2 ref={heading} tabIndex={-1} className={headingClass}>{step === 1 ? "Add Photos Of Your Junk" : step === 2 ? "A Few Quick Questions" : "Where Should We Send Your Quote?"}</h2>
     </div>
     <fieldset disabled={busy} className="min-w-0 space-y-5">
       {step === 1 && <>
@@ -266,18 +266,18 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
             <Button type="button" size="icon" onClick={() => removePhoto(index)} aria-label={`Remove Photo ${index + 1}`} className="absolute right-1 top-1 flex size-9 items-center justify-center rounded-full bg-foreground/70 text-background hover:bg-foreground"><X className="size-4" /></Button>
           </li>)}
         </ul>}
-        <Button type="button" variant="outline" className="min-h-14 w-full text-base font-bold" disabled={photos.length >= QUOTE_MAX_PHOTOS} onClick={() => fileInput.current?.click()}><Camera />{photos.length ? `Add More Photos (${photos.length} of ${QUOTE_MAX_PHOTOS})` : "Take or Choose Photos"}</Button>
+        <Button type="button" variant="outline" className="min-h-14 w-full text-base font-bold" disabled={photos.length >= QUOTE_MAX_PHOTOS} onClick={() => fileInput.current?.click()}><Camera />{photos.length ? `Add More Photos (${photos.length} Of ${QUOTE_MAX_PHOTOS})` : "Take Or Choose Photos"}</Button>
       </>}
       {step === 2 && <>
         <div className="space-y-1.5">
           <label htmlFor={`${id}-zip`} className="text-sm font-semibold">ZIP Code</label>
           <Input id={`${id}-zip`} value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} inputMode="numeric" autoComplete="postal-code" maxLength={5} placeholder="5-Digit ZIP Code" className="h-14 text-base" />
         </div>
-        <ChoiceGroup label="Where Is It?" value={location} onChange={setLocation} options={[{ value: "curbside", label: "Curb, Driveway or Garage" }, { value: "inside", label: "Inside the Home" }]} />
-        <ChoiceGroup label="Stairs to Carry It Down?" value={stairs} onChange={setStairs} options={[{ value: 0, label: "None" }, { value: 1, label: "1 Flight" }, { value: 2, label: "2 Flights" }, { value: 3, label: "3+ Flights" }]} />
-        <ChoiceGroup label="Carry Over 100 Ft to the Truck?" value={longCarry} onChange={setLongCarry} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
-        <ChoiceGroup label="Any Dirt, Concrete, Brick, Roofing or Tile?" value={heavy} onChange={setHeavy} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
-        <ChoiceGroup label="Is the Home Packed Floor to Ceiling?" value={hoarder} onChange={setHoarder} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
+        <ChoiceGroup label="Where Is It?" value={location} onChange={setLocation} options={[{ value: "curbside", label: "Curb, Driveway Or Garage" }, { value: "inside", label: "Inside The Home" }]} />
+        <ChoiceGroup label="Stairs To Carry It Down?" value={stairs} onChange={setStairs} options={[{ value: 0, label: "None" }, { value: 1, label: "1 Flight" }, { value: 2, label: "2 Flights" }, { value: 3, label: "3+ Flights" }]} />
+        <ChoiceGroup label="Carry Over 100 Ft To The Truck?" value={longCarry} onChange={setLongCarry} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
+        <ChoiceGroup label="Any Dirt, Concrete, Brick, Roofing Or Tile?" value={heavy} onChange={setHeavy} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
+        <ChoiceGroup label="Is The Home Packed Floor To Ceiling?" value={hoarder} onChange={setHoarder} options={[{ value: false, label: "No" }, { value: true, label: "Yes" }]} />
         <div className="space-y-1.5">
           <label htmlFor={`${id}-description`} className="text-sm font-semibold">Anything We Should Know? (Optional)</label>
           <Textarea id={`${id}-description`} value={description} maxLength={2000} onChange={(event) => setDescription(event.target.value)} className="min-h-20 text-base" />

@@ -92,27 +92,27 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-service-background/95 via-service-background/85 to-service-background/95 md:bg-gradient-to-r md:from-service-background/95 md:via-service-background/80 md:to-service-background/70"
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:gap-6 md:px-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)] lg:gap-x-10 lg:gap-y-4 lg:pb-8 lg:pt-6">
-          {/* Headline & subhead span the full width; on lg+ each stays on one line and scales down instead of wrapping. Sizes are kept tight so the whole photo | form row fits above the fold. */}
-          <div className="order-1 min-w-0 lg:order-none lg:col-span-2">
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:gap-6 md:px-8 md:py-10 lg:max-w-[1360px] lg:grid-cols-[minmax(0,1fr)_minmax(400px,440px)] lg:grid-rows-[auto_1fr] lg:gap-x-8 lg:gap-y-3 lg:pb-6 lg:pt-5">
+          {/* lg+: hero uses a wider container (1360px) than the rest of the page. Left column = headline, subhead & photo; right column = form spanning both rows, sized to its content. The photo fills whatever height is left so its bottom lines up with the form. Cards sit in one strip below. Everything fits above the fold at 1280x650 & up. */}
+          <div className="order-1 min-w-0 lg:order-none lg:col-start-1 lg:row-start-1">
             <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">{config.eyebrow}</p>
-            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-2 md:text-5xl lg:mt-1 lg:whitespace-nowrap lg:text-[clamp(2.25rem,3.4vw,3.25rem)] lg:leading-[1.05]">{config.headline}</h1>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-3 md:max-w-none md:text-lg lg:mt-1.5 lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.25vw,1.125rem)]">{config.subhead}</p>
+            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-2 md:text-5xl lg:mt-1 xl:whitespace-nowrap lg:text-[clamp(2.25rem,3.2vw,3.25rem)] lg:leading-[1.05]">{config.headline}</h1>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-3 md:max-w-none md:text-lg lg:mt-1.5 xl:whitespace-nowrap lg:text-[clamp(0.95rem,1.25vw,1.125rem)]">{config.subhead}</p>
           </div>
-          {/* lg+: photo & form share one row and stretch to the same height; the photo fills its card (object-cover). The form card height follows the viewport (100svh minus header & headline) so the bottom of both sits above the fold, clamped so every form step fits. Mobile: form comes right after the headline, photo below it. */}
-          {config.heroPhoto && <div className="relative order-3 lg:order-none lg:h-full">
+          {/* Mobile: form comes right after the headline, photo below it. */}
+          {config.heroPhoto && <div className="relative order-3 lg:order-none lg:col-start-1 lg:row-start-2 lg:min-h-[220px]">
             <JobPhotoFigure photo={config.heroPhoto} eager className="aspect-[21/9] shadow-2xl md:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto" />
           </div>}
-          <div aria-label="Quick Quote" className="order-2 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:order-none lg:h-[clamp(390px,calc(100svh-244px),560px)] lg:overflow-hidden lg:px-6 lg:py-5">
+          <div aria-label="Quick Quote" className="order-2 self-start rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:px-6 lg:py-5">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
           </div>
-          <ul className="order-4 grid grid-cols-2 gap-3 pt-1 md:pt-0 lg:order-none lg:col-span-2 lg:grid-cols-3 [&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(odd)]:col-span-1">
-            {config.bullets.map((bullet) => <li key={bullet} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-background/70 px-3 py-3 text-sm font-semibold shadow-lg md:px-5 md:py-4 md:text-base">
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15 md:size-9"><Check className="size-4 text-red md:size-5" aria-hidden="true" /></span>{bullet}
+          <ul className="order-4 grid grid-cols-2 gap-3 pt-1 md:pt-0 lg:order-none lg:col-span-2 lg:row-start-3 lg:grid-cols-3 [&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(odd)]:col-span-1">
+            {config.bullets.map((bullet) => <li key={bullet} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-background/70 px-3 py-3 text-sm font-semibold shadow-lg md:px-5 md:py-4 md:text-base lg:py-2.5">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15 md:size-9 lg:size-8"><Check className="size-4 text-red md:size-5" aria-hidden="true" /></span>{bullet}
             </li>)}
           </ul>
-          {config.photoQuote && <a href="#photo-quote" onClick={() => track("click_photo_quote", { page: config.page })} className="group order-5 flex min-h-14 items-center justify-between gap-3 rounded-lg border border-red/60 bg-red/10 px-4 py-3 text-sm font-bold text-service-foreground transition-colors hover:bg-red/20 md:px-5 md:text-base lg:col-span-2">
-            <span className="flex items-center gap-3"><Camera className="size-5 shrink-0 text-red" aria-hidden="true" />Get a Photo Quote: See Your Price Range in About a Minute</span>
+          {config.photoQuote && <a href="#photo-quote" onClick={() => track("click_photo_quote", { page: config.page })} className="group order-5 flex min-h-14 items-center justify-between gap-3 rounded-lg border border-red/60 bg-red/10 px-4 py-3 text-sm font-bold text-service-foreground transition-colors hover:bg-red/20 md:px-5 md:text-base lg:col-span-2 lg:row-start-4 lg:min-h-12 lg:py-2.5">
+            <span className="flex items-center gap-3"><Camera className="size-5 shrink-0 text-red" aria-hidden="true" />Get A Photo Quote: See Your Price Range In About A Minute</span>
             <ArrowRight className="size-5 shrink-0 text-red motion-safe:transition-transform motion-safe:group-hover:translate-x-1" aria-hidden="true" />
           </a>}
         </div>
@@ -127,7 +127,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
             <h2 className={`${headingClass} mt-2`}>{config.photoQuote.heading}</h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-service-muted md:text-lg">{config.photoQuote.description}</p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {[`Upload Up to ${QUOTE_MAX_PHOTOS} Photos`, "See a Price Range in About a Minute", `Junk Removal From $${AD_ANCHOR_PRICE}`, "Final Price Confirmed Before We Start"].map((item) => <li key={item} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-surface px-4 py-3 text-sm font-semibold md:text-base">
+              {[`Upload Up To ${QUOTE_MAX_PHOTOS} Photos`, "See A Price Range In About A Minute", `Junk Removal From $${AD_ANCHOR_PRICE}`, "Final Price Confirmed Before We Start"].map((item) => <li key={item} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-surface px-4 py-3 text-sm font-semibold md:text-base">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15"><Check className="size-4 text-red" aria-hidden="true" /></span>{item}
               </li>)}
             </ul>
@@ -182,7 +182,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
 
       {config.sellingOption && <section id="sell-option" className="scroll-mt-6 border-y border-service-border bg-service-surface">
         <div className={`${sectionClass} grid gap-7 md:grid-cols-[1fr_2fr] md:gap-16`}>
-          <h2 className={headingClass}>Clean It Out or Sell It As-Is</h2>
+          <h2 className={headingClass}>Clean It Out Or Sell It As-Is</h2>
           <div>
             <p className="max-w-2xl text-lg leading-relaxed text-service-muted">{config.sellingOption.description}</p>
             <div className="mt-6 flex flex-col items-start gap-3">
