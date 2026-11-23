@@ -17,9 +17,11 @@ export interface ServiceLeadFormProps {
   sourcePage: string;
   compact?: boolean;
   buttonLabel?: string;
+  /** Custom thank-you steps; defaults to the standard three. */
+  thankYouItems?: string[];
 }
 
-export function ServiceLeadForm({ defaultService, sourcePage, compact = false, buttonLabel = "Get My Free Quote" }: ServiceLeadFormProps) {
+export function ServiceLeadForm({ defaultService, sourcePage, compact = false, buttonLabel = "Get My Free Quote", thankYouItems }: ServiceLeadFormProps) {
   const id = useId();
   const [step, setStep] = useState(1);
   const [zip, setZip] = useState("");
@@ -135,9 +137,11 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
       <CheckCircle2 className="size-10 text-red" aria-hidden="true" />
       <h2 ref={heading} tabIndex={-1} className={headingClass}>Got It. Here's What Happens Next.</h2>
       <ol className="list-decimal space-y-4 pl-6 text-base leading-relaxed">
-        <li>We review your details and photos.</li>
-        <li>We call or text you, usually the same business day, to confirm details and give an upfront quote before any work starts.</li>
-        <li>We schedule a time that works for you.</li>
+        {thankYouItems ? thankYouItems.map((item) => <li key={item}>{item}</li>) : <>
+          <li>We review your details and photos.</li>
+          <li>We call or text you, usually the same business day, to confirm details and give an upfront quote before any work starts.</li>
+          <li>We schedule a time that works for you.</li>
+        </>}
       </ol>
       <Button asChild className="min-h-14 w-full text-base font-bold">
         <a href="tel:+18139232042" onClick={() => track("click_call", { page: sourcePage.replace(/^\//, "") })}><Phone />813-923-2042</a>

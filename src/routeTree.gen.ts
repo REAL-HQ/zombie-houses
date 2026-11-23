@@ -21,6 +21,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as JunkRouteImport } from './routes/junk'
 import { Route as DesignRouteImport } from './routes/design'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as CleanoutsRouteImport } from './routes/cleanouts'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as AboutRouteImport } from './routes/about'
@@ -90,6 +91,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComingSoonRoute = ComingSoonRouteImport.update({
+  id: '/coming-soon',
+  path: '/coming-soon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CleanoutsRoute = CleanoutsRouteImport.update({
   id: '/cleanouts',
   path: '/cleanouts',
@@ -137,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
@@ -159,6 +166,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
@@ -182,6 +190,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/cleanouts': typeof CleanoutsRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
   '/design': typeof DesignRoute
   '/junk': typeof JunkRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/coming-soon'
     | '/contact'
     | '/design'
     | '/junk'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/coming-soon'
     | '/contact'
     | '/design'
     | '/junk'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/apply'
     | '/cleanouts'
+    | '/coming-soon'
     | '/contact'
     | '/design'
     | '/junk'
@@ -273,6 +285,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApplyRoute: typeof ApplyRoute
   CleanoutsRoute: typeof CleanoutsRoute
+  ComingSoonRoute: typeof ComingSoonRoute
   ContactRoute: typeof ContactRoute
   DesignRoute: typeof DesignRoute
   JunkRoute: typeof JunkRoute
@@ -377,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coming-soon': {
+      id: '/coming-soon'
+      path: '/coming-soon'
+      fullPath: '/coming-soon'
+      preLoaderRoute: typeof ComingSoonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cleanouts': {
       id: '/cleanouts'
       path: '/cleanouts'
@@ -441,6 +461,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApplyRoute: ApplyRoute,
   CleanoutsRoute: CleanoutsRoute,
+  ComingSoonRoute: ComingSoonRoute,
   ContactRoute: ContactRoute,
   DesignRoute: DesignRoute,
   JunkRoute: JunkRoute,

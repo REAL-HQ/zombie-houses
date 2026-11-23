@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SERVICE_DESTINATIONS, serviceDestination } from "@/lib/services-directory";
+import { COMING_SOON_SERVICES } from "@/lib/coming-soon-services";
 import { zipFromSearch } from "@/lib/service-lead";
 import { track } from "@/lib/track";
 import recent1 from "@/assets/recent-1.jpg";
@@ -93,6 +94,24 @@ function ServicesPage() {
             <span className="mt-auto flex items-center justify-between gap-2 pt-5 text-sm font-bold text-red"><span>{item.cta}</span><ArrowRight className="size-4 shrink-0" aria-hidden="true" /></span>
           </div>
         </Link>)}
+      </div>
+    </section>
+
+    <section aria-labelledby="coming-soon-heading" className="border-t border-service-border bg-service-background px-4 py-8 text-service-foreground md:px-8 md:py-12">
+      <div className="mx-auto max-w-6xl">
+        <h2 id="coming-soon-heading" className="font-display text-2xl tracking-normal md:text-4xl">Specialty Cleanups</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-service-muted md:text-base">We're adding these. Until then, tell us what you need & we'll follow up or point you to a specialist.</p>
+        <div className="mt-6 grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
+          {COMING_SOON_SERVICES.map((item) => <Link key={item.slug} to="/coming-soon" search={{ service: item.slug }} className="group flex min-w-0 flex-col rounded-lg border border-dashed border-service-border bg-service-surface p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red md:p-5">
+            <div className="flex items-start justify-between gap-2">
+              <item.icon className="size-7 shrink-0 text-service-muted md:size-8" aria-hidden="true" />
+              <span className="rounded bg-service-background px-2 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-red md:text-xs">Coming Soon</span>
+            </div>
+            <h3 className="mt-4 font-display text-base leading-snug tracking-normal md:text-xl">{item.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-service-muted">{item.description}</p>
+            <span className="mt-auto flex items-center justify-between gap-2 pt-5 text-sm font-bold text-service-foreground"><span>Get Notified</span><ArrowRight className="size-4 shrink-0" aria-hidden="true" /></span>
+          </Link>)}
+        </div>
       </div>
     </section>
 
