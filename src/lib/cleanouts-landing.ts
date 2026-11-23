@@ -17,12 +17,6 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     { title: "Walk Through Together", description: "We confirm what stays, what goes & anything to set aside for family.", icon: HeartHandshake },
     { title: "We Clear It", description: "We sort, haul & sweep up so the house is ready for what comes next.", icon: Truck },
   ],
-  audiences: [
-    { title: "Families Settling An Estate" },
-    { title: "Adult Children Helping A Parent" },
-    { title: "Homeowners Ready For A Reset" },
-    { title: "Executors & Attorneys" },
-  ],
   care: {
     heading: "Handled With Care",
     bullets: ["We Set Aside Photos, Papers & Keepsakes We Find", "We Work At A Pace That's Right For You", "We Keep It Private & Never Judge"],

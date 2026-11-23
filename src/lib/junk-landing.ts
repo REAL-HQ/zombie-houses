@@ -36,12 +36,6 @@ export const junkLanding: ServiceLandingConfig = {
     { title: "Estate Contents", icon: Boxes },
   ],
   itemsNote: "We can't take hazardous waste, paint, chemicals or biohazards. Ask us and we'll point you to the right place.",
-  audiences: [
-    { title: "Homeowners" },
-    { title: "Landlords & Property Managers", to: "/property-cleanouts" },
-    { title: "Realtors" },
-    { title: "Families Clearing An Estate", to: "/cleanouts" },
-  ],
   ownerHeading: "Meet Dolmar & Keisha",
   ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing distressed Tampa houses, the kind most people won't walk into, so there isn't much junk we haven't seen. You may know Dolmar from A&E's Zombie House Flipping. Our own crew does the work: we clear properties fast, haul it all away & leave the place clean. When you call or text, you're talking to local owners, not a call center. Send a few photos & we'll give you an upfront quote before we start.",
   related: [

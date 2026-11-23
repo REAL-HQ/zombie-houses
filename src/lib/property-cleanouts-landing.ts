@@ -17,12 +17,6 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
     { title: "Approve The Quote", description: "Upfront quote before we start. No surprises at the end.", icon: ClipboardCheck },
     { title: "We Clear & Report Back", description: "We haul it, sweep up & send you photos when we're done.", icon: Truck },
   ],
-  audiences: [
-    { title: "Landlords" },
-    { title: "Property Managers" },
-    { title: "Realtors & Listing Agents" },
-    { title: "Investors & Wholesalers" },
-  ],
   itemsHeading: "Common Jobs",
   items: [
     { title: "Tenant Move-Outs", icon: DoorOpen },

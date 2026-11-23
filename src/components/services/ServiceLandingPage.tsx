@@ -35,7 +35,6 @@ export interface ServiceLandingConfig {
   care?: { heading: string; bullets: readonly string[] };
   notice?: string;
   sellingOption?: { description: string; buttonLabel: string; quoteLinkLabel?: string };
-  audiences: readonly { title: string; to?: ServiceLink }[];
   ownerHeading: string;
   ownerDescription: string;
   related?: readonly { title: string; to: ServiceLink }[];
@@ -159,15 +158,6 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           {config.itemsNote && <p className="mt-10 max-w-3xl border-t border-service-border pt-5 text-sm leading-relaxed text-service-muted">{config.itemsNote}</p>}
         </div>
       </section>}
-
-      <section className={sectionClass}>
-        <h2 className={headingClass}>Who We Help</h2>
-        <ul className="mt-7 grid gap-0 md:grid-cols-2 md:gap-x-12">
-          {config.audiences.map((audience) => <li key={audience.title} className="border-b border-service-border">
-            {audience.to ? <Button asChild variant="link" className="flex h-auto min-h-16 w-full justify-between whitespace-normal px-0 py-4 text-left text-base text-service-foreground"><Link to={audience.to}>{audience.title}<ArrowRight className="text-red" aria-hidden="true" /></Link></Button> : <p className="flex min-h-16 items-center py-4 text-base font-medium">{audience.title}</p>}
-          </li>)}
-        </ul>
-      </section>
 
       {config.care && <section className="border-t border-service-border">
         <div className={`${sectionClass} grid gap-7 md:grid-cols-[1fr_2fr] md:gap-16`}>
