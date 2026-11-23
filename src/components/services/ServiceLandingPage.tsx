@@ -158,13 +158,12 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         </div>
       </section>}
 
+      {/* Full-bleed owner photo so the whole wrecked room shows; copy sits below so it never covers the damage. */}
       <section className="border-y border-service-border bg-service-surface">
-        <div className={`${sectionClass} grid items-center gap-6 md:grid-cols-2 md:gap-14`}>
-          <img src={ownerPhoto} alt="Dolmar & Keisha Cross" loading="lazy" className="aspect-[4/5] w-full rounded-xl border border-service-border object-cover object-[52%_center] md:aspect-square" />
-          <div className="space-y-4">
-            <h2 className={headingClass}>{config.ownerHeading}</h2>
-            <p className="max-w-2xl text-lg leading-relaxed text-service-foreground md:text-xl">{config.ownerDescription}</p>
-          </div>
+        <img src={ownerPhoto} alt="Dolmar & Keisha Cross standing in a gutted, debris-filled room" loading="lazy" className="block aspect-[16/9] w-full object-cover object-[50%_40%] md:aspect-[21/9]" />
+        <div className={`${sectionClass} grid gap-4 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:items-start md:gap-14 md:py-14`}>
+          <h2 className={headingClass}>{config.ownerHeading}</h2>
+          <p className="max-w-2xl text-lg leading-relaxed text-service-foreground md:text-xl">{config.ownerDescription}</p>
         </div>
       </section>
 
