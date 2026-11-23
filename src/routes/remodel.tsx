@@ -4,6 +4,8 @@ import { Bath, CookingPot, Hammer } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { ServiceLeadForm } from "@/components/services/ServiceLeadForm";
 import { ServiceNoticeBand } from "@/components/services/ServiceNoticeBand";
+import { JobPhotoGrid } from "@/components/services/JobPhotoGrid";
+import { JOB_PHOTOS } from "@/lib/job-photos";
 import { Button } from "@/components/ui/button";
 import { track } from "@/lib/track";
 const title = "Remodeling Consultations | Zombie Houses";
@@ -52,6 +54,12 @@ function RemodelPage() {
           <h2 className="mt-5 font-display text-2xl tracking-normal">{project.title}</h2>
           <p className="mt-3 text-base leading-relaxed text-service-muted">{project.description}</p>
         </article>)}
+      </div>
+    </section>
+    <section aria-labelledby="remodel-jobs" className="border-t border-service-border bg-service-background px-5 py-10 text-service-foreground md:px-8 md:py-14">
+      <div className="mx-auto max-w-6xl">
+        <h2 id="remodel-jobs" className="font-display text-3xl tracking-normal md:text-4xl">Recent Jobs</h2>
+        <JobPhotoGrid photos={[JOB_PHOTOS.goldenBefore3, JOB_PHOTOS.leilaBefore5, JOB_PHOTOS.elmwoodBefore4, JOB_PHOTOS.goldenBefore4, JOB_PHOTOS.elmwoodBefore6, JOB_PHOTOS.goldenBefore5]} />
       </div>
     </section>
     <ServiceNoticeBand>Work that requires a license, such as structural, plumbing, electrical or general contracting, is handled by appropriately licensed professionals. We'll confirm who does what during your consultation.</ServiceNoticeBand>

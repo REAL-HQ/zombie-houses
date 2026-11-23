@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Camera, Check, ClipboardList, MessageSquare, Phone, type LucideIcon } from "lucide-react";
+import { ArrowRight, Check, ClipboardList, MessageSquare, Phone, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ServiceLeadForm } from "./ServiceLeadForm";
 import { ServiceNoticeBand } from "./ServiceNoticeBand";
+import { JobPhotoFigure, JobPhotoGrid } from "./JobPhotoGrid";
+import type { JobPhoto } from "@/lib/job-photos";
 import { track } from "@/lib/track";
 import logo from "@/assets/zombie-houses-logo.png";
 import heroBg from "@/assets/recent-3.jpg";
@@ -14,6 +16,9 @@ type ServiceLink = "/cleanouts" | "/property-cleanouts" | "/sell";
 export interface ServiceLandingConfig {
   page: string;
   heroImage?: string;
+  heroPhoto?: JobPhoto;
+  gallery?: readonly JobPhoto[];
+  feature?: { id: string; heading: string; description: string; bullets: readonly string[]; photos: readonly [JobPhoto, ...JobPhoto[]] };
   sourcePage: string;
   service: string;
   eyebrow: string;
@@ -79,6 +84,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
             <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">{config.eyebrow}</p>
             <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-3 md:text-6xl">{config.headline}</h1>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-4 md:text-xl">{config.subhead}</p>
+            {config.heroPhoto && <JobPhotoFigure photo={config.heroPhoto} eager className="mt-3 aspect-[21/9] shadow-2xl md:mt-8 md:aspect-[16/10]" />}
           </div>
           <div aria-label="Quick Quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:row-span-2 md:p-7">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
@@ -153,13 +159,27 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         </div>
       </section>
 
-      <section className={sectionClass}>
-        <h2 className={headingClass}>Recent Jobs</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {/* Replace each placeholder with an img using Dolmar's real job photo, descriptive alt text, and the same aspect ratio. Never substitute stock photos. */}
-          {[1, 2, 3].map((job) => <div key={job} className="flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-service-muted bg-service-surface p-6 text-center"><Camera className="size-9 text-service-muted" aria-hidden="true" /><p className="max-w-56 text-sm font-medium leading-relaxed text-service-muted">Placeholder: Dolmar's Real Before &amp; After Photo Goes Here</p></div>)}
+      {config.feature && <section id={config.feature.id} className="scroll-mt-4 border-b border-service-border">
+        <div className={`${sectionClass} grid gap-8 md:grid-cols-2 md:items-center md:gap-14`}>
+          <div className="space-y-5">
+            <h2 className={headingClass}>{config.feature.heading}</h2>
+            <p className="max-w-xl text-lg leading-relaxed text-service-muted">{config.feature.description}</p>
+            <ul className="grid gap-3">
+              {config.feature.bullets.map((bullet) => <li key={bullet} className="flex items-center gap-3 text-base font-semibold"><Check className="size-5 shrink-0 text-red" aria-hidden="true" />{bullet}</li>)}
+            </ul>
+            <Button className="min-h-12 px-6 text-base font-bold" onClick={scrollToQuote}>Get My Free Quote<ArrowRight aria-hidden="true" /></Button>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <JobPhotoFigure photo={config.feature.photos[0]} className="col-span-2 aspect-[16/10]" />
+            {config.feature.photos.slice(1).map((photo) => <JobPhotoFigure key={photo.src} photo={photo} className="aspect-[4/3]" />)}
+          </div>
         </div>
-      </section>
+      </section>}
+
+      {config.gallery && config.gallery.length > 0 && <section className={sectionClass}>
+        <h2 className={headingClass}>Recent Jobs</h2>
+        <JobPhotoGrid photos={config.gallery} />
+      </section>}
 
       {config.related && config.related.length > 0 && <section className={`${sectionClass} border-t border-service-border`}>
         <h2 className={headingClass}>Bigger Job?</h2>

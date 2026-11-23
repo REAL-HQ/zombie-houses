@@ -1,9 +1,12 @@
 import { Camera, HeartHandshake, Truck } from "lucide-react";
+import { JOB_PHOTOS } from "@/lib/job-photos";
 import type { ServiceLandingConfig } from "@/components/services/ServiceLandingPage";
 
 export const cleanoutsLanding: ServiceLandingConfig = {
   page: "cleanouts",
   sourcePage: "/cleanouts",
+  heroPhoto: JOB_PHOTOS.coolrdBefore1,
+  gallery: [JOB_PHOTOS.jonesBefore3, JOB_PHOTOS.coolrdBefore2, JOB_PHOTOS.leilaHoarder1, JOB_PHOTOS.coolrdBefore3, JOB_PHOTOS.jonesBefore5, JOB_PHOTOS.leilaHoarder2],
   service: "Hoarder or Estate Cleanout",
   eyebrow: "Hoarder & Estate Cleanouts",
   headline: "Cleanouts Without Judgment",

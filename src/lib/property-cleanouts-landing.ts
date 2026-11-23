@@ -1,9 +1,12 @@
 import { Camera, ClipboardCheck, DoorOpen, KeyRound, Landmark, Leaf, ListChecks, Truck, Warehouse } from "lucide-react";
+import { JOB_PHOTOS } from "@/lib/job-photos";
 import type { ServiceLandingConfig } from "@/components/services/ServiceLandingPage";
 
 export const propertyCleanoutsLanding: ServiceLandingConfig = {
   page: "property-cleanouts",
   sourcePage: "/property-cleanouts",
+  heroPhoto: JOB_PHOTOS.leilaBefore1,
+  gallery: [JOB_PHOTOS.goldenBefore1, JOB_PHOTOS.leilaBefore2, JOB_PHOTOS.goldenBefore3, JOB_PHOTOS.leilaBefore4, JOB_PHOTOS.elmwoodBefore1, JOB_PHOTOS.elmwoodBefore3],
   service: "Property Cleanout",
   eyebrow: "For Landlords & Realtors",
   headline: "Property Cleanouts, Turned Fast",

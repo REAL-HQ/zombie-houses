@@ -1,9 +1,12 @@
 import { Armchair, Bath, BedDouble, Boxes, Camera, Hammer, House, Leaf, MessageSquare, Refrigerator, Truck } from "lucide-react";
+import { JOB_PHOTOS } from "@/lib/job-photos";
 import type { ServiceLandingConfig } from "@/components/services/ServiceLandingPage";
 
 export const junkLanding: ServiceLandingConfig = {
   page: "junk",
   sourcePage: "/junk",
+  heroPhoto: JOB_PHOTOS.truckJones1,
+  gallery: [JOB_PHOTOS.truckJones2, JOB_PHOTOS.jonesBefore1, JOB_PHOTOS.coolrdBefore4, JOB_PHOTOS.jonesBefore6, JOB_PHOTOS.coolrdBefore6, JOB_PHOTOS.jonesBefore4],
   service: "Junk Removal",
   eyebrow: "Tampa Bay Junk Removal",
   headline: "Junk Gone, Tampa Bay",
@@ -14,6 +17,13 @@ export const junkLanding: ServiceLandingConfig = {
     { title: "Get Your Quote", description: "We review it and text or call you with an upfront quote.", icon: MessageSquare },
     { title: "We Haul It", description: "We load, sweep up & take it away. You point, we lift.", icon: Truck },
   ],
+  feature: {
+    id: "yard",
+    heading: "Yard Cleanup & Debris Removal",
+    description: "Overgrown lots, curb piles & yard junk hauled off in one trip. Send photos & we'll quote it upfront.",
+    bullets: ["Branches, Brush & Yard Waste", "Curbside & Driveway Junk Piles", "Overgrown Lots & Fence Lines", "Old Sheds, Playsets & Patio Furniture"],
+    photos: [JOB_PHOTOS.yardTruckOvergrown, JOB_PHOTOS.yardJunkHouse, JOB_PHOTOS.yardTruckJunk],
+  },
   itemsHeading: "What We Take",
   items: [
     { title: "Furniture", icon: Armchair },
