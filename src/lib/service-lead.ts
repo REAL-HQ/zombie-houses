@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-export const SERVICE_TYPES = ["Junk Removal", "Hoarder or Estate Cleanout", "Property Cleanout", "Remodeling Consultation", "Other"] as const;
+// Stored values: never rename an existing entry (old leads & reports use them). Add new ones only.
+export const SERVICE_TYPES = ["Junk Removal", "Furniture Or Household Items", "Garage Or Storage Cleanout", "Property Cleanout", "Vacant Rental Or Move-Out", "Pre-Listing Or Estate Cleanout", "Hoarder or Estate Cleanout", "Heavy Clutter Or Possible Hazards", "Biohazard Or Crime Scene Cleanup", "Remodeling Consultation", "Other"] as const;
+export const JOB_SIZE_OPTIONS = ["A Few Items", "One Room", "Several Rooms", "Most Of The Property", "Unsure"] as const;
 export const TIMING_OPTIONS = ["ASAP", "This Week", "This Month", "Flexible"] as const;
 export const MAX_PHOTOS = 5;
 export const MAX_PHOTO_BYTES = 10 * 1024 * 1024;

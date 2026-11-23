@@ -1,10 +1,16 @@
 import { describe, expect, test } from 'bun:test';
 import { filterPossibleSellers, SERVICE_LEAD_STATUSES, SERVICE_PHOTO_URL_TTL, serviceLeadUpdateSchema, formatServiceLeadDate } from '../src/lib/service-lead-admin';
 import { serviceDestination } from '../src/lib/services-directory';
-import { zipFromSearch } from '../src/lib/service-lead';
+import { SERVICE_TYPES, serviceStepOneSchema, zipFromSearch } from '../src/lib/service-lead';
 
 const credentials = { pin: 'test-only', id: '11111111-1111-4111-8111-111111111111' };
 describe('service lead admin rules', () => {
+  test('accepts expanded service types without renaming stored values', () => {
+    const expected = ['Junk Removal', 'Furniture Or Household Items', 'Garage Or Storage Cleanout', 'Property Cleanout', 'Vacant Rental Or Move-Out', 'Pre-Listing Or Estate Cleanout', 'Hoarder or Estate Cleanout', 'Heavy Clutter Or Possible Hazards', 'Biohazard Or Crime Scene Cleanup', 'Remodeling Consultation', 'Other'];
+    expect([...SERVICE_TYPES]).toEqual(expected);
+    for (const service_type of expected) expect(serviceStepOneSchema.safeParse({ zip: '33602', service_type }).success).toBe(true);
+    expect(serviceStepOneSchema.safeParse({ zip: '33602', service_type: 'Hoarder Or Estate Cleanout' }).success).toBe(false);
+  });
   test('supports exactly the six service statuses', () => {
     expect(SERVICE_LEAD_STATUSES).toEqual(['new', 'contacted', 'quoted', 'booked', 'won', 'lost']);
     for (const status of SERVICE_LEAD_STATUSES) expect(serviceLeadUpdateSchema.safeParse({ ...credentials, status }).success).toBe(true);

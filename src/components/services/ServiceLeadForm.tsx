@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { BUSINESS } from "@/lib/business";
 import { track } from "@/lib/track";
-import { captureAttribution, SERVICE_TYPES, TIMING_OPTIONS, serviceStepOneSchema, serviceContactSchema, sellingValue, validatePhotos, zipFromSearch, type Attribution } from "@/lib/service-lead";
+import { captureAttribution, SERVICE_TYPES, TIMING_OPTIONS, JOB_SIZE_OPTIONS, serviceStepOneSchema, serviceContactSchema, sellingValue, validatePhotos, zipFromSearch, type Attribution } from "@/lib/service-lead";
 import { cn } from "@/lib/utils";
 
 export interface ServiceLeadFormProps {
@@ -28,6 +28,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
   const [zip, setZip] = useState("");
   const [serviceType, setServiceType] = useState(SERVICE_TYPES.find((service) => service === defaultService) ?? "");
   const [timing, setTiming] = useState("");
+  const [jobSize, setJobSize] = useState("");
   const [description, setDescription] = useState("");
   const [photos, setPhotos] = useState<File[]>([]);
   const [contact, setContact] = useState({ name: "", phone: "", email: "" });
@@ -110,6 +111,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
         ...result.data,
         email: result.data.email || null,
         timing: timing || null,
+        job_size: jobSize || null,
         description: description.trim() || null,
         photo_paths: photoPaths,
         thinking_of_selling: sellingValue(selling),
@@ -153,13 +155,22 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
     </section>
   );
 
-  // Compact (hero) form asks Timing on step 1 so all 3 steps are about the same height.
+  // Compact (hero) form asks Timing & About How Much? side by side on step 1 (sm+), so step 1 stays the same height & all 3 steps match.
   const timingField = (
-    <div className={gap}>
+    <div className={cn(gap, "min-w-0")}>
       <label htmlFor={`${id}-timing`} className="text-sm font-semibold">Timing</label>
       <Select value={timing} onValueChange={setTiming}>
-        <SelectTrigger id={`${id}-timing`} className={cn("text-base", fieldH)}><SelectValue placeholder="Choose Timing (Optional)" /></SelectTrigger>
+        <SelectTrigger id={`${id}-timing`} className={cn("text-base", fieldH)}><SelectValue placeholder={compact ? "Optional" : "Choose Timing (Optional)"} /></SelectTrigger>
         <SelectContent>{TIMING_OPTIONS.map((option) => <SelectItem key={option} value={option} className="min-h-12">{option}</SelectItem>)}</SelectContent>
+      </Select>
+    </div>
+  );
+  const jobSizeField = (
+    <div className={cn(gap, "min-w-0")}>
+      <label htmlFor={`${id}-size`} className="text-sm font-semibold">About How Much?</label>
+      <Select value={jobSize} onValueChange={setJobSize}>
+        <SelectTrigger id={`${id}-size`} className={cn("text-base", fieldH)}><SelectValue placeholder="Optional" /></SelectTrigger>
+        <SelectContent>{JOB_SIZE_OPTIONS.map((option) => <SelectItem key={option} value={option} className="min-h-12">{option}</SelectItem>)}</SelectContent>
       </Select>
     </div>
   );
@@ -191,7 +202,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
               <SelectContent>{SERVICE_TYPES.map((service) => <SelectItem key={service} value={service} className="min-h-12 whitespace-normal">{service.replace(" or ", " Or ")}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          {compact && timingField}
+          {compact && <div className="grid gap-3.5 sm:grid-cols-2 sm:gap-3 lg:gap-2.5">{timingField}{jobSizeField}</div>}
         </>}
         {step === 2 && <>
           {!compact && timingField}

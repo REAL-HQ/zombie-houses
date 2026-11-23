@@ -15,6 +15,13 @@
       "when": 1795457716709,
       "tag": "0001_add_photo_quote_requests",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795473468852,
+      "tag": "0002_add_service_leads_job_size",
+      "breakpoints": true
     }
   ]
 }

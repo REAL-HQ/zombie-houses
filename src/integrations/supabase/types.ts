@@ -245,6 +245,7 @@ export type Database = {
           description: string | null
           email: string | null
           id: string
+          job_size: string | null
           name: string
           notes: string | null
           phone: string
@@ -269,6 +270,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           id?: string
+          job_size?: string | null
           name: string
           notes?: string | null
           phone: string
@@ -293,6 +295,7 @@ export type Database = {
           description?: string | null
           email?: string | null
           id?: string
+          job_size?: string | null
           name?: string
           notes?: string | null
           phone?: string

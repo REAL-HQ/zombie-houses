@@ -78,7 +78,7 @@ function ServiceLeadCard({ lead, pin, onUpdated }: { lead: ServiceLead; pin: str
       <Field label="Phone"><a href={`tel:${lead.phone}`} className="underline underline-offset-4">{lead.phone}</a></Field>
       <Field label="Email">{lead.email ? <a href={`mailto:${lead.email}`} className="break-all underline underline-offset-4">{lead.email}</a> : "Not provided"}</Field>
       <Field label="ZIP">{lead.zip}</Field><Field label="Service Type">{lead.service_type}</Field>
-      <Field label="Timing">{lead.timing}</Field><Field label="Source Page">{lead.source_page}</Field>
+      <Field label="Timing">{lead.timing}</Field><Field label="About How Much?">{lead.job_size}</Field><Field label="Source Page">{lead.source_page}</Field>
       <Field label="SMS Consent">{lead.sms_consent ? "Yes" : "No"}</Field>
       <Field label="UTM Source">{lead.utm_source}</Field><Field label="UTM Medium">{lead.utm_medium}</Field><Field label="UTM Campaign">{lead.utm_campaign}</Field>
     </dl>
