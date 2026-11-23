@@ -41,7 +41,7 @@ function ComingSoonPage() {
     <section className="bg-service-background px-5 py-12 text-service-foreground md:px-8 md:py-16">
       <div className="mx-auto max-w-xl">
         <div className="rounded-lg border border-border bg-card p-5 text-card-foreground md:p-8">
-          <ServiceLeadForm key={sourcePage} defaultService="Other" sourcePage={sourcePage} buttonLabel="Get Notified" thankYouItems={[
+          <ServiceLeadForm key={sourcePage} defaultService="Other" sourcePage={sourcePage} buttonLabel="Get Notified" eyebrow="Service Request" thankYouItems={[
             "We review what you sent.",
             "We call or text you to talk it through.",
             "If we can't help yet, we'll point you to a specialist who can.",

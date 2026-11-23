@@ -19,9 +19,10 @@ export interface ServiceLeadFormProps {
   buttonLabel?: string;
   /** Custom thank-you steps; defaults to the standard three. */
   thankYouItems?: string[];
+  eyebrow?: string;
 }
 
-export function ServiceLeadForm({ defaultService, sourcePage, compact = false, buttonLabel = "Get My Free Quote", thankYouItems }: ServiceLeadFormProps) {
+export function ServiceLeadForm({ defaultService, sourcePage, compact = false, buttonLabel = "Get My Free Quote", thankYouItems, eyebrow = "Free Photo Quote" }: ServiceLeadFormProps) {
   const id = useId();
   const [step, setStep] = useState(1);
   const [zip, setZip] = useState("");
@@ -153,7 +154,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
     <form onSubmit={submit} onFocusCapture={start} onPointerDownCapture={start} className={cn("w-full text-card-foreground", compact ? "space-y-3.5" : "space-y-6")}>
       <div className="space-y-1.5">
         <div className="flex items-center justify-between gap-2">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Free Photo Quote</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{eyebrow}</p>
           <p className="text-xs font-semibold text-red" aria-live="polite">Step {step} of 3</p>
         </div>
         <div className="flex gap-1.5" aria-hidden="true">

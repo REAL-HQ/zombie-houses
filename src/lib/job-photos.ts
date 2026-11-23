@@ -1,5 +1,5 @@
 // Dolmar's own job photos (approved for use). Captions never include street addresses.
-import truckJones1Src from "@/assets/jobs/truck-jones-1.webp";
+import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street.webp";
 import truckJones2Src from "@/assets/jobs/truck-jones-2.webp";
 import jonesBefore1Src from "@/assets/jobs/jones-before-1.webp";
 import jonesBefore3Src from "@/assets/jobs/jones-before-3.webp";
@@ -31,10 +31,11 @@ import yardJunkHouseSrc from "@/assets/jobs/yard-junk-house.webp";
 import yardTruckOvergrownSrc from "@/assets/jobs/yard-truck-overgrown.webp";
 import conniewoodBefore1Src from "@/assets/jobs/conniewood-before-1.webp";
 
-export interface JobPhoto { src: string; alt: string; caption: string; before: boolean }
+export interface JobPhoto { src: string; alt: string; caption: string; before: boolean; objectPosition?: string }
 
 export const JOB_PHOTOS = {
-  truckJones1: { src: truckJones1Src, alt: "Zombie Houses truck parked beside a curbside pile of bagged junk & bins", caption: "Junk Haul, Tampa", before: false },
+  // AI-enhanced illustration (approved by Dolmar), not a real job photo: keep the caption generic, no city, no Before badge.
+  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie House Buyers truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "40% 55%" },
   truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: false },
   jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a house", caption: "Yard Debris, Tampa", before: true },
   jonesBefore3: { src: jonesBefore3Src, alt: "Living room filled with bags, clothes & stacked belongings", caption: "Hoarder Cleanout, Tampa", before: true },
