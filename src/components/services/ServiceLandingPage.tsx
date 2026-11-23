@@ -92,26 +92,26 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-service-background/95 via-service-background/85 to-service-background/95 md:bg-gradient-to-r md:from-service-background/95 md:via-service-background/80 md:to-service-background/70"
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:gap-6 md:px-8 md:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] lg:gap-x-14">
-          {/* Headline & subhead span the full width; on lg+ each stays on one line and scales down instead of wrapping. */}
-          <div className="min-w-0 lg:col-span-2">
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:gap-6 md:px-8 md:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)] lg:gap-x-10 lg:gap-y-4 lg:pb-8 lg:pt-6">
+          {/* Headline & subhead span the full width; on lg+ each stays on one line and scales down instead of wrapping. Sizes are kept tight so the whole photo | form row fits above the fold. */}
+          <div className="order-1 min-w-0 lg:order-none lg:col-span-2">
             <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">{config.eyebrow}</p>
-            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-3 md:text-5xl lg:whitespace-nowrap lg:text-[clamp(3rem,5.2vw,4.25rem)]">{config.headline}</h1>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-4 md:max-w-none md:text-lg lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.55vw,1.25rem)]">{config.subhead}</p>
+            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-2 md:text-5xl lg:mt-1 lg:whitespace-nowrap lg:text-[clamp(2.25rem,3.4vw,3.25rem)] lg:leading-[1.05]">{config.headline}</h1>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-3 md:max-w-none md:text-lg lg:mt-1.5 lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.25vw,1.125rem)]">{config.subhead}</p>
           </div>
-          {/* lg+: photo & form share one row and stretch to the same height; the photo fills its card (object-cover). The form card has a fixed min-height sized for its tallest step so nothing jumps between steps. */}
-          {config.heroPhoto && <div className="relative lg:h-full">
+          {/* lg+: photo & form share one row and stretch to the same height; the photo fills its card (object-cover). The form card height follows the viewport (100svh minus header & headline) so the bottom of both sits above the fold, clamped so every form step fits. Mobile: form comes right after the headline, photo below it. */}
+          {config.heroPhoto && <div className="relative order-3 lg:order-none lg:h-full">
             <JobPhotoFigure photo={config.heroPhoto} eager className="aspect-[21/9] shadow-2xl md:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto" />
           </div>}
-          <div aria-label="Quick Quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:min-h-[640px]">
+          <div aria-label="Quick Quote" className="order-2 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:order-none lg:h-[clamp(390px,calc(100svh-244px),560px)] lg:overflow-hidden lg:px-6 lg:py-5">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
           </div>
-          <ul className="grid grid-cols-2 gap-3 pt-1 md:pt-0 lg:col-span-2 lg:grid-cols-3 [&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(odd)]:col-span-1">
+          <ul className="order-4 grid grid-cols-2 gap-3 pt-1 md:pt-0 lg:order-none lg:col-span-2 lg:grid-cols-3 [&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(odd)]:col-span-1">
             {config.bullets.map((bullet) => <li key={bullet} className="flex items-center gap-3 rounded-lg border border-service-border bg-service-background/70 px-3 py-3 text-sm font-semibold shadow-lg md:px-5 md:py-4 md:text-base">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-red/15 md:size-9"><Check className="size-4 text-red md:size-5" aria-hidden="true" /></span>{bullet}
             </li>)}
           </ul>
-          {config.photoQuote && <a href="#photo-quote" onClick={() => track("click_photo_quote", { page: config.page })} className="group flex min-h-14 items-center justify-between gap-3 rounded-lg border border-red/60 bg-red/10 px-4 py-3 text-sm font-bold text-service-foreground transition-colors hover:bg-red/20 md:px-5 md:text-base lg:col-span-2">
+          {config.photoQuote && <a href="#photo-quote" onClick={() => track("click_photo_quote", { page: config.page })} className="group order-5 flex min-h-14 items-center justify-between gap-3 rounded-lg border border-red/60 bg-red/10 px-4 py-3 text-sm font-bold text-service-foreground transition-colors hover:bg-red/20 md:px-5 md:text-base lg:col-span-2">
             <span className="flex items-center gap-3"><Camera className="size-5 shrink-0 text-red" aria-hidden="true" />Get a Photo Quote: See Your Price Range in About a Minute</span>
             <ArrowRight className="size-5 shrink-0 text-red motion-safe:transition-transform motion-safe:group-hover:translate-x-1" aria-hidden="true" />
           </a>}

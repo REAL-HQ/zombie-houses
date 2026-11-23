@@ -2,8 +2,8 @@
 import goldenBefore6Src from "@/assets/jobs/golden-before-6.webp";
 import thumbLeilaBefore3Src from "@/assets/jobs/thumb-leila-before-3.webp";
 import thumbBoardwalkBefore2Src from "@/assets/jobs/thumb-boardwalk-before-2.webp";
-import thumbElmwoodBefore5Src from "@/assets/jobs/thumb-elmwood-before-5.webp";
-import thumbTruckBoardwalk1Src from "@/assets/jobs/thumb-truck-boardwalk-1.webp";
+import thumbCourtlandCavedCeilingSrc from "@/assets/jobs/thumb-courtland-caved-ceiling.webp";
+import thumbLeilaHoarder2Src from "@/assets/jobs/thumb-leila-hoarder-2.webp";
 import courtlandBefore1Src from "@/assets/jobs/courtland-before-1.webp";
 import courtlandBefore2Src from "@/assets/jobs/courtland-before-2.webp";
 import courtlandBefore3Src from "@/assets/jobs/courtland-before-3.webp";
@@ -84,8 +84,8 @@ export const JOB_PHOTOS = {
 
 // Small job thumbnails for the shared "Meet Dolmar & Keisha" section (not used elsewhere on the landing pages).
 export const OWNER_THUMBS: readonly JobPhoto[] = [
+  { src: thumbCourtlandCavedCeilingSrc, alt: "Room with a caved-in ceiling, hanging insulation & debris piled on the floor", caption: "Caved-In Ceiling, Tampa", before: true },
   { src: thumbLeilaBefore3Src, alt: "Hoarder house room piled high with clutter under a gutted ceiling", caption: "Hoarder House, Tampa", before: true },
   { src: thumbBoardwalkBefore2Src, alt: "Fire-damaged room with burned-out ceiling & exposed rafters", caption: "Fire Damage, Holiday", before: true },
-  { src: thumbElmwoodBefore5Src, alt: "Gutted garage with stained concrete floor & stripped walls", caption: "Gutted Garage, Tampa", before: true },
-  { src: thumbTruckBoardwalk1Src, alt: "Zombie House Hunter truck parked in front of a burned-out house", caption: "On the Job, Holiday", before: false },
+  { src: thumbLeilaHoarder2Src, alt: "Bedroom buried in boxes, papers & trash", caption: "Hoarder Cleanout, Tampa", before: true },
 ];

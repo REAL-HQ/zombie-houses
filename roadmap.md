@@ -10,4 +10,6 @@
 - [x] Add approved pricing, Photo Quote form, and service-page sections.
 - [x] Add supported server-function endpoint and PIN-protected Photo Quotes review.
 - [x] Verify 52 new pricing/security tests, anonymous privacy, and full manual-fallback submission/admin readback; commit without publishing.
-- [ ] Activate and verify live AI estimates: waiting for Dolmar to approve an available replacement for Gemini 2.5 Flash, retired October 20, 2026. Gemini 3.8 Flash is available; no model substituted.
+- [x] Activate approved Gemini 3.8 Flash and run S1–S4 directly through the gateway without database or storage writes.
+- [x] Delete only the specified earlier QA request and its private photo.
+- [x] Apply two byte-identical owner thumbnails and supplied registry/hero/form files; verify 53 tests and all three pages at desktop/mobile sizes; commit without publishing.

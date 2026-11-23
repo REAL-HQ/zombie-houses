@@ -130,8 +130,11 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
     }
   }
 
+  // Compact (hero) form: lg+ uses shorter controls so every step fits a card sized to the viewport (hero stays above the fold).
+  const fieldH = compact ? "h-12 md:h-14 lg:h-11" : "h-14";
+  const gap = compact ? "space-y-1.5 lg:space-y-1" : "space-y-2";
   const headingClass = compact
-    ? "font-display text-xl font-extrabold leading-tight tracking-normal text-foreground md:text-2xl"
+    ? "font-display text-xl font-extrabold leading-tight tracking-normal text-foreground md:text-2xl lg:text-xl"
     : "font-display text-2xl font-extrabold leading-tight tracking-normal text-foreground";
   if (submitted) return (
     <section className="w-full space-y-6 text-card-foreground" aria-live="polite">
@@ -151,7 +154,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
   );
 
   return (
-    <form onSubmit={submit} onFocusCapture={start} onPointerDownCapture={start} className={cn("w-full text-card-foreground", compact ? "space-y-3.5 lg:flex lg:h-full lg:flex-col" : "space-y-6")}>
+    <form onSubmit={submit} onFocusCapture={start} onPointerDownCapture={start} className={cn("w-full text-card-foreground", compact ? "space-y-3.5 lg:flex lg:h-full lg:flex-col lg:space-y-3" : "space-y-6")}>
       <div className="space-y-1.5">
         <div className="flex items-center justify-between gap-2">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{eyebrow}</p>
@@ -164,63 +167,63 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
         </div>
         <h2 ref={heading} tabIndex={-1} className={headingClass}>{step === 1 ? buttonLabel : step === 2 ? "Tell Us What You Need" : "Where Can We Reach You?"}</h2>
       </div>
-      <fieldset disabled={busy} className={cn("min-w-0", compact ? "space-y-3.5 lg:flex lg:flex-1 lg:flex-col" : "space-y-5")}>
+      <fieldset disabled={busy} className={cn("min-w-0", compact ? "space-y-3.5 lg:-mx-1 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:space-y-2.5 lg:overflow-y-auto lg:px-1" : "space-y-5")}>
         {step === 1 && <>
           <div className="space-y-1.5">
             <label htmlFor={`${id}-zip`} className="text-sm font-semibold">ZIP Code</label>
-            <Input id={`${id}-zip`} value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} required pattern="[0-9]{5}" maxLength={5} inputMode="numeric" autoComplete="postal-code" placeholder="5-Digit ZIP Code" className={cn("text-base", compact ? "h-12 md:h-14" : "h-14")} />
+            <Input id={`${id}-zip`} value={zip} onChange={(event) => setZip(event.target.value.replace(/\D/g, "").slice(0, 5))} required pattern="[0-9]{5}" maxLength={5} inputMode="numeric" autoComplete="postal-code" placeholder="5-Digit ZIP Code" className={cn("text-base", fieldH)} />
           </div>
           <div className="space-y-1.5">
             <label htmlFor={`${id}-service`} className="text-sm font-semibold">Service Type</label>
             <Select value={serviceType} onValueChange={setServiceType}>
-              <SelectTrigger id={`${id}-service`} className={cn("whitespace-normal text-left text-base [&>span]:line-clamp-none", compact ? "min-h-12 md:min-h-14" : "min-h-14")}><SelectValue placeholder="Choose a Service" /></SelectTrigger>
+              <SelectTrigger id={`${id}-service`} className={cn("whitespace-normal text-left text-base [&>span]:line-clamp-none", compact ? "min-h-12 md:min-h-14 lg:min-h-11 lg:h-11" : "min-h-14")}><SelectValue placeholder="Choose a Service" /></SelectTrigger>
               <SelectContent>{SERVICE_TYPES.map((service) => <SelectItem key={service} value={service} className="min-h-12 whitespace-normal">{service}</SelectItem>)}</SelectContent>
             </Select>
           </div>
         </>}
         {step === 2 && <>
-          <div className="space-y-2">
+          <div className={gap}>
             <label htmlFor={`${id}-timing`} className="text-sm font-semibold">Timing</label>
             <Select value={timing} onValueChange={setTiming}>
-              <SelectTrigger id={`${id}-timing`} className="h-14 text-base"><SelectValue placeholder="Choose Timing (Optional)" /></SelectTrigger>
+              <SelectTrigger id={`${id}-timing`} className={cn("text-base", fieldH)}><SelectValue placeholder="Choose Timing (Optional)" /></SelectTrigger>
               <SelectContent>{TIMING_OPTIONS.map((option) => <SelectItem key={option} value={option} className="min-h-12">{option}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div className="space-y-2">
+          <div className={gap}>
             <label htmlFor={`${id}-description`} className="text-sm font-semibold">Short Description (Optional)</label>
-            <Textarea id={`${id}-description`} value={description} maxLength={5000} onChange={(event) => setDescription(event.target.value)} className="min-h-28 text-base" />
+            <Textarea id={`${id}-description`} value={description} maxLength={5000} onChange={(event) => setDescription(event.target.value)} className={cn("text-base", compact ? "min-h-28 lg:min-h-0 lg:h-14 lg:resize-none" : "min-h-28")} />
           </div>
-          <div className="space-y-3">
+          <div className={compact ? "space-y-3 lg:space-y-1.5" : "space-y-3"}>
             <p className="text-sm font-semibold">Photos (Optional) · Up to 5 Images, 10MB Each</p>
             <Input ref={fileInput} type="file" accept="image/*" multiple aria-label="Upload Photos" className="sr-only" tabIndex={-1} onChange={(event) => { addPhotos(Array.from(event.target.files ?? [])); event.target.value = ""; }} />
-            <Button type="button" variant="outline" className="min-h-12 w-full" disabled={photos.length >= 5} onClick={() => fileInput.current?.click()}><Upload />Add Photos</Button>
-            {photos.length > 0 && <ul className="space-y-2">{photos.map((photo, index) => <li key={`${photo.name}-${index}`} className="flex min-h-12 items-center justify-between gap-3 border-b border-border text-sm"><span className="min-w-0 break-all">{photo.name}</span><Button type="button" variant="ghost" size="icon" className="size-12 shrink-0" aria-label={`Remove ${photo.name}`} title="Remove Photo" onClick={() => { setPhotos(photos.filter((_, photoIndex) => photoIndex !== index)); setError(""); }}><X /></Button></li>)}</ul>}
+            <Button type="button" variant="outline" className={cn("w-full", compact ? "min-h-12 lg:min-h-10 lg:h-10" : "min-h-12")} disabled={photos.length >= 5} onClick={() => fileInput.current?.click()}><Upload />Add Photos</Button>
+            {photos.length > 0 && <ul className={compact ? "space-y-2 lg:flex lg:flex-wrap lg:gap-1.5 lg:space-y-0" : "space-y-2"}>{photos.map((photo, index) => <li key={`${photo.name}-${index}`} className={cn("flex min-h-12 items-center justify-between gap-3 border-b border-border text-sm", compact && "lg:min-h-0 lg:max-w-[48%] lg:gap-1 lg:rounded-full lg:border lg:py-0.5 lg:pl-3 lg:text-xs")}><span className={cn("min-w-0 break-all", compact && "lg:truncate lg:break-normal")}>{photo.name}</span><Button type="button" variant="ghost" size="icon" className={cn("size-12 shrink-0", compact && "lg:size-7")} aria-label={`Remove ${photo.name}`} title="Remove Photo" onClick={() => { setPhotos(photos.filter((_, photoIndex) => photoIndex !== index)); setError(""); }}><X /></Button></li>)}</ul>}
           </div>
         </>}
         {step === 3 && <>
-          {/* Compact (hero) form: name & phone side by side on lg+ so step 3 fits the same card height as steps 1 & 2. */}
-          <div className={cn(compact ? "space-y-3.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0" : "space-y-5")}>
-          {(["name", "phone", "email"] as const).map((field) => <div className={cn("space-y-2", compact && field === "email" && "lg:col-span-2")} key={field}>
+          {/* Compact (hero) form: on lg+ name|phone and email|selling sit side by side so step 3 fits the viewport-sized card. */}
+          <div className={cn(compact ? "space-y-3.5 lg:grid lg:grid-cols-2 lg:gap-x-3 lg:gap-y-2 lg:space-y-0" : "space-y-5")}>
+          {(["name", "phone", "email"] as const).map((field) => <div className={gap} key={field}>
               <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
-              <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className="h-14 text-base" />
+              <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className={cn("text-base", compact ? "h-12 md:h-14 lg:h-11" : "h-14")} />
             </div>)}
-          </div>
-          <div className="space-y-2">
-            <label htmlFor={`${id}-selling`} className="text-sm font-semibold">Thinking About Selling the Property? (Optional)</label>
+          <div className={gap}>
+            <label htmlFor={`${id}-selling`} className="text-sm font-semibold">{compact ? <><span className="lg:hidden">Thinking About Selling the Property? (Optional)</span><span className="hidden lg:inline">Selling the Property?</span></> : "Thinking About Selling the Property? (Optional)"}</label>
             <Select value={selling} onValueChange={setSelling}>
-              <SelectTrigger id={`${id}-selling`} className="h-14 text-base"><SelectValue placeholder="Choose an Answer" /></SelectTrigger>
+              <SelectTrigger id={`${id}-selling`} className={cn("text-base", compact ? "h-12 md:h-14 lg:h-11" : "h-14")}><SelectValue placeholder="Choose an Answer" /></SelectTrigger>
               <SelectContent><SelectItem value="yes" className="min-h-12">Yes</SelectItem><SelectItem value="no" className="min-h-12">No</SelectItem><SelectItem value="unsure" className="min-h-12">Not Sure</SelectItem></SelectContent>
             </Select>
           </div>
+          </div>
           <div className="flex items-start gap-3">
-            <Checkbox id={`${id}-consent`} checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked === true)} className="mt-1 size-6 shrink-0" />
-            <label htmlFor={`${id}-consent`} className={cn("text-sm leading-relaxed text-muted-foreground", compact && "lg:text-xs")}>By checking this box, I agree to receive text messages from {BUSINESS.legalName} about my request at the number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of any purchase or service. See our <Link to="/privacy" className="font-semibold text-red underline">Privacy Policy</Link> and <Link to="/sms-terms" className="font-semibold text-red underline">SMS Terms</Link>.</label>
+            <Checkbox id={`${id}-consent`} checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked === true)} className={cn("mt-1 size-6 shrink-0", compact && "lg:mt-0.5 lg:size-5")} />
+            <label htmlFor={`${id}-consent`} className={cn("text-sm leading-relaxed text-muted-foreground", compact && "lg:text-[11px] lg:leading-snug")}>By checking this box, I agree to receive text messages from {BUSINESS.legalName} about my request at the number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of any purchase or service. See our <Link to="/privacy" className="font-semibold text-red underline">Privacy Policy</Link> and <Link to="/sms-terms" className="font-semibold text-red underline">SMS Terms</Link>.</label>
           </div>
         </>}
         {error && <p role="alert" className="break-words text-sm font-medium text-destructive">{error}</p>}
-        <div className={cn("flex gap-3", compact && "lg:!mt-auto lg:pt-3.5")}>
-          {step > 1 && <Button type="button" variant="outline" className="min-h-14 px-4" onClick={() => changeStep(step - 1)} aria-label="Previous Step" title="Previous Step"><ArrowLeft /></Button>}
-          <Button type="submit" disabled={busy} className={cn("min-w-0 flex-1 whitespace-normal px-4 text-base font-bold", compact ? "min-h-12 md:min-h-14" : "min-h-14")}>{busy ? <><Loader2 className="motion-safe:animate-spin" />Sending...</> : <>{step === 2 ? "Next" : buttonLabel}<ArrowRight /></>}</Button>
+        <div className={cn("flex gap-3", compact && "lg:!mt-auto lg:pt-2")}>
+          {step > 1 && <Button type="button" variant="outline" className={cn("px-4", compact ? "min-h-12 md:min-h-14 lg:min-h-12" : "min-h-14")} onClick={() => changeStep(step - 1)} aria-label="Previous Step" title="Previous Step"><ArrowLeft /></Button>}
+          <Button type="submit" disabled={busy} className={cn("min-w-0 flex-1 whitespace-normal px-4 text-base font-bold", compact ? "min-h-12 md:min-h-14 lg:min-h-12" : "min-h-14")}>{busy ? <><Loader2 className="motion-safe:animate-spin" />Sending...</> : <>{step === 2 ? "Next" : buttonLabel}<ArrowRight /></>}</Button>
         </div>
       </fieldset>
     </form>

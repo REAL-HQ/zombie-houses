@@ -1,13 +1,14 @@
 import { describe, expect, test } from 'bun:test';
 import { AD_ANCHOR_PRICE, ADD_ONS, computeQuote, FIRST_JOB_DISCOUNT, HOARDER_SURCHARGE, LONG_CARRY_FEET, MULTI_TRUCK_DISCOUNT, NOT_ACCEPTED, PRICING_VERSION, SINGLE_ITEM, TRUCK_CUBIC_YARDS, TRUCK_TIERS, type AiEstimate, type QuoteAnswers } from '../src/lib/junk-quote-pricing';
 import { quoteEstimateInput, QUOTE_PHOTO_URL_TTL } from '../src/lib/photo-quote-schema';
-import { readEstimateStream, sanitizeEstimate, sessionProof, verifySession } from '../src/lib/photo-quote.server';
+import { PHOTO_QUOTE_MODEL, readEstimateStream, sanitizeEstimate, sessionProof, verifySession } from '../src/lib/photo-quote.server';
 
 const base: AiEstimate = { summary: 'Furniture and bags', item_count: 2, single_item: false, heavy_single_item: false, truck_eighths: 1, cubic_yards: 1.875, over_one_truck: false, hoarder_conditions: false, mattresses: 0, tires: 0, tires_with_rim: 0, freon_appliances: 0, tvs_monitors: 0, hot_tubs: 0, pianos_safes_pool_tables: 0, heavy_material_cubic_yards: 0, prohibited_items: [], not_junk_photo: false, confidence: 'high' };
 const answers: QuoteAnswers = { location: 'curbside', stairsFlights: 0, longCarry: false, heavyMaterial: false, hoarder: false };
 const estimate = (patch: Partial<AiEstimate> = {}) => ({ ...base, ...patch });
 
 describe('Dolmar approved Photo Quote pricing', () => {
+  test('uses Dolmar-approved Gemini 3.8 Flash vision model', () => expect(PHOTO_QUOTE_MODEL).toBe('google/gemini-3.8-flash'));
   test('pricing version is November 23 and provisional truck is 15 cubic yards', () => { expect(PRICING_VERSION).toBe('2026-11-23'); expect(TRUCK_CUBIC_YARDS).toBe(15); });
   test('ad anchor is $99', () => expect(AD_ANCHOR_PRICE).toBe(99));
   for (const [location, heavy, price] of [['curbside', false, 99], ['inside', false, 139], ['curbside', true, 169]] as const) {

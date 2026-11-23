@@ -1,9 +1,8 @@
 import { TRUCK_CUBIC_YARDS, type AiEstimate } from "./junk-quote-pricing";
 import { createLovableAiGatewayRunIdFetch } from "./photo-quote-run-id.server";
 
-// The requested Gemini 2.5 Flash retired on 2026-10-20. Do not substitute a model
-// without Dolmar's approval. Set this to an approved, catalog-verified model to activate AI.
-export const PHOTO_QUOTE_MODEL: string | null = null;
+// Gemini 3.8 Flash vision was approved by Dolmar on 2026-11-23.
+export const PHOTO_QUOTE_MODEL: string | null = "google/gemini-3.8-flash";
 
 export async function sessionProof(folder: string, expires: number, secret: string) {
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
