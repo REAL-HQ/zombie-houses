@@ -4,6 +4,10 @@ import thumbLeilaBefore3Src from "@/assets/jobs/thumb-leila-before-3.webp";
 import thumbBoardwalkBefore2Src from "@/assets/jobs/thumb-boardwalk-before-2.webp";
 import thumbElmwoodBefore5Src from "@/assets/jobs/thumb-elmwood-before-5.webp";
 import thumbTruckBoardwalk1Src from "@/assets/jobs/thumb-truck-boardwalk-1.webp";
+import courtlandBefore1Src from "@/assets/jobs/courtland-before-1.webp";
+import courtlandBefore2Src from "@/assets/jobs/courtland-before-2.webp";
+import courtlandBefore3Src from "@/assets/jobs/courtland-before-3.webp";
+import courtlandBefore4Src from "@/assets/jobs/courtland-before-4.webp";
 import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street-v2.webp";
 import truckJones2Src from "@/assets/jobs/truck-jones-2.webp";
 import jonesBefore1Src from "@/assets/jobs/jones-before-1.webp";
@@ -71,6 +75,10 @@ export const JOB_PHOTOS = {
   yardTruckJunk: { src: yardTruckJunkSrc, alt: "Zombie House Buyers truck beside a curbside pile of yard junk, bins & bags", caption: "Yard Cleanup, Tampa", before: false },
   yardJunkHouse: { src: yardJunkHouseSrc, alt: "Front yard & driveway piled with bags, bins & debris before haul-off", caption: "Front Yard Junk, Tampa", before: true },
   yardTruckOvergrown: { src: yardTruckOvergrownSrc, alt: "Zombie House Buyers truck on a gravel drive in an overgrown lot in front of a red house", caption: "Overgrown Lot, Tampa Bay", before: false },
+  courtlandBefore1: { src: courtlandBefore1Src, alt: "Room buried in fallen insulation under a collapsed ceiling", caption: "Collapsed Ceiling, Tampa", before: true },
+  courtlandBefore2: { src: courtlandBefore2Src, alt: "Kitchen with insulation hanging from a caved-in ceiling & debris on the floor", caption: "Kitchen Ceiling Collapse, Tampa", before: true },
+  courtlandBefore3: { src: courtlandBefore3Src, alt: "Gutted room with the floor covered in pink insulation & debris", caption: "Insulation & Debris, Tampa", before: true },
+  courtlandBefore4: { src: courtlandBefore4Src, alt: "Overgrown backyard with a falling-down shed, scrap wood & yard debris", caption: "Shed & Yard Debris, Tampa", before: true },
   goldenBefore6: { src: goldenBefore6Src, alt: "Overgrown backyard with a collapsing wood fence & shed buried in brush", caption: "Overgrown Yard, Tampa", before: true },
 } satisfies Record<string, JobPhoto>;
 

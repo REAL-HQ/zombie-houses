@@ -6,7 +6,7 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   page: "property-cleanouts",
   sourcePage: "/property-cleanouts",
   heroPhoto: JOB_PHOTOS.leilaBefore1,
-  gallery: [JOB_PHOTOS.goldenBefore1, JOB_PHOTOS.leilaBefore2, JOB_PHOTOS.goldenBefore3, JOB_PHOTOS.leilaBefore4, JOB_PHOTOS.elmwoodBefore1, JOB_PHOTOS.elmwoodBefore3],
+  gallery: [JOB_PHOTOS.courtlandBefore1, JOB_PHOTOS.leilaBefore2, JOB_PHOTOS.goldenBefore3, JOB_PHOTOS.leilaBefore4, JOB_PHOTOS.courtlandBefore2, JOB_PHOTOS.elmwoodBefore3],
   service: "Property Cleanout",
   eyebrow: "For Landlords & Realtors",
   headline: "Property Cleanouts, Turned Fast",

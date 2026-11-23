@@ -6,7 +6,7 @@ export const junkLanding: ServiceLandingConfig = {
   page: "junk",
   sourcePage: "/junk",
   heroPhoto: JOB_PHOTOS.junkHeroStreet,
-  gallery: [JOB_PHOTOS.truckJones2, JOB_PHOTOS.jonesBefore1, JOB_PHOTOS.coolrdBefore4, JOB_PHOTOS.jonesBefore6, JOB_PHOTOS.coolrdBefore6, JOB_PHOTOS.jonesBefore4],
+  gallery: [JOB_PHOTOS.truckJones2, JOB_PHOTOS.jonesBefore1, JOB_PHOTOS.courtlandBefore4, JOB_PHOTOS.jonesBefore6, JOB_PHOTOS.coolrdBefore6, JOB_PHOTOS.jonesBefore4],
   service: "Junk Removal",
   eyebrow: "Tampa Bay Junk Removal",
   headline: "Junk Gone, Tampa Bay",
