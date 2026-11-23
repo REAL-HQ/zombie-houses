@@ -125,6 +125,81 @@ export type Database = {
         }
         Relationships: []
       }
+      service_leads: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string
+          photo_paths: string[] | null
+          referrer: string | null
+          service_type: string
+          sms_consent: boolean
+          sms_consent_at: string | null
+          source_page: string | null
+          status: string
+          thinking_of_selling: boolean | null
+          timing: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          zip: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone: string
+          photo_paths?: string[] | null
+          referrer?: string | null
+          service_type: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          source_page?: string | null
+          status?: string
+          thinking_of_selling?: boolean | null
+          timing?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          zip: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string
+          photo_paths?: string[] | null
+          referrer?: string | null
+          service_type?: string
+          sms_consent?: boolean
+          sms_consent_at?: string | null
+          source_page?: string | null
+          status?: string
+          thinking_of_selling?: boolean | null
+          timing?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          zip?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -13,9 +13,13 @@ import { Route as WatchRouteImport } from './routes/watch'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as PropertyCleanoutsRouteImport } from './routes/property-cleanouts'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as JunkRouteImport } from './routes/junk'
 import { Route as DesignRouteImport } from './routes/design'
+import { Route as CleanoutsRouteImport } from './routes/cleanouts'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RescueIndexRouteImport } from './routes/rescue/index'
@@ -43,9 +47,19 @@ const SmsTermsRoute = SmsTermsRouteImport.update({
   path: '/sms-terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PropertyCleanoutsRoute = PropertyCleanoutsRouteImport.update({
+  id: '/property-cleanouts',
+  path: '/property-cleanouts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -53,9 +67,19 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JunkRoute = JunkRouteImport.update({
+  id: '/junk',
+  path: '/junk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignRoute = DesignRouteImport.update({
   id: '/design',
   path: '/design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CleanoutsRoute = CleanoutsRouteImport.update({
+  id: '/cleanouts',
+  path: '/cleanouts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplyRoute = ApplyRouteImport.update({
@@ -93,9 +117,13 @@ const ApiPublicRefreshInstagramTokenRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/cleanouts': typeof CleanoutsRoute
   '/design': typeof DesignRoute
+  '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
+  '/property-cleanouts': typeof PropertyCleanoutsRoute
   '/sell': typeof SellRoute
+  '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
@@ -108,9 +136,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/cleanouts': typeof CleanoutsRoute
   '/design': typeof DesignRoute
+  '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
+  '/property-cleanouts': typeof PropertyCleanoutsRoute
   '/sell': typeof SellRoute
+  '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
@@ -124,9 +156,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/cleanouts': typeof CleanoutsRoute
   '/design': typeof DesignRoute
+  '/junk': typeof JunkRoute
   '/privacy': typeof PrivacyRoute
+  '/property-cleanouts': typeof PropertyCleanoutsRoute
   '/sell': typeof SellRoute
+  '/services': typeof ServicesRoute
   '/sms-terms': typeof SmsTermsRoute
   '/sponsors': typeof SponsorsRoute
   '/terms': typeof TermsRoute
@@ -141,9 +177,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/apply'
+    | '/cleanouts'
     | '/design'
+    | '/junk'
     | '/privacy'
+    | '/property-cleanouts'
     | '/sell'
+    | '/services'
     | '/sms-terms'
     | '/sponsors'
     | '/terms'
@@ -156,9 +196,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/apply'
+    | '/cleanouts'
     | '/design'
+    | '/junk'
     | '/privacy'
+    | '/property-cleanouts'
     | '/sell'
+    | '/services'
     | '/sms-terms'
     | '/sponsors'
     | '/terms'
@@ -171,9 +215,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/apply'
+    | '/cleanouts'
     | '/design'
+    | '/junk'
     | '/privacy'
+    | '/property-cleanouts'
     | '/sell'
+    | '/services'
     | '/sms-terms'
     | '/sponsors'
     | '/terms'
@@ -187,9 +235,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApplyRoute: typeof ApplyRoute
+  CleanoutsRoute: typeof CleanoutsRoute
   DesignRoute: typeof DesignRoute
+  JunkRoute: typeof JunkRoute
   PrivacyRoute: typeof PrivacyRoute
+  PropertyCleanoutsRoute: typeof PropertyCleanoutsRoute
   SellRoute: typeof SellRoute
+  ServicesRoute: typeof ServicesRoute
   SmsTermsRoute: typeof SmsTermsRoute
   SponsorsRoute: typeof SponsorsRoute
   TermsRoute: typeof TermsRoute
@@ -230,11 +282,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SmsTermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sell': {
       id: '/sell'
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/property-cleanouts': {
+      id: '/property-cleanouts'
+      path: '/property-cleanouts'
+      fullPath: '/property-cleanouts'
+      preLoaderRoute: typeof PropertyCleanoutsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -244,11 +310,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/junk': {
+      id: '/junk'
+      path: '/junk'
+      fullPath: '/junk'
+      preLoaderRoute: typeof JunkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/design': {
       id: '/design'
       path: '/design'
       fullPath: '/design'
       preLoaderRoute: typeof DesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cleanouts': {
+      id: '/cleanouts'
+      path: '/cleanouts'
+      fullPath: '/cleanouts'
+      preLoaderRoute: typeof CleanoutsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apply': {
@@ -299,9 +379,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApplyRoute: ApplyRoute,
+  CleanoutsRoute: CleanoutsRoute,
   DesignRoute: DesignRoute,
+  JunkRoute: JunkRoute,
   PrivacyRoute: PrivacyRoute,
+  PropertyCleanoutsRoute: PropertyCleanoutsRoute,
   SellRoute: SellRoute,
+  ServicesRoute: ServicesRoute,
   SmsTermsRoute: SmsTermsRoute,
   SponsorsRoute: SponsorsRoute,
   TermsRoute: TermsRoute,
@@ -314,3 +398,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
