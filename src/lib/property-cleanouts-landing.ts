@@ -33,8 +33,8 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
     description: "Got a rental you're done with? We also buy properties as-is, tenants or not. Ask about both.",
     buttonLabel: "See Selling Options",
   },
-  ownerHeading: "Meet Dolmar",
-  ownerDescription: "I'm Dolmar Cross. I buy & rehab Tampa properties myself, so I know what a fast, clean turnover is worth. You'll deal with me & my crew directly.",
+  ownerHeading: "Meet Dolmar & Keisha",
+  ownerDescription: "We're Dolmar & Keisha Cross. We buy & rehab Tampa properties ourselves, so we know what a fast, clean turnover is worth. You'll deal with us & our crew directly.",
   faqs: [
     { question: "Do I Need to Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
     { question: "Can You Handle Repeat Turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },

@@ -32,8 +32,8 @@ export const junkLanding: ServiceLandingConfig = {
     { title: "Realtors" },
     { title: "Families Clearing an Estate", to: "/cleanouts" },
   ],
-  ownerHeading: "Meet Dolmar",
-  ownerDescription: "I'm Dolmar Cross. I've spent years buying & rehabbing Tampa houses most people wouldn't walk into. My crew knows how to clear a property fast and leave it clean. When you call, you're dealing with a local owner, not a call center.",
+  ownerHeading: "Meet Dolmar & Keisha",
+  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing Tampa houses most people wouldn't walk into. Our crew knows how to clear a property fast and leave it clean. When you call, you're dealing with local owners, not a call center.",
   related: [
     { title: "Hoarder & Estate Cleanouts", to: "/cleanouts" },
     { title: "Property Cleanouts", to: "/property-cleanouts" },

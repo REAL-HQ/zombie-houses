@@ -8,6 +8,7 @@ import { ServiceNoticeBand } from "./ServiceNoticeBand";
 import { track } from "@/lib/track";
 import logo from "@/assets/zombie-houses-logo.png";
 import heroBg from "@/assets/recent-3.jpg";
+import ownerPhoto from "@/assets/hero-couple.jpg";
 
 type ServiceLink = "/cleanouts" | "/property-cleanouts" | "/sell";
 export interface ServiceLandingConfig {
@@ -143,9 +144,12 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
       </section>}
 
       <section className="border-y border-service-border bg-service-surface">
-        <div className={`${sectionClass} grid gap-6 md:grid-cols-[1fr_2fr] md:gap-16`}>
-          <h2 className={headingClass}>{config.ownerHeading}</h2>
-          <p className="max-w-2xl text-lg leading-relaxed text-service-foreground md:text-xl">{config.ownerDescription}</p>
+        <div className={`${sectionClass} grid items-center gap-6 md:grid-cols-2 md:gap-14`}>
+          <img src={ownerPhoto} alt="Dolmar & Keisha Cross" loading="lazy" className="aspect-[4/5] w-full rounded-xl border border-service-border object-cover object-[52%_center] md:aspect-square" />
+          <div className="space-y-4">
+            <h2 className={headingClass}>{config.ownerHeading}</h2>
+            <p className="max-w-2xl text-lg leading-relaxed text-service-foreground md:text-xl">{config.ownerDescription}</p>
+          </div>
         </div>
       </section>
 

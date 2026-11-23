@@ -30,8 +30,8 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     buttonLabel: "See My Selling Options",
     quoteLinkLabel: "Or Keep Going With a Cleanout Quote",
   },
-  ownerHeading: "Meet Dolmar",
-  ownerDescription: "I'm Dolmar Cross. I've spent years buying & rehabbing Tampa houses most people wouldn't walk into. My crew knows how to clear a property fast and leave it clean. When you call, you're dealing with a local owner, not a call center. I've walked into a lot of houses like this. Nobody gets judged here.",
+  ownerHeading: "Meet Dolmar & Keisha",
+  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing Tampa houses most people wouldn't walk into. Our crew knows how to clear a property fast and leave it clean. When you call, you're dealing with local owners, not a call center. We've walked into a lot of houses like this. Nobody gets judged here.",
   faqs: [
     { question: "Do I Need to Be There?", answer: "Not always. We can plan access with you or a family member ahead of time." },
     { question: "What Happens to Items Worth Keeping?", answer: "We set aside anything you ask us to look for, plus photos, papers & keepsakes we come across." },
