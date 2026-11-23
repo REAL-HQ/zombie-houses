@@ -1,5 +1,5 @@
 // Dolmar's own job photos (approved for use). Captions never include street addresses.
-import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street.webp";
+import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street-v2.webp";
 import truckJones2Src from "@/assets/jobs/truck-jones-2.webp";
 import jonesBefore1Src from "@/assets/jobs/jones-before-1.webp";
 import jonesBefore3Src from "@/assets/jobs/jones-before-3.webp";

@@ -56,10 +56,18 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
   }
 
   return <div className="bg-service-background pb-[calc(88px+env(safe-area-inset-bottom))] text-service-foreground md:pb-0">
-    <header className="border-b border-service-border bg-service-surface">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 md:h-24 md:px-8">
-        <Link to="/" aria-label="Zombie Houses home" className="block shrink-0">
-          <img src={logo} alt="Zombie Houses" width={112} height={64} className="h-12 w-24 object-contain md:h-20 md:w-36" />
+    {/* Same bar & logo placement as the site Nav (logo hangs over the bar), minus the menu. */}
+    <header className="relative z-[200] bg-[hsl(0_0%_15%)]">
+      <div className="w-full px-4 md:px-8 h-16 md:h-20 flex items-center justify-between relative overflow-visible">
+        <Link
+          to="/"
+          className="relative z-40 block h-16 md:h-20 w-24 md:w-40 shrink-0 overflow-visible"
+        >
+          <img
+            src={logo}
+            alt="Zombie Houses"
+            className="absolute top-2 md:top-2 left-0 h-14 md:h-20 w-auto max-w-none object-contain drop-shadow-lg"
+          />
         </Link>
         <Button asChild variant="ghost" className="min-h-12 px-2 text-sm font-bold text-service-foreground hover:bg-service-background hover:text-service-foreground md:text-base">
           <a href="tel:8139232042" onClick={call}><Phone aria-hidden="true" />813-923-2042</a>
@@ -79,14 +87,15 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-gradient-to-b from-service-background/95 via-service-background/85 to-service-background/95 md:bg-gradient-to-r md:from-service-background/95 md:via-service-background/80 md:to-service-background/70"
         />
-        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] md:items-center md:gap-x-14 md:gap-y-6 md:px-8 md:py-16">
-          <div>
+        <div className="relative z-10 mx-auto grid max-w-6xl gap-4 px-5 py-5 md:grid-cols-[minmax(0,1fr)_minmax(360px,440px)] md:gap-x-14 md:gap-y-6 md:px-8 md:py-14">
+          {/* Headline & subhead span the full width; on lg+ each stays on one line and scales down instead of wrapping. */}
+          <div className="min-w-0 md:col-span-2">
             <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">{config.eyebrow}</p>
-            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-3 md:text-6xl">{config.headline}</h1>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-4 md:text-xl">{config.subhead}</p>
-            {config.heroPhoto && <JobPhotoFigure photo={config.heroPhoto} eager className="mt-3 aspect-[21/9] shadow-2xl md:mt-8 md:aspect-[16/10]" />}
+            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-3 md:text-5xl lg:whitespace-nowrap lg:text-[clamp(3rem,5.2vw,4.25rem)]">{config.headline}</h1>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-4 md:max-w-none md:text-lg lg:whitespace-nowrap lg:text-[clamp(0.95rem,1.55vw,1.25rem)]">{config.subhead}</p>
           </div>
-          <div aria-label="Quick Quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:row-span-2 md:p-7">
+          {config.heroPhoto && <JobPhotoFigure photo={config.heroPhoto} eager className="aspect-[21/9] shadow-2xl md:aspect-[16/10] md:self-start" />}
+          <div aria-label="Quick Quote" className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:row-span-2 md:self-start md:p-7">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
           </div>
           <ul className="grid gap-2.5 pt-1 md:self-start md:gap-3 md:pt-0">
