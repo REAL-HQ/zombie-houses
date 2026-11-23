@@ -22,7 +22,7 @@ export const junkLanding: ServiceLandingConfig = {
     heading: "Yard Cleanup & Debris Removal",
     description: "Overgrown lots, curb piles & yard junk hauled off in one trip. Send photos & we'll quote it upfront.",
     bullets: ["Branches, Brush & Yard Waste", "Curbside & Driveway Junk Piles", "Overgrown Lots & Fence Lines", "Old Sheds, Playsets & Patio Furniture"],
-    photos: [JOB_PHOTOS.yardTruckOvergrown, JOB_PHOTOS.yardJunkHouse, JOB_PHOTOS.yardTruckJunk],
+    photos: [JOB_PHOTOS.yardTruckOvergrown, JOB_PHOTOS.yardJunkHouse, JOB_PHOTOS.goldenBefore6],
   },
   itemsHeading: "What We Take",
   items: [
@@ -43,7 +43,7 @@ export const junkLanding: ServiceLandingConfig = {
     { title: "Families Clearing an Estate", to: "/cleanouts" },
   ],
   ownerHeading: "Meet Dolmar & Keisha",
-  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing Tampa houses most people wouldn't walk into. Our crew knows how to clear a property fast and leave it clean. When you call, you're dealing with local owners, not a call center.",
+  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing distressed Tampa houses, the kind most people won't walk into, so there isn't much junk we haven't seen. You may know Dolmar from A&E's Zombie House Flipping. Our own crew does the work: we clear properties fast, haul it all away & leave the place clean. When you call or text, you're talking to local owners, not a call center. Send a few photos & we'll give you an upfront quote before we start.",
   related: [
     { title: "Hoarder & Estate Cleanouts", to: "/cleanouts" },
     { title: "Property Cleanouts", to: "/property-cleanouts" },

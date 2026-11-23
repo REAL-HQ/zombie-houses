@@ -34,7 +34,7 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     quoteLinkLabel: "Or Keep Going With a Cleanout Quote",
   },
   ownerHeading: "Meet Dolmar & Keisha",
-  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing Tampa houses most people wouldn't walk into. Our crew knows how to clear a property fast and leave it clean. When you call, you're dealing with local owners, not a call center. We've walked into a lot of houses like this. Nobody gets judged here.",
+  ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing distressed Tampa houses most people wouldn't walk into, including plenty of hoarder homes, so nothing you show us will surprise us. You may know Dolmar from A&E's Zombie House Flipping. Our own crew clears the house quietly & respectfully, works fast & leaves it clean. When you call, you're dealing with local owners, not a call center. We've walked into a lot of houses like this. Nobody gets judged here.",
   faqs: [
     { question: "Do I Need to Be There?", answer: "Not always. We can plan access with you or a family member ahead of time." },
     { question: "What Happens to Items Worth Keeping?", answer: "We set aside anything you ask us to look for, plus photos, papers & keepsakes we come across." },

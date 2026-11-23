@@ -1,4 +1,9 @@
 // Dolmar's own job photos (approved for use). Captions never include street addresses.
+import goldenBefore6Src from "@/assets/jobs/golden-before-6.webp";
+import thumbLeilaBefore3Src from "@/assets/jobs/thumb-leila-before-3.webp";
+import thumbBoardwalkBefore2Src from "@/assets/jobs/thumb-boardwalk-before-2.webp";
+import thumbElmwoodBefore5Src from "@/assets/jobs/thumb-elmwood-before-5.webp";
+import thumbTruckBoardwalk1Src from "@/assets/jobs/thumb-truck-boardwalk-1.webp";
 import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street-v2.webp";
 import truckJones2Src from "@/assets/jobs/truck-jones-2.webp";
 import jonesBefore1Src from "@/assets/jobs/jones-before-1.webp";
@@ -35,7 +40,7 @@ export interface JobPhoto { src: string; alt: string; caption: string; before: b
 
 export const JOB_PHOTOS = {
   // AI-enhanced illustration (approved by Dolmar), not a real job photo: keep the caption generic, no city, no Before badge.
-  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie House Buyers truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "40% 55%" },
+  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie House Buyers truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
   truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: false },
   jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a house", caption: "Yard Debris, Tampa", before: true },
   jonesBefore3: { src: jonesBefore3Src, alt: "Living room filled with bags, clothes & stacked belongings", caption: "Hoarder Cleanout, Tampa", before: true },
@@ -66,4 +71,13 @@ export const JOB_PHOTOS = {
   yardTruckJunk: { src: yardTruckJunkSrc, alt: "Zombie House Buyers truck beside a curbside pile of yard junk, bins & bags", caption: "Yard Cleanup, Tampa", before: false },
   yardJunkHouse: { src: yardJunkHouseSrc, alt: "Front yard & driveway piled with bags, bins & debris before haul-off", caption: "Front Yard Junk, Tampa", before: true },
   yardTruckOvergrown: { src: yardTruckOvergrownSrc, alt: "Zombie House Buyers truck on a gravel drive in an overgrown lot in front of a red house", caption: "Overgrown Lot, Tampa Bay", before: false },
+  goldenBefore6: { src: goldenBefore6Src, alt: "Overgrown backyard with a collapsing wood fence & shed buried in brush", caption: "Overgrown Yard, Tampa", before: true },
 } satisfies Record<string, JobPhoto>;
+
+// Small job thumbnails for the shared "Meet Dolmar & Keisha" section (not used elsewhere on the landing pages).
+export const OWNER_THUMBS: readonly JobPhoto[] = [
+  { src: thumbLeilaBefore3Src, alt: "Hoarder house room piled high with clutter under a gutted ceiling", caption: "Hoarder House, Tampa", before: true },
+  { src: thumbBoardwalkBefore2Src, alt: "Fire-damaged room with burned-out ceiling & exposed rafters", caption: "Fire Damage, Holiday", before: true },
+  { src: thumbElmwoodBefore5Src, alt: "Gutted garage with stained concrete floor & stripped walls", caption: "Gutted Garage, Tampa", before: true },
+  { src: thumbTruckBoardwalk1Src, alt: "Zombie House Hunter truck parked in front of a burned-out house", caption: "On the Job, Holiday", before: false },
+];

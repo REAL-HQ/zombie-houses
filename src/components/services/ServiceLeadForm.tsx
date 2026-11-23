@@ -151,7 +151,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
   );
 
   return (
-    <form onSubmit={submit} onFocusCapture={start} onPointerDownCapture={start} className={cn("w-full text-card-foreground", compact ? "space-y-3.5" : "space-y-6")}>
+    <form onSubmit={submit} onFocusCapture={start} onPointerDownCapture={start} className={cn("w-full text-card-foreground", compact ? "space-y-3.5 lg:flex lg:h-full lg:flex-col" : "space-y-6")}>
       <div className="space-y-1.5">
         <div className="flex items-center justify-between gap-2">
           <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{eyebrow}</p>
@@ -164,7 +164,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
         </div>
         <h2 ref={heading} tabIndex={-1} className={headingClass}>{step === 1 ? buttonLabel : step === 2 ? "Tell Us What You Need" : "Where Can We Reach You?"}</h2>
       </div>
-      <fieldset disabled={busy} className={cn("min-w-0", compact ? "space-y-3.5" : "space-y-5")}>
+      <fieldset disabled={busy} className={cn("min-w-0", compact ? "space-y-3.5 lg:flex lg:flex-1 lg:flex-col" : "space-y-5")}>
         {step === 1 && <>
           <div className="space-y-1.5">
             <label htmlFor={`${id}-zip`} className="text-sm font-semibold">ZIP Code</label>
@@ -198,10 +198,13 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
           </div>
         </>}
         {step === 3 && <>
-          {(["name", "phone", "email"] as const).map((field) => <div className="space-y-2" key={field}>
-            <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
-            <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className="h-14 text-base" />
-          </div>)}
+          {/* Compact (hero) form: name & phone side by side on lg+ so step 3 fits the same card height as steps 1 & 2. */}
+          <div className={cn(compact ? "space-y-3.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0" : "space-y-5")}>
+          {(["name", "phone", "email"] as const).map((field) => <div className={cn("space-y-2", compact && field === "email" && "lg:col-span-2")} key={field}>
+              <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
+              <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className="h-14 text-base" />
+            </div>)}
+          </div>
           <div className="space-y-2">
             <label htmlFor={`${id}-selling`} className="text-sm font-semibold">Thinking About Selling the Property? (Optional)</label>
             <Select value={selling} onValueChange={setSelling}>
@@ -211,11 +214,11 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
           </div>
           <div className="flex items-start gap-3">
             <Checkbox id={`${id}-consent`} checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked === true)} className="mt-1 size-6 shrink-0" />
-            <label htmlFor={`${id}-consent`} className="text-sm leading-relaxed text-muted-foreground">By checking this box, I agree to receive text messages from {BUSINESS.legalName} about my request at the number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of any purchase or service. See our <Link to="/privacy" className="font-semibold text-red underline">Privacy Policy</Link> and <Link to="/sms-terms" className="font-semibold text-red underline">SMS Terms</Link>.</label>
+            <label htmlFor={`${id}-consent`} className={cn("text-sm leading-relaxed text-muted-foreground", compact && "lg:text-xs")}>By checking this box, I agree to receive text messages from {BUSINESS.legalName} about my request at the number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of any purchase or service. See our <Link to="/privacy" className="font-semibold text-red underline">Privacy Policy</Link> and <Link to="/sms-terms" className="font-semibold text-red underline">SMS Terms</Link>.</label>
           </div>
         </>}
         {error && <p role="alert" className="break-words text-sm font-medium text-destructive">{error}</p>}
-        <div className="flex gap-3">
+        <div className={cn("flex gap-3", compact && "lg:!mt-auto lg:pt-3.5")}>
           {step > 1 && <Button type="button" variant="outline" className="min-h-14 px-4" onClick={() => changeStep(step - 1)} aria-label="Previous Step" title="Previous Step"><ArrowLeft /></Button>}
           <Button type="submit" disabled={busy} className={cn("min-w-0 flex-1 whitespace-normal px-4 text-base font-bold", compact ? "min-h-12 md:min-h-14" : "min-h-14")}>{busy ? <><Loader2 className="motion-safe:animate-spin" />Sending...</> : <>{step === 2 ? "Next" : buttonLabel}<ArrowRight /></>}</Button>
         </div>

@@ -37,7 +37,7 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
     buttonLabel: "See Selling Options",
   },
   ownerHeading: "Meet Dolmar & Keisha",
-  ownerDescription: "We're Dolmar & Keisha Cross. We buy & rehab Tampa properties ourselves, so we know what a fast, clean turnover is worth. You'll deal with us & our crew directly.",
+  ownerDescription: "We're Dolmar & Keisha Cross. We buy & rehab Tampa properties ourselves, so we know what a fast, clean turnover is worth to a landlord or realtor. You may know Dolmar from A&E's Zombie House Flipping. We've spent years working on distressed Tampa houses, from move-outs to full gut jobs. Our own crew clears the property, hauls everything away & leaves it clean & ready for the next step. You'll deal with us & our crew directly, not a call center. Send photos & we'll quote it upfront.",
   faqs: [
     { question: "Do I Need to Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
     { question: "Can You Handle Repeat Turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },
