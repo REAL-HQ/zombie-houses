@@ -96,8 +96,8 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           {/* lg+: hero uses a wider container (1360px) than the rest of the page. Left column = headline, subhead & photo; right column = form spanning both rows, sized to its content. The photo fills whatever height is left so its bottom lines up with the form. Cards sit in one strip below. Everything fits above the fold at 1280x650 & up. */}
           <div className="order-1 min-w-0 lg:order-none lg:col-start-1 lg:row-start-1">
             <p className="text-xs font-bold uppercase tracking-wider text-red md:text-sm">{config.eyebrow}</p>
-            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-2 md:text-5xl lg:mt-1 xl:whitespace-nowrap lg:text-[clamp(2.25rem,3.2vw,3.25rem)] lg:leading-[1.05]">{config.headline}</h1>
-            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-3 md:max-w-none md:text-lg lg:mt-1.5 xl:whitespace-nowrap lg:text-[clamp(0.95rem,1.25vw,1.125rem)]">{config.subhead}</p>
+            <h1 className="mt-1.5 font-display text-3xl leading-[1.08] tracking-tight md:mt-2 md:text-5xl lg:mt-1 lg:text-balance lg:text-[clamp(2.25rem,3.2vw,3.25rem)] lg:leading-[1.05]">{config.headline}</h1>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-service-muted md:mt-3 md:max-w-none md:text-lg lg:mt-1.5 lg:max-w-[46rem] lg:text-pretty lg:text-[clamp(0.95rem,1.25vw,1.125rem)]">{config.subhead}</p>
           </div>
           {/* Mobile: form comes right after the headline, photo below it. */}
           {config.heroPhoto && <div className="relative order-3 lg:order-none lg:col-start-1 lg:row-start-2 lg:min-h-[220px]">

@@ -10,7 +10,7 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   service: "Property Cleanout",
   eyebrow: "For Landlords & Realtors",
   headline: "Property Cleanouts, Turned Fast",
-  subhead: "Move-outs, evictions, foreclosures & pre-listing cleanouts across Tampa Bay. Send photos, get an upfront quote.",
+  subhead: "Move-outs, evictions, foreclosures & pre-listing cleanouts across Tampa Bay.",
   bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Photos When The Job Is Done"],
   steps: [
     { title: "Send Photos Or A Lockbox Code", description: "Share photos & access details. We can quote from what you send.", icon: Camera },

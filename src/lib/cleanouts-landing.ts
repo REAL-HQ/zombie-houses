@@ -10,7 +10,7 @@ export const cleanoutsLanding: ServiceLandingConfig = {
   service: "Hoarder or Estate Cleanout",
   eyebrow: "Hoarder & Estate Cleanouts",
   headline: "Cleanouts Without Judgment",
-  subhead: "Whether it built up over years or you just inherited a full house, we clear it quietly & respectfully.",
+  subhead: "Years of buildup or an inherited full house, we clear it quietly & respectfully.",
   bullets: ["Free Photo Quote", "Upfront Quote Before We Start", "Discreet, Local Crew"],
   steps: [
     { title: "Tell Us What's Going On", description: "Share a few photos or just describe it. No need to clean up first.", icon: Camera },
