@@ -12,7 +12,7 @@ import courtlandBefore1Src from "@/assets/jobs/courtland-before-1.webp";
 import courtlandBefore2Src from "@/assets/jobs/courtland-before-2.webp";
 import courtlandBefore3Src from "@/assets/jobs/courtland-before-3.webp";
 import courtlandBefore4Src from "@/assets/jobs/courtland-before-4.webp";
-import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street-v2.webp";
+import junkHeroStreetSrc from "@/assets/jobs/junk-hero-street-v3.webp";
 import truckJones2Src from "@/assets/jobs/truck-jones-2.webp";
 import jonesBefore1Src from "@/assets/jobs/jones-before-1.webp";
 import jonesBefore3Src from "@/assets/jobs/jones-before-3.webp";
@@ -48,7 +48,7 @@ export interface JobPhoto { src: string; alt: string; caption: string; before: b
 
 export const JOB_PHOTOS = {
   // AI-enhanced illustration (approved by Dolmar), not a real job photo: keep the caption generic, no city, no Before badge.
-  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie Houses truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
+  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Black Zombie Houses truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
   truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: true },
   jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a hoarder house", caption: "Hoarder House, Tampa", before: true },
   jonesBefore3: { src: jonesBefore3Src, alt: "Living room filled with bags, clothes & stacked belongings", caption: "Hoarder Cleanout, Tampa", before: true },
