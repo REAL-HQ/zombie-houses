@@ -146,7 +146,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
       </section>}
 
       {/* How It Works: red icon badges joined by a dashed connector (horizontal on desktop, vertical on mobile). Cards are opaque, so the line only shows in the gaps between them. */}
-      <section className="relative overflow-hidden border-y border-service-border bg-[radial-gradient(ellipse_at_top,rgba(220,38,38,0.12),transparent_60%)]">
+      <section className="relative overflow-hidden border-y border-service-border">
         <div className={sectionClass}>
           <h2 className={`${headingClass} text-center`}>How It Works</h2>
           <ol className="relative mx-auto mt-10 grid max-w-5xl gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
