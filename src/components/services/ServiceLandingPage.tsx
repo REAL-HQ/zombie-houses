@@ -7,6 +7,7 @@ import { ServiceLeadForm } from "./ServiceLeadForm";
 import { ServiceNoticeBand } from "./ServiceNoticeBand";
 import { JobPhotoFigure, JobPhotoGrid } from "./JobPhotoGrid";
 import { SeenOnStrip } from "./SeenOnStrip";
+import { RealHouseSeal } from "./RealHouseSeal";
 import { PhotoQuote, QUOTE_MAX_PHOTOS } from "./PhotoQuote";
 import { AD_ANCHOR_PRICE, QUOTE_DISCLAIMER } from "@/lib/junk-quote-pricing";
 import { OWNER_THUMBS, type JobPhoto } from "@/lib/job-photos";
@@ -204,7 +205,11 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
       {/* Full-bleed owner photo. lg+: heading & bio sit in a blurred dark panel over the right side of the photo (Dolmar & Keisha stand near the center, so the panel never covers them). Below lg the panel stacks under the photo. */}
       <section className="border-y border-service-border bg-service-surface">
         <div className="relative">
-          <img src={ownerPhoto} alt="Dolmar & Keisha Cross standing in a gutted, debris-filled room" loading="lazy" className="block aspect-[16/9] w-full object-cover object-[50%_40%] md:aspect-[21/9] lg:min-h-[540px]" />
+          <div className="relative">
+            <img src={ownerPhoto} alt="Dolmar & Keisha Cross standing in a gutted, debris-filled room" loading="lazy" className="block aspect-[16/9] w-full object-cover object-[50%_40%] md:aspect-[21/9] lg:min-h-[540px]" />
+            {/* Real-house seal: bottom-left corner, clear of Dolmar & Keisha (center) & the bio panel (right). */}
+            <RealHouseSeal className="absolute bottom-[6%] left-[4%] size-[88px] -rotate-12 opacity-95 sm:size-24 lg:bottom-[7%] lg:left-[3%] lg:size-[120px] xl:size-[136px]" />
+          </div>
           <div className="px-5 pt-8 md:px-8 lg:absolute lg:inset-y-0 lg:right-[3%] lg:flex lg:w-[37%] lg:items-center lg:p-0">
             <div className="lg:rounded-xl lg:border lg:border-white/10 lg:bg-black/70 lg:p-7 lg:shadow-2xl lg:backdrop-blur-md xl:p-8">
               <h2 className={headingClass}>{config.ownerHeading}</h2>
