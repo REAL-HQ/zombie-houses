@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { listLeads, updateLead } from "@/lib/leads.functions";
+import { displayPhone, phoneHref } from "@/lib/phone";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ServiceLeadsViewer } from "@/components/services/ServiceLeadsViewer";
 import { PhotoQuotesViewer } from "@/components/services/PhotoQuotesViewer";
@@ -17,10 +18,10 @@ import {
 export const Route = createFileRoute("/admin/leads")({
   head: () => ({
     meta: [
-      { title: "Lead Back Office — Zombie House Buyers" },
-      { name: "description", content: "Internal lead management for Zombie House Buyers." },
+      { title: "Lead Back Office | Zombie Houses" },
+      { name: "description", content: "Internal lead management for Zombie Houses." },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "Lead Back Office — Zombie House Buyers" },
+      { property: "og:title", content: "Lead Back Office | Zombie Houses" },
       { property: "og:description", content: "Internal lead management." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -119,7 +120,7 @@ function AdminLeads() {
     <div className="min-h-screen bg-[#f8f7f4]">
       <div className="bg-[#0e0e0e] text-white px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="font-display text-xl">Zombie House Buyers</h1>
+          <h1 className="font-display text-xl">Zombie Houses</h1>
           <p className="text-white/50 text-xs">Lead Back Office</p>
         </div>
         <div className="flex items-center gap-4">
@@ -241,8 +242,8 @@ function AdminLeads() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Phone className="w-4 h-4 text-muted-foreground shrink-0" />
-                    <a href={`tel:${selected.phone}`} className="text-sm font-medium hover:underline">
-                      {selected.phone}
+                    <a href={phoneHref(selected.phone)} className="text-sm font-medium hover:underline">
+                      {displayPhone(selected.phone)}
                     </a>
                   </div>
                   <div className="flex items-center gap-3">
@@ -286,13 +287,13 @@ function AdminLeads() {
 
               <div className="mt-4 flex flex-wrap gap-3">
                 <a
-                  href={`tel:${selected.phone}`}
+                  href={phoneHref(selected.phone)}
                   className="inline-flex items-center gap-2 rounded-lg bg-red text-white px-5 py-2.5 text-sm font-bold hover:bg-[#b81830] transition"
                 >
                   <Phone className="w-4 h-4" /> Call Now
                 </a>
                 <a
-                  href={`mailto:${selected.email}?subject=Your Cash Offer — Zombie House Buyers`}
+                  href={`mailto:${selected.email}?subject=Your Cash Offer from Zombie Houses`}
                   className="inline-flex items-center gap-2 rounded-lg border-[1.5px] border-[#0e0e0e] px-5 py-2.5 text-sm font-bold hover:bg-[#0e0e0e] hover:text-white transition"
                 >
                   <Mail className="w-4 h-4" /> Send Email

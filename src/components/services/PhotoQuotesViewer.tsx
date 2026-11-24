@@ -4,6 +4,7 @@ import { RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { listPhotoQuotes, getPhotoQuotePhotoUrls } from "@/lib/leads.functions";
 import { formatServiceLeadDate } from "@/lib/service-lead-admin";
+import { displayPhone, phoneHref } from "@/lib/phone";
 
 type PhotoQuoteRow = Awaited<ReturnType<typeof listPhotoQuotes>>[number];
 const message = (error: unknown) => error instanceof Error ? error.message : "Unable to load photo quotes.";
@@ -50,7 +51,7 @@ function QuoteCard({ quote, pin }: { quote: PhotoQuoteRow; pin: string }) {
       <p className="text-sm font-semibold">{quote.status}</p>
     </div>
     <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-5 md:grid-cols-4">
-      <Field label="Phone"><a href={`tel:${quote.phone}`} className="underline underline-offset-4">{quote.phone}</a></Field>
+      <Field label="Phone"><a href={phoneHref(quote.phone)} className="underline underline-offset-4">{displayPhone(quote.phone)}</a></Field>
       <Field label="Email">{quote.email ? <a href={`mailto:${quote.email}`} className="break-all underline underline-offset-4">{quote.email}</a> : "Not provided"}</Field>
       <Field label="ZIP">{quote.zip}</Field><Field label="Source Page">{quote.source_page}</Field>
       <Field label="Outcome">{quote.outcome}</Field>

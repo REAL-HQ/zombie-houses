@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { formatPhoneInPlace } from "@/lib/phone";
 import {
   Scissors,
   Droplets,
@@ -120,7 +121,7 @@ function SponsorsPage() {
             <Input placeholder="Your Name" />
             <Input placeholder="Company" />
             <Input placeholder="Email" type="email" />
-            <Input placeholder="Phone" type="tel" />
+            <Input placeholder="Phone" type="tel" inputMode="tel" autoComplete="tel" onChange={formatPhoneInPlace} />
             <select required defaultValue="" className="sm:col-span-2 rounded-xl border border-mid bg-off px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]">
               <option value="" disabled>Tier interest</option>
               <option>Title Sponsor ($5k/project)</option>
@@ -160,7 +161,7 @@ function SponsorsPage() {
             <Input placeholder="Trade" />
             <Input placeholder="Service Area" />
             <Input placeholder="License #" />
-            <Input placeholder="Phone" type="tel" />
+            <Input placeholder="Phone" type="tel" inputMode="tel" autoComplete="tel" onChange={formatPhoneInPlace} />
             <Input placeholder="Email" type="email" />
             <Input placeholder="Website" />
             <button type="submit" className="sm:col-span-2 rounded-lg bg-[#0e0e0e] text-white py-3.5 font-bold text-sm hover:bg-black transition">

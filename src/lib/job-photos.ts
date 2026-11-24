@@ -48,7 +48,7 @@ export interface JobPhoto { src: string; alt: string; caption: string; before: b
 
 export const JOB_PHOTOS = {
   // AI-enhanced illustration (approved by Dolmar), not a real job photo: keep the caption generic, no city, no Before badge.
-  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie House Buyers truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
+  junkHeroStreet: { src: junkHeroStreetSrc, alt: "Zombie Houses truck parked beside a large junk pile", caption: "We Haul It All", before: false, objectPosition: "10% 55%" },
   truckJones2: { src: truckJones2Src, alt: "Curbside pile of trash bags, bins & debris ready for haul-off in front of a Tampa house", caption: "Curbside Haul-Off, Tampa", before: true },
   jonesBefore1: { src: jonesBefore1Src, alt: "Side yard packed with bikes, tires, hoses & scrap beside a hoarder house", caption: "Hoarder House, Tampa", before: true },
   jonesBefore3: { src: jonesBefore3Src, alt: "Living room filled with bags, clothes & stacked belongings", caption: "Hoarder Cleanout, Tampa", before: true },
@@ -76,9 +76,9 @@ export const JOB_PHOTOS = {
   elmwoodBefore6: { src: elmwoodBefore6Src, alt: "Old kitchen with water-stained floor & worn cabinets", caption: "Kitchen, Tampa", before: true },
   boardwalkBefore1: { src: boardwalkBefore1Src, alt: "Burned-out ceiling with charred joists above a bedroom", caption: "Fire Damage, Holiday", before: true },
   conniewoodBefore1: { src: conniewoodBefore1Src, alt: "Stained living room floor with scattered furniture & debris", caption: "Waste-Soiled Home, New Port Richey", before: true },
-  yardTruckJunk: { src: yardTruckJunkSrc, alt: "Zombie House Buyers truck beside a curbside pile of yard junk, bins & bags", caption: "Yard Cleanup, Tampa", before: false },
+  yardTruckJunk: { src: yardTruckJunkSrc, alt: "Zombie Houses truck beside a curbside pile of yard junk, bins & bags", caption: "Yard Cleanup, Tampa", before: false },
   yardJunkHouse: { src: yardJunkHouseSrc, alt: "Front yard & driveway piled with bags, bins & debris before haul-off", caption: "Front Yard Junk, Tampa", before: true },
-  yardTruckOvergrown: { src: yardTruckOvergrownSrc, alt: "Zombie House Buyers truck on a gravel drive in an overgrown lot in front of a red house", caption: "Overgrown Lot, Tampa Bay", before: false },
+  yardTruckOvergrown: { src: yardTruckOvergrownSrc, alt: "Zombie Houses truck on a gravel drive in an overgrown lot in front of a red house", caption: "Overgrown Lot, Tampa Bay", before: false },
   courtlandBefore1: { src: courtlandBefore1Src, alt: "Room buried in fallen insulation under a collapsed ceiling", caption: "Collapsed Ceiling, Tampa", before: true },
   courtlandBefore2: { src: courtlandBefore2Src, alt: "Kitchen with insulation hanging from a caved-in ceiling & debris on the floor", caption: "Kitchen Ceiling Collapse, Tampa", before: true },
   courtlandBefore3: { src: courtlandBefore3Src, alt: "Gutted room with the floor covered in pink insulation & debris", caption: "Insulation & Debris, Tampa", before: true },

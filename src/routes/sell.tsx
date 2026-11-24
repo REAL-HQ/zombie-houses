@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BUSINESS } from "@/lib/business";
+import { isValidPhone, nextPhoneValue, phoneDigits } from "@/lib/phone";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -36,13 +37,13 @@ import recent6 from "@/assets/recent-6.jpg";
 export const Route = createFileRoute("/sell")({
   head: () => ({
     meta: [
-      { title: "Sell Your Home Fast — Zombie House Buyers" },
+      { title: "Sell Your Home Fast | Zombie Houses" },
       {
         name: "description",
         content:
           "We buy houses in any condition. No repairs. No commissions. Cash offer in 24 hours. Close on your timeline.",
       },
-      { property: "og:title", content: "Sell Your Home Fast — Zombie House Buyers" },
+      { property: "og:title", content: "Sell Your Home Fast | Zombie Houses" },
       { property: "og:description", content: "Cash offer in 24 hours. Any condition." },
     ],
   }),
@@ -83,7 +84,7 @@ function SellPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    if (!contact.first || !contact.email || !contact.phone) return;
+    if (!contact.first || !contact.email || !isValidPhone(contact.phone)) return;
     setSubmitting(true);
     try {
       const { error } = await supabase.from("sell_leads").insert({
@@ -91,7 +92,7 @@ function SellPage() {
         first_name: contact.first,
         last_name: contact.last,
         email: contact.email,
-        phone: contact.phone,
+        phone: phoneDigits(contact.phone),
         factors,
         sms_consent: smsConsent,
         sms_consent_at: smsConsent ? new Date().toISOString() : null,
@@ -271,9 +272,11 @@ function SellPage() {
                 <FormRow icon={<Phone className="w-5 h-5" />}>
                   <Input
                     type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
                     placeholder="Phone Number"
                     value={contact.phone}
-                    onChange={(e) => setContact({ ...contact, phone: e.target.value })}
+                    onChange={(e) => setContact({ ...contact, phone: nextPhoneValue(contact.phone, e.target.value, e.target.selectionStart) })}
                     className="border-0 h-12 focus-visible:ring-0 shadow-none"
                   />
                 </FormRow>
@@ -306,7 +309,7 @@ function SellPage() {
                 size="lg"
                 onClick={handleSubmit}
                 disabled={
-                  submitting || !contact.first || !contact.email || !contact.phone || !smsConsent
+                  submitting || !contact.first || !contact.email || !isValidPhone(contact.phone) || !smsConsent
                 }
                 className="mt-6 w-full h-14 text-lg font-extrabold uppercase tracking-wide bg-red hover:bg-red/90"
               >
@@ -441,7 +444,7 @@ function SellPage() {
                 Are Saying About Their Experience
               </h2>
               <p className="mt-4 text-center text-muted-foreground text-lg">
-                See Why Over 1000 Florida Home Owners Have Trusted Zombie House Buyers
+                See Why Over 1000 Florida Home Owners Have Trusted Zombie Houses
               </p>
 
               <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">

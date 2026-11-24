@@ -9,7 +9,7 @@ export const Route = createFileRoute("/privacy")({
       {
         name: "description",
         content:
-          "How Zombie House Buyers collects, uses, and protects your information, including SMS/text messaging data and consent.",
+          "How Zombie Houses collects, uses, and protects your information, including SMS/text messaging data and consent.",
       },
       { property: "og:title", content: "Privacy Policy — Zombie Houses" },
       {
@@ -38,7 +38,7 @@ function PrivacyPage() {
         <div className="mt-10 space-y-8 text-[0.95rem] leading-relaxed text-muted-foreground">
           <Section title="Who We Are">
             <p>
-              This site is operated by {BUSINESS.legalName} ("Zombie Houses," "we," "us"). You can
+              This site is operated by {BUSINESS.legalName} ("we," "us"). You can
               reach us at {BUSINESS.address}, by phone at{" "}
               <a className="text-red font-semibold" href={`tel:${BUSINESS.phoneHref}`}>
                 {BUSINESS.phone}

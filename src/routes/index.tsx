@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { nextPhoneValue, phoneDigits } from "@/lib/phone";
 import heroCouple from "@/assets/hero-couple.jpg";
 import shermanHero from "@/assets/sherman-hero.jpg";
 import storyLutz from "@/assets/recent-2.jpg";
@@ -254,7 +255,7 @@ function Initiatives() {
     },
     {
       icon: HomeIcon,
-      title: "Zombie House Buyers",
+      title: "Sell Your House",
       body: "Need to sell a distressed property? We buy houses in any condition in 3 days.",
       tag: "Get a Cash Offer",
       to: "/sell" as const,
@@ -317,7 +318,7 @@ function SellInline() {
     <section className="bg-off py-20 md:py-28">
       <div className="max-w-[1160px] mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
         <div>
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Zombie House Buyers</p>
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">Zombie Houses</p>
           <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.6rem)] tracking-[-0.025em]">
             Got A Zombie House?<br /> <em className="not-italic text-red font-display">We'll Buy It.</em>
           </h2>
@@ -354,7 +355,7 @@ function SellFormCard({ compact = false }: { compact?: boolean }) {
         first_name: parts[0] || vals.name,
         last_name: parts.slice(1).join(" "),
         email: vals.email,
-        phone: vals.phone,
+        phone: phoneDigits(vals.phone),
         status: "new",
       });
     } catch (err) {
@@ -402,9 +403,13 @@ function SellFormCard({ compact = false }: { compact?: boolean }) {
         <input
           required
           type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          pattern="\(\d{3}\) \d{3}-\d{4}"
+          title="Enter a 10-digit phone number"
           placeholder="Phone"
           value={vals.phone}
-          onChange={(e) => setVals({ ...vals, phone: e.target.value })}
+          onChange={(e) => setVals({ ...vals, phone: nextPhoneValue(vals.phone, e.target.value, e.target.selectionStart) })}
           className="w-full rounded-xl border border-mid bg-white px-4 py-3 text-sm focus:outline-none focus:border-[#0e0e0e]"
         />
         <input

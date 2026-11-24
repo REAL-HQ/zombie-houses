@@ -9,7 +9,7 @@ export const Route = createFileRoute("/sms-terms")({
       {
         name: "description",
         content:
-          "Text messaging program terms for Zombie House Buyers: opt-in, message frequency, rates, STOP and HELP instructions.",
+          "Text messaging program terms for Zombie Houses: opt-in, message frequency, rates, STOP and HELP instructions.",
       },
       { property: "og:title", content: "SMS Terms & Conditions — Zombie Houses" },
       {
