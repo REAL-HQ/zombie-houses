@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidPhone, phoneDigits } from "@/lib/phone";
 
 // Stored values: never rename an existing entry (old leads & reports use them). Add new ones only.
 export const SERVICE_TYPES = ["Junk Removal", "Furniture Or Household Items", "Garage Or Storage Cleanout", "Property Cleanout", "Vacant Rental Or Move-Out", "Pre-Listing Or Estate Cleanout", "Hoarder or Estate Cleanout", "Heavy Clutter Or Possible Hazards", "Biohazard Or Crime Scene Cleanup", "Remodeling Consultation", "Other"] as const;
@@ -16,7 +17,8 @@ export const serviceStepOneSchema = z.object({
 });
 export const serviceContactSchema = z.object({
   name: z.string().trim().min(1, "Enter Your Name").max(200),
-  phone: z.string().trim().max(40).refine((value) => value.replace(/\D/g, "").length >= 10, "Enter A Valid Mobile Phone Number"),
+  // Shown as (813) 476-8508 while typing; stored as the plain 10 digits.
+  phone: z.string().trim().max(40).refine(isValidPhone, "Enter A Valid Mobile Phone Number").transform(phoneDigits),
   email: z.union([z.literal(""), z.string().trim().email("Enter A Valid Email Address").max(254)]),
 });
 
@@ -52,3 +54,4 @@ export function captureAttribution(search: string, referrer: string, storage?: P
   try { storage?.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution)); } catch { /* Still submit without persistence. */ }
   return attribution;
 }
+

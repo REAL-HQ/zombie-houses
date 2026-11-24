@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { formatPhoneInPlace, phoneDigits } from "@/lib/phone";
 import { supabase } from "@/integrations/supabase/client";
 import { BUSINESS } from "@/lib/business";
 import { toast } from "sonner";
@@ -16,6 +17,8 @@ export const Route = createFileRoute("/apply")({
       },
       { property: "og:title", content: "Apply for Help — ZombieHouses" },
       { property: "og:description", content: "Nominate a home for rescue." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ApplyPage,
@@ -33,7 +36,7 @@ function ApplyPage() {
     const payload = {
       your_name: String(fd.get("your_name") || "").trim(),
       relationship: String(fd.get("relationship") || "").trim(),
-      phone: String(fd.get("phone") || "").trim(),
+      phone: phoneDigits(String(fd.get("phone") || "")),
       email: String(fd.get("email") || "").trim(),
       homeowner_name: String(fd.get("homeowner_name") || "").trim(),
       property_address: String(fd.get("property_address") || "").trim(),
@@ -90,7 +93,7 @@ function ApplyPage() {
           >
             <In name="your_name" placeholder="Your Name" />
             <In name="relationship" placeholder="Your Relationship to Homeowner" />
-            <In name="phone" placeholder="Phone" type="tel" />
+            <In name="phone" placeholder="Phone" type="tel" inputMode="tel" autoComplete="tel" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" onChange={formatPhoneInPlace} />
             <In name="email" placeholder="Email" type="email" />
             <In name="homeowner_name" placeholder="Homeowner Name" />
             <In name="property_address" placeholder="Property Address" />
@@ -155,3 +158,4 @@ function In(props: React.InputHTMLAttributes<HTMLInputElement>) {
     />
   );
 }
+

@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { BUSINESS } from "@/lib/business";
+import { nextPhoneValue } from "@/lib/phone";
 import { track } from "@/lib/track";
 import { captureAttribution, SERVICE_TYPES, TIMING_OPTIONS, JOB_SIZE_OPTIONS, serviceStepOneSchema, serviceContactSchema, sellingValue, validatePhotos, zipFromSearch, type Attribution } from "@/lib/service-lead";
 import { cn } from "@/lib/utils";
@@ -222,7 +223,7 @@ export function ServiceLeadForm({ defaultService, sourcePage, compact = false, b
           <div className={cn(compact ? "space-y-3.5 lg:grid lg:grid-cols-2 lg:gap-x-3 lg:gap-y-2 lg:space-y-0" : "space-y-5")}>
           {(["name", "phone", "email"] as const).map((field) => <div className={gap} key={field}>
               <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
-              <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className={cn("text-base", compact ? "h-12 md:h-14 lg:h-11" : "h-14")} />
+              <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} inputMode={field === "phone" ? "tel" : undefined} placeholder={field === "phone" ? "(813) 555-0123" : undefined} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} required={field !== "email"} onChange={(event) => setContact({ ...contact, [field]: field === "phone" ? nextPhoneValue(contact.phone, event.target.value, event.target.selectionStart) : event.target.value })} className={cn("text-base", compact ? "h-12 md:h-14 lg:h-11" : "h-14")} />
             </div>)}
           <div className={gap}>
             <label htmlFor={`${id}-selling`} className="text-sm font-semibold">{compact ? <><span className="lg:hidden">Thinking About Selling The Property? (Optional)</span><span className="hidden lg:inline">Selling The Property?</span></> : "Thinking About Selling The Property? (Optional)"}</label>

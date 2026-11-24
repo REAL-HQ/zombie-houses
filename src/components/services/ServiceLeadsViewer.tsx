@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { displayPhone, phoneHref } from "@/lib/phone";
 import { useServerFn } from "@tanstack/react-start";
 import { RefreshCw, Save } from "lucide-react";
 import { listServiceLeads, updateServiceLead, getServiceLeadPhotoUrls } from "@/lib/leads.functions";
@@ -75,7 +76,7 @@ function ServiceLeadCard({ lead, pin, onUpdated }: { lead: ServiceLead; pin: str
       </div>
     </div>
     <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-5 md:grid-cols-4">
-      <Field label="Phone"><a href={`tel:${lead.phone}`} className="underline underline-offset-4">{lead.phone}</a></Field>
+      <Field label="Phone"><a href={phoneHref(lead.phone)} className="underline underline-offset-4">{displayPhone(lead.phone)}</a></Field>
       <Field label="Email">{lead.email ? <a href={`mailto:${lead.email}`} className="break-all underline underline-offset-4">{lead.email}</a> : "Not provided"}</Field>
       <Field label="ZIP">{lead.zip}</Field><Field label="Service Type">{lead.service_type}</Field>
       <Field label="Timing">{lead.timing}</Field><Field label="About How Much?">{lead.job_size}</Field><Field label="Source Page">{lead.source_page}</Field>
@@ -117,3 +118,4 @@ export function ServiceLeadsViewer({ pin }: { pin: string }) {
     <div className="space-y-5">{filtered.map((lead) => <ServiceLeadCard key={lead.id} lead={lead} pin={pin} onUpdated={(updated) => setLeads((rows) => rows.map((row) => row.id === updated.id ? updated : row))} />)}</div>
   </section>;
 }
+

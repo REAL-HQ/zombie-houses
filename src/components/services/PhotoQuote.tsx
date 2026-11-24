@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { BUSINESS } from "@/lib/business";
+import { nextPhoneValue } from "@/lib/phone";
 import { track } from "@/lib/track";
 import { captureAttribution, serviceContactSchema, zipFromSearch, type Attribution } from "@/lib/service-lead";
 import { computeQuote, PRICING_VERSION, QUOTE_DISCLAIMER, type AiEstimate, type QuoteAnswers, type QuoteResult } from "@/lib/junk-quote-pricing";
@@ -286,7 +287,7 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
       {step === 3 && <>
         {(["name", "phone", "email"] as const).map((field) => <div className="space-y-1.5" key={field}>
           <label htmlFor={`${id}-${field}`} className="text-sm font-semibold">{field === "name" ? "Name" : field === "phone" ? "Mobile Phone" : "Email (Optional)"}</label>
-          <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} onChange={(event) => setContact({ ...contact, [field]: event.target.value })} className="h-14 text-base" />
+          <Input id={`${id}-${field}`} type={field === "phone" ? "tel" : field === "email" ? "email" : "text"} inputMode={field === "phone" ? "tel" : undefined} placeholder={field === "phone" ? "(813) 555-0123" : undefined} autoComplete={field === "phone" ? "tel" : field} value={contact[field]} maxLength={field === "name" ? 200 : field === "phone" ? 40 : 254} onChange={(event) => setContact({ ...contact, [field]: field === "phone" ? nextPhoneValue(contact.phone, event.target.value, event.target.selectionStart) : event.target.value })} className="h-14 text-base" />
         </div>)}
         <div className="flex items-start gap-3">
           <Checkbox id={`${id}-consent`} checked={smsConsent} onCheckedChange={(checked) => setSmsConsent(checked === true)} className="mt-1 size-6 shrink-0" />
