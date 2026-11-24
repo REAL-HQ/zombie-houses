@@ -10,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { BUSINESS } from "@/lib/business";
 import { track } from "@/lib/track";
 import { captureAttribution, serviceContactSchema, zipFromSearch, type Attribution } from "@/lib/service-lead";
-import { computeQuote, NOT_ACCEPTED, PRICING_VERSION, QUOTE_DISCLAIMER, type AiEstimate, type QuoteAnswers, type QuoteResult } from "@/lib/junk-quote-pricing";
+import { computeQuote, PRICING_VERSION, QUOTE_DISCLAIMER, type AiEstimate, type QuoteAnswers, type QuoteResult } from "@/lib/junk-quote-pricing";
 import { createPhotoQuoteSession, photoQuoteEstimate } from "@/lib/photo-quote.functions";
 import { cn } from "@/lib/utils";
 
@@ -282,7 +282,6 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
           <label htmlFor={`${id}-description`} className="text-sm font-semibold">Anything We Should Know? (Optional)</label>
           <Textarea id={`${id}-description`} value={description} maxLength={2000} onChange={(event) => setDescription(event.target.value)} className="min-h-20 text-base" />
         </div>
-        <p className="text-xs leading-relaxed text-muted-foreground">We can't take {NOT_ACCEPTED.join(", ").toLowerCase()}.</p>
       </>}
       {step === 3 && <>
         {(["name", "phone", "email"] as const).map((field) => <div className="space-y-1.5" key={field}>
@@ -307,3 +306,5 @@ export function PhotoQuote({ sourcePage, defaultLocation = "curbside" }: { sourc
 }
 
 export default PhotoQuote;
+
+

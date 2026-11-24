@@ -35,7 +35,6 @@ function ComingSoonPage() {
       <div className="mx-auto max-w-6xl">
         <span className="inline-block rounded bg-red px-2 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground">Coming Soon</span>
         <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight tracking-normal md:text-5xl">{service ? service.title : "Specialty Cleanups"}</h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-service-muted md:text-xl">We don't offer this yet. Tell us what you're dealing with & we'll reach out when it's available, or help you find the right specialist now.</p>
       </div>
     </section>
     <section className="bg-service-background px-5 py-12 text-service-foreground md:px-8 md:py-16">
@@ -44,7 +43,6 @@ function ComingSoonPage() {
           <ServiceLeadForm key={sourcePage} defaultService="Other" sourcePage={sourcePage} buttonLabel="Get Notified" eyebrow="Service Request" thankYouItems={[
             "We review what you sent.",
             "We call or text you to talk it through.",
-            "If we can't help yet, we'll point you to a specialist who can.",
           ]} />
         </div>
       </div>
@@ -57,3 +55,4 @@ function ComingSoonPage() {
     </section>
   </SiteLayout>;
 }
+

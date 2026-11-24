@@ -113,8 +113,7 @@ export function computeQuote(estimate: AiEstimate | null, answers: QuoteAnswers)
   if (!estimate || estimate.not_junk_photo) {
     return { outcome: "manual", reason: estimate ? "Photos didn't show the items clearly" : "Estimate unavailable", lines: [], discount: 0, notes };
   }
-  const prohibited = (estimate.prohibited_items ?? []).filter(Boolean);
-  if (prohibited.length) notes.push(`We can't take ${NOT_ACCEPTED.join(", ")}. We'll leave those items behind.`);
+  // prohibited_items stays in the saved AI estimate for the team; nothing about it is shown to the customer.
   if (answers.hoarder || estimate.hoarder_conditions) {
     return { outcome: "walkthrough", reason: "hoarder", lines: [], discount: 0, notes };
   }
@@ -168,3 +167,4 @@ export function computeQuote(estimate: AiEstimate | null, answers: QuoteAnswers)
   notes.push("Same-day pickup is free when available.");
   return { outcome: "instant", sizeLabel, eighths: single ? 0 : eighths, low, high, lines, discount, notes };
 }
+

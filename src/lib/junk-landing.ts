@@ -35,20 +35,16 @@ export const junkLanding: ServiceLandingConfig = {
     { title: "Hot Tubs & Sheds (Ask Us)", icon: Bath },
     { title: "Estate Contents", icon: Boxes },
   ],
-  itemsNote: "We can't take hazardous waste, paint, chemicals or biohazards. Ask us and we'll point you to the right place.",
   ownerHeading: "Meet Dolmar & Keisha",
   ownerDescription: "We're Dolmar & Keisha Cross. We've spent years buying & rehabbing distressed Tampa houses, the kind most people won't walk into, so there isn't much junk we haven't seen. You may know Dolmar from A&E's Zombie House Flipping. Our own crew does the work: we clear properties fast, haul it all away & leave the place clean. When you call or text, you're talking to local owners, not a call center. Send a few photos & we'll give you an upfront quote before we start.",
-  related: [
-    { title: "Hoarder & Estate Cleanouts", to: "/cleanouts" },
-    { title: "Property Cleanouts", to: "/property-cleanouts" },
-  ],
   faqs: [
     { question: "How Do You Price A Job?", answer: "By how much space it takes up in the truck, plus anything heavy or hard to reach. Photos let us give you an upfront quote before we start." },
     { question: "Do I Need To Be Home?", answer: "Not always. If the items are outside or we have access, we can work it out with you ahead of time." },
-    { question: "What Can't You Take?", answer: "Hazardous waste, paint, chemicals, tires in bulk & biohazards. We'll tell you up front if something is off limits." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP in the form and we'll confirm." },
     { question: "Can You Help If I'm Thinking About Selling?", answer: "Yes. We also buy houses as-is. Mention it in the form and we'll talk through both options.", to: "/sell" },
   ],
   photoQuote: { heading: "Get A Photo Quote", description: "Snap a few photos of the pile. Our AI estimates how much of the truck it fills & shows your price range right away. A real person confirms it before we start.", defaultLocation: "curbside" },
   quoteHeading: "Get Your Free Photo Quote",
+  quoteBackground: JOB_PHOTOS.coolrdBefore1,
 };
+

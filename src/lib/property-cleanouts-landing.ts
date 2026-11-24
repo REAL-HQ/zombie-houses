@@ -35,9 +35,10 @@ export const propertyCleanoutsLanding: ServiceLandingConfig = {
   faqs: [
     { question: "Do I Need To Meet You There?", answer: "No. With a lockbox or access code we can quote from photos & send photos when we finish." },
     { question: "Can You Handle Repeat Turnovers?", answer: "Yes. Tell us about your portfolio in the form & we'll set up a simple process." },
-    { question: "What Can't You Take?", answer: "Hazardous waste, paint, chemicals & biohazards. We'll tell you up front." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP to confirm." },
   ],
   photoQuote: { heading: "Get A Photo Quote", description: "Upload photos of the unit, garage or lot. You'll see a price range right away, or for bigger turnovers we'll set up a quick walkthrough.", defaultLocation: "inside" },
   quoteHeading: "Get Your Free Photo Quote",
+  quoteBackground: JOB_PHOTOS.coolrdBefore1,
 };
+

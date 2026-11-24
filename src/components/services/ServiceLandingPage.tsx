@@ -37,7 +37,8 @@ export interface ServiceLandingConfig {
   sellingOption?: { description: string; buttonLabel: string; quoteLinkLabel?: string };
   ownerHeading: string;
   ownerDescription: string;
-  related?: readonly { title: string; to: ServiceLink }[];
+  /** Real job photo shown full-bleed behind the bottom quote section. */
+  quoteBackground?: JobPhoto;
   faqs: readonly { question: string; answer: string; to?: ServiceLink }[];
   quoteHeading: string;
   /** AI Photo Quote section (photo upload, instant price range). */
@@ -51,6 +52,12 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
   useEffect(() => { track("view_service", { page: config.page }); }, [config.page]);
   const call = () => track("click_call", { page: config.page });
   const text = () => track("click_text", { page: config.page });
+
+  function scrollToHeroForm() {
+    const form = document.getElementById("hero-quote");
+    form?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    form?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
+  }
 
   function scrollToQuote() {
     document.getElementById("quote")?.scrollIntoView({
@@ -102,7 +109,7 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
           {config.heroPhoto && <div className="relative order-3 lg:order-none lg:col-start-1 lg:row-start-2 lg:min-h-[220px]">
             <JobPhotoFigure photo={config.heroPhoto} eager className="aspect-[21/9] shadow-2xl md:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto" />
           </div>}
-          <div aria-label="Quick Quote" className="order-2 self-start rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:px-6 lg:py-5">
+          <div id="hero-quote" aria-label="Quick Quote" className="order-2 scroll-mt-24 self-start rounded-xl border border-border bg-card p-4 text-card-foreground shadow-2xl md:p-7 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:px-6 lg:py-5">
             <ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} compact />
           </div>
           <ul className="order-4 grid grid-cols-2 gap-3 pt-1 md:pt-0 lg:order-none lg:col-span-2 lg:row-start-3 lg:grid-cols-3 [&>li:last-child:nth-child(odd)]:col-span-2 lg:[&>li:last-child:nth-child(odd)]:col-span-1">
@@ -138,15 +145,26 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         </div>
       </section>}
 
-      <section className={sectionClass}>
-        <h2 className={headingClass}>How It Works</h2>
-        <ol className="mt-8 grid gap-8 md:mt-10 md:grid-cols-3 md:gap-10">
-          {config.steps.map((step, index) => <li key={step.title} className="border-t border-service-border pt-5">
-            <div className="flex items-center justify-between"><span className="font-display text-3xl tracking-normal text-red">0{index + 1}</span><step.icon className="size-7 text-service-muted" aria-hidden="true" /></div>
-            <h3 className="mt-5 font-display text-xl tracking-normal">{step.title}</h3>
-            <p className="mt-3 text-base leading-relaxed text-service-muted">{step.description}</p>
-          </li>)}
-        </ol>
+      {/* How It Works: red icon badges joined by a dashed connector (horizontal on desktop, vertical on mobile). Cards are opaque, so the line only shows in the gaps between them. */}
+      <section className="relative overflow-hidden border-y border-service-border bg-[radial-gradient(ellipse_at_top,rgba(220,38,38,0.12),transparent_60%)]">
+        <div className={sectionClass}>
+          <h2 className={`${headingClass} text-center`}>How It Works</h2>
+          <ol className="relative mx-auto mt-10 grid max-w-5xl gap-5 md:mt-12 md:grid-cols-3 md:gap-6">
+            <span aria-hidden="true" className="absolute inset-x-[16%] top-[3.25rem] hidden border-t-2 border-dashed border-red/50 md:block" />
+            <span aria-hidden="true" className="absolute inset-y-6 left-[3.25rem] border-l-2 border-dashed border-red/50 md:hidden" />
+            {config.steps.map((step, index) => <li key={step.title} className="group relative z-10 rounded-2xl border border-white/10 bg-service-surface p-6 shadow-lg transition duration-300 hover:border-red/50 hover:shadow-[0_20px_40px_-18px_rgba(220,38,38,0.45)] motion-safe:hover:-translate-y-1 md:p-7">
+              <div className="flex items-start justify-between gap-4">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-red text-white shadow-[0_0_0_6px_rgba(220,38,38,0.18)] transition-transform duration-300 motion-safe:group-hover:scale-105"><step.icon className="size-7" aria-hidden="true" /></span>
+                <span className="font-display text-4xl leading-none tracking-normal text-red/80" aria-hidden="true">0{index + 1}</span>
+              </div>
+              <h3 className="mt-6 font-display text-xl tracking-normal">{step.title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-service-muted">{step.description}</p>
+            </li>)}
+          </ol>
+          <div className="mt-10 flex justify-center">
+            <Button className="min-h-12 px-8 text-base font-bold shadow-lg" onClick={scrollToHeroForm}><Camera aria-hidden="true" />Send Your Photos<ArrowRight aria-hidden="true" /></Button>
+          </div>
+        </div>
       </section>
 
       {config.items && config.items.length > 0 && <section className="border-y border-service-border bg-service-surface">
@@ -223,13 +241,6 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         <JobPhotoGrid photos={config.gallery} />
       </section>}
 
-      {config.related && config.related.length > 0 && <section className={`${sectionClass} border-t border-service-border`}>
-        <h2 className={headingClass}>Bigger Job?</h2>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {config.related.map((related) => <Button key={related.to} asChild variant="outline" className="h-auto min-h-28 justify-between whitespace-normal border-service-border bg-service-surface p-6 text-left font-display text-xl tracking-normal text-service-foreground hover:bg-service-background hover:text-service-foreground motion-safe:transition-transform motion-safe:hover:-translate-y-1"><Link to={related.to}>{related.title}<ArrowRight className="text-red" aria-hidden="true" /></Link></Button>)}
-        </div>
-      </section>}
-
       <section className="border-y border-service-border bg-service-surface">
         <div className={`${sectionClass} grid gap-8 md:grid-cols-[1fr_2fr] md:gap-16`}>
           <h2 className={headingClass}>FAQ</h2>
@@ -244,10 +255,17 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         </div>
       </section>
 
-      <section id="quote" className={`${sectionClass} scroll-mt-6`}>
-        <div className="mx-auto max-w-xl">
-          <h2 className={`${headingClass} mb-8`}>{config.quoteHeading}</h2>
-          <div className="rounded-xl border border-border bg-card p-5 text-card-foreground shadow-2xl md:p-8"><ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} /></div>
+      {/* Bottom quote: full-bleed real job photo behind the form, darkened so the heading stays readable. */}
+      <section id="quote" className="relative isolate scroll-mt-6 overflow-hidden">
+        {config.quoteBackground && <>
+          <img src={config.quoteBackground.src} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 -z-20 h-full w-full object-cover" style={config.quoteBackground.objectPosition ? { objectPosition: config.quoteBackground.objectPosition } : undefined} />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/80 via-black/65 to-black/85" aria-hidden="true" />
+        </>}
+        <div className={sectionClass}>
+          <div className="mx-auto max-w-xl">
+            <h2 className={`${headingClass} mb-8 [text-shadow:0_2px_12px_rgb(0_0_0/0.6)]`}>{config.quoteHeading}</h2>
+            <div className="rounded-xl border border-border bg-card p-5 text-card-foreground shadow-2xl md:p-8"><ServiceLeadForm defaultService={config.service} sourcePage={config.sourcePage} /></div>
+          </div>
         </div>
       </section>
     </main>
@@ -257,7 +275,6 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         <Button asChild variant="link" className="min-h-12 px-0 text-service-muted"><Link to="/privacy">Privacy</Link></Button>
         <Button asChild variant="link" className="min-h-12 px-0 text-service-muted"><Link to="/terms">Terms</Link></Button>
         <Button asChild variant="link" className="min-h-12 px-0 text-service-muted"><Link to="/sms-terms">SMS Terms</Link></Button>
-        <Button asChild variant="link" className="min-h-12 whitespace-normal px-0 text-service-foreground md:ml-auto"><Link to="/services">More Zombie Houses Services<ArrowRight aria-hidden="true" /></Link></Button>
       </nav>
     </footer>
 
@@ -268,3 +285,4 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
     </nav>
   </div>;
 }
+

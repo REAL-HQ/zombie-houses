@@ -107,7 +107,6 @@ function ServicesPage() {
     <section aria-labelledby="coming-soon-heading" className="border-t border-service-border bg-service-background px-4 py-8 text-service-foreground md:px-8 md:py-12">
       <div className="mx-auto max-w-6xl">
         <h2 id="coming-soon-heading" className="font-display text-2xl tracking-normal md:text-4xl">Specialty Cleanups</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-service-muted md:text-base">We're adding these. Until then, tell us what you need & we'll follow up or point you to a specialist.</p>
         <div className="mt-6 grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
           {COMING_SOON_SERVICES.map((item) => <Link key={item.slug} to="/coming-soon" search={{ service: item.slug }} className="group flex min-w-0 flex-col rounded-lg border border-dashed border-service-border bg-service-surface p-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red md:p-5">
             {item.photo ? <div className="relative -mx-3 -mt-3 mb-1 aspect-[16/9] overflow-hidden rounded-t-lg md:-mx-5 md:-mt-5">
@@ -137,3 +136,4 @@ function ServicesPage() {
     </section>
   </SiteLayout>;
 }
+

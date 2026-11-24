@@ -21,7 +21,6 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     heading: "Handled With Care",
     bullets: ["We Set Aside Photos, Papers & Keepsakes We Find", "We Work At A Pace That's Right For You", "We Keep It Private & Never Judge"],
   },
-  notice: "Biohazard situations like body fluids, needles or animal waste need a specialized remediation company. Tell us what you're seeing and we'll help you find the right next step.",
   sellingOption: {
     description: "Not sure you want to keep the house? We also buy houses in any condition. Clear it out & sell it yourself, or sell it to us as-is. We'll talk through both, with no pressure.",
     buttonLabel: "See My Selling Options",
@@ -33,9 +32,10 @@ export const cleanoutsLanding: ServiceLandingConfig = {
     { question: "Do I Need To Be There?", answer: "Not always. We can plan access with you or a family member ahead of time." },
     { question: "What Happens To Items Worth Keeping?", answer: "We set aside anything you ask us to look for, plus photos, papers & keepsakes we come across." },
     { question: "Can You Help If The House Needs To Be Sold?", answer: "Yes. We buy houses as-is too. Mark it in the form and we'll cover both options." },
-    { question: "Do You Handle Biohazard Cleanup?", answer: "Not ourselves. Biohazards need a specialized company, and we'll help point you to one." },
     { question: "What Areas Do You Serve?", answer: "Tampa Bay. Enter your ZIP and we'll confirm." },
   ],
   photoQuote: { heading: "Get A Photo Quote", description: "Send a few photos of the rooms. You'll see a price range right away, or for a full house we'll set up a quick, judgment-free walkthrough.", defaultLocation: "inside" },
   quoteHeading: "Get Your Free Photo Quote",
+  quoteBackground: JOB_PHOTOS.leilaBefore1,
 };
+
