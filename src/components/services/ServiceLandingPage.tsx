@@ -183,15 +183,21 @@ export function ServiceLandingPage({ config }: { config: ServiceLandingConfig })
         </div>
       </section>}
 
-      {/* Full-bleed owner photo so the whole wrecked room shows; copy sits below so it never covers the damage. */}
+      {/* Full-bleed owner photo. lg+: heading & bio sit in a blurred dark panel over the right side of the photo (Dolmar & Keisha stand near the center, so the panel never covers them). Below lg the panel stacks under the photo. */}
       <section className="border-y border-service-border bg-service-surface">
-        <img src={ownerPhoto} alt="Dolmar & Keisha Cross standing in a gutted, debris-filled room" loading="lazy" className="block aspect-[16/9] w-full object-cover object-[50%_40%] md:aspect-[21/9]" />
-        <div className={`${sectionClass} md:py-14`}>
-          <h2 className={headingClass}>{config.ownerHeading}</h2>
-          <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
+        <div className="relative">
+          <img src={ownerPhoto} alt="Dolmar & Keisha Cross standing in a gutted, debris-filled room" loading="lazy" className="block aspect-[16/9] w-full object-cover object-[50%_40%] md:aspect-[21/9] lg:min-h-[540px]" />
+          <div className="px-5 pt-8 md:px-8 lg:absolute lg:inset-y-0 lg:right-[3%] lg:flex lg:w-[37%] lg:items-center lg:p-0">
+            <div className="lg:rounded-xl lg:border lg:border-white/10 lg:bg-black/70 lg:p-7 lg:shadow-2xl lg:backdrop-blur-md xl:p-8">
+              <h2 className={headingClass}>{config.ownerHeading}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-service-foreground lg:text-base lg:leading-relaxed xl:text-lg 2xl:text-xl">{config.ownerDescription}</p>
+            </div>
+          </div>
+        </div>
+        <div className={`${sectionClass} pt-8 md:pt-10 lg:py-14`}>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
             {OWNER_THUMBS.map((photo) => <JobPhotoFigure key={photo.src} photo={photo} className="aspect-[4/3]" />)}
           </div>
-          <p className="mt-6 max-w-4xl text-lg leading-relaxed text-service-foreground md:mt-8 md:text-xl">{config.ownerDescription}</p>
         </div>
       </section>
 
